@@ -1,16 +1,28 @@
+// src/components/Skills/Skills.tsx
 import { SkillsSection, SectionTitle, SkillsGrid, SkillCard, SkillIcon } from './Skills.styles';
-import { FaReact, FaAngular, FaJsSquare, FaHtml5, FaCss3Alt, FaGitAlt } from 'react-icons/fa';
+// 1. Добавляем новые иконки
+import {
+    FaReact, FaAngular, FaJsSquare, FaHtml5, FaCss3Alt, FaGithub, FaFigma, FaSass
+} from 'react-icons/fa';
 import { SiTypescript, SiStyledcomponents } from 'react-icons/si';
+import { AiOutlineMail } from 'react-icons/ai'; // Для MJML
+import { FiDatabase } from 'react-icons/fi'; // для SQL
 
+
+// 2. Расширяем массив навыков
 const skills = [
     { name: 'React', icon: <FaReact /> },
     { name: 'Angular', icon: <FaAngular /> },
     { name: 'TypeScript', icon: <SiTypescript /> },
     { name: 'JavaScript', icon: <FaJsSquare /> },
-    { name: 'HTML5', icon: <FaHtml5 /> },
-    { name: 'CSS3', icon: <FaCss3Alt /> },
+    { name: 'SCSS/SASS', icon: <FaSass /> },
+    { name: 'MJML', icon: <AiOutlineMail /> },
+    { name: 'HTML5 & CSS3', icon: <FaHtml5 /> },
     { name: 'Styled-comp.', icon: <SiStyledcomponents /> },
-    { name: 'Git', icon: <FaGitAlt /> },
+    { name: 'GitHub', icon: <FaGithub /> },
+    { name: 'Figma', icon: <FaFigma /> },
+    { name: 'SQL', icon: <FiDatabase /> },
+    { name: 'MailChimp', icon: 'MC' }, // Просто текст, так как иконки нет
 ];
 
 const Skills = () => {
