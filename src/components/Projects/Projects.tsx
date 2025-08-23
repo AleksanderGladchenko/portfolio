@@ -18,7 +18,6 @@ import projectFlightsImg from '../../assets/project-flights.gif';
 import projectAnalyzerImg from '../../assets/project-analyzer.gif';
 import Modal from '../Modal/Modal';
 
-// Определяем тип для объекта проекта
 interface Project {
     title: string;
     image: string;
@@ -47,7 +46,6 @@ const projectsData: Project[] = [
     }
 ];
 
-// Здесь были пустые объекты в твоей версии
 const gridVariants = {
     hidden: { opacity: 0 },
     visible: {

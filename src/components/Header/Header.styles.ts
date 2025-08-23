@@ -1,4 +1,4 @@
-// src/components/Header/Header.styles.ts
+
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -13,7 +13,7 @@ export const HeaderContainer = styled.header`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1010; // Немного увеличим, чтобы был над всем контентом
+    z-index: 1010;
     backdrop-filter: blur(10px);
 
     @media (max-width: 768px) {
@@ -61,7 +61,7 @@ export const BurgerIcon = styled.div`
     font-size: 1.5rem;
     color: #ccd6f6;
     cursor: pointer;
-    z-index: 1020; // Выше чем меню, чтобы можно было закрыть
+    z-index: 1020;
 
     @media (max-width: 768px) {
         display: block;
@@ -76,7 +76,7 @@ export const MobileNav = styled(motion.div)`
     height: 100vh;
     background-color: #112240;
     box-shadow: -10px 0px 30px -15px rgba(2, 12, 27, 0.7);
-    z-index: 1000; // <-- ВОТ ГЛАВНЫЙ ФИКС!
+    z-index: 1000;
 
     display: flex;
     flex-direction: column;

@@ -11,7 +11,7 @@ export const ContactSection = styled(motion.section)`
     text-align: center;
 
     @media (max-width: 768px) {
-        padding: 80px 1rem; // Добавляем боковые отступы на мобильных
+        padding: 80px 1rem;
     }
 `;
 

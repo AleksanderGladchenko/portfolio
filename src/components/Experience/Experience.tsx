@@ -3,7 +3,7 @@ import { ExperienceSection, SectionTitle, TabsContainer, TabList, TabButton, Tab
 
 const jobs = [
     {
-        company: 'E-commerce Project', // <-- Теперь это первая работа
+        company: 'E-commerce Project',
         role: 'Junior Front-End Developer',
         period: 'Jan 2024 - Dec 2024',
         tasks: [
@@ -13,7 +13,7 @@ const jobs = [
         ]
     },
     {
-        company: 'IT Company', // <-- А это вторая
+        company: 'IT Company',
         role: 'Front-End Developer',
         period: 'Feb 2025 - Jul 2025',
         tasks: [
