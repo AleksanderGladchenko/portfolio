@@ -1,13 +1,14 @@
 // vite.config.ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import svgr from 'vite-plugin-svgr' // 1. Импортируем плагин
+import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    svgr() // 2. Добавляем плагин сюда
+    svgr()
   ],
-  base: '/my-react-portfolio/', // Убедись, что base правильный для твоего репозитория
+  // Эта строка говорит приложению, что все пути должны начинаться с /portfolio/
+  base: '/portfolio/',
 })
