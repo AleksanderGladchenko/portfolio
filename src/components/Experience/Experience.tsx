@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ExperienceSection, SectionTitle, TabsContainer, TabList, TabButton, TabContent } from './Experience.styles';
-import { motion } from 'framer-motion';
 
 const jobs = [
     {

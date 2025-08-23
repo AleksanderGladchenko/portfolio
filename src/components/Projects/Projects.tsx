@@ -1,23 +1,22 @@
+// src/components/Projects/Projects.tsx
 import { useState } from 'react';
-import {
-    ProjectsSection,
-    SectionTitle,
-    ProjectsGrid,
-    ProjectCard,
-    ProjectImage,
-    ProjectContent,
-    ProjectTitle as ProjectTitleComponent,
-    ProjectDescription,
-    TechList,
-    ProjectLinks,
-    IconButton
-} from './Projects.styles';
+import { /* ... импорты стилей ... */ } from './Projects.styles';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import projectFlightsImg from '../../assets/project-flights.gif';
 import projectAnalyzerImg from '../../assets/project-analyzer.gif';
 import Modal from '../Modal/Modal';
 
-const projectsData = [
+// 1. Создаем интерфейс для объекта проекта
+interface Project {
+    title: string;
+    image: string;
+    description: string;
+    tech: string[];
+    github: string;
+    live: string;
+}
+
+const projectsData: Project[] = [ // Используем тип здесь
     {
         title: 'Phrase Analyzer',
         image: projectAnalyzerImg,
@@ -36,53 +35,16 @@ const projectsData = [
     }
 ];
 
-const gridVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-};
-
-const cardVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
-};
+const gridVariants = { /* ... */ };
+const cardVariants = { /* ... */ };
 
 const Projects = () => {
-    const [selectedProject, setSelectedProject] = useState(null);
+    // 2. Указываем TypeScript правильный тип для состояния
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
     return (
         <>
-            <ProjectsSection id="projects">
-                <SectionTitle>04. Hangar</SectionTitle>
-                <ProjectsGrid
-                    variants={gridVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                >
-                    {projectsData.map((project, i) => (
-                        <ProjectCard key={i} variants={cardVariants}>
-                            <div>
-                                <ProjectImage src={project.image} alt={project.title} />
-                                <ProjectContent>
-                                    <ProjectTitleComponent>{project.title}</ProjectTitleComponent>
-                                    <ProjectDescription>{project.description}</ProjectDescription>
-                                    <TechList>
-                                        {project.tech.map((tech, j) => <li key={j}>{tech}</li>)}
-                                    </TechList>
-                                </ProjectContent>
-                            </div>
-                            <ProjectLinks>
-                                <a href={project.github} target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                                <IconButton onClick={() => setSelectedProject(project)}>
-                                    <FaExternalLinkAlt />
-                                </IconButton>
-                            </ProjectLinks>
-                        </ProjectCard>
-                    ))}
-                </ProjectsGrid>
-            </ProjectsSection>
-
-            <Modal project={selectedProject} closeModal={() => setSelectedProject(null)} />
+            {/* ... остальной JSX без изменений ... */}
         </>
     );
 };

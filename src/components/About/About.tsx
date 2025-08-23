@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { AboutSection, SectionTitle, ContentWrapper, TextBlock, SkillsList, ImageWrapper } from './About.styles';
 import profileImage from '../../assets/135319167.jpeg';
 
