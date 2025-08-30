@@ -4,7 +4,21 @@ import { Backdrop, ModalContent, ModalImage, CloseButton } from './Modal.styles'
 import { ProjectContent, ProjectTitle, ProjectDescription, TechList, ProjectLinks, IconButton } from '../Projects/Projects.styles';
 import { FaGithub, FaCompressAlt, FaTimes } from 'react-icons/fa';
 
-// ... (интерфейсы Project и ModalProps без изменений) ...
+// 1. Определяем интерфейс для объекта Project
+interface Project {
+    title: string;
+    image: string;
+    description: string;
+    tech: string[];
+    github: string;
+    live: string;
+}
+
+// 2. Определяем интерфейс для пропсов модального окна (исправляет 'Cannot find name')
+interface ModalProps {
+    project: Project | null;
+    closeModal: () => void;
+}
 
 const Modal = ({ project, closeModal }: ModalProps) => {
     return (
@@ -16,7 +30,6 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                 >
-                    {/* 1. Переместили крестик сюда, чтобы он не прокручивался */}
                     <CloseButton onClick={closeModal}>
                         <FaTimes />
                     </CloseButton>
@@ -28,7 +41,6 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                         exit={{ y: "50px", opacity: 0 }}
                         transition={{ ease: "easeOut", duration: 0.3 }}
                     >
-                        {/* Крестика здесь больше нет */}
                         <div style={{ flexGrow: 1 }}>
                             <ModalImage as="video" autoPlay loop muted playsInline>
                                 <source src={project.image} type="video/mp4" />
@@ -37,7 +49,8 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                                 <ProjectTitle>{project.title}</ProjectTitle>
                                 <ProjectDescription>{project.description}</ProjectDescription>
                                 <TechList>
-                                    {project.tech.map((tech, j) => <li key={j}>{tech}</li>)}
+                                    {/* 3. Явно указываем типы для 'tech' и 'j' */}
+                                    {project.tech.map((tech: string, j: number) => <li key={j}>{tech}</li>)}
                                 </TechList>
                             </ProjectContent>
                         </div>
