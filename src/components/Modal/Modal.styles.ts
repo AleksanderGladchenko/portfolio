@@ -9,23 +9,30 @@ export const Backdrop = styled(motion.div)`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+
+    /* Эти три строчки вернут центрирование */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
 `;
 
 export const ModalContent = styled(motion.div)`
     position: relative;
     background: #112240;
-    padding: 2.5rem; /* Немного увеличим внутренний отступ */
+    padding: 2.5rem;
     border-radius: 8px;
     width: 80%;
     max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
     border: 1px solid #00aaff;
-    /* Убираем flex, чтобы контент не растягивался */
+
+    @media (orientation: landscape) and (max-height: 600px) {
+        width: 90vw;
+        max-width: 90vw;
+        padding: 1.5rem;
+    }
 `;
 
 export const ModalImage = styled.video`
@@ -33,20 +40,23 @@ export const ModalImage = styled.video`
     height: auto;
     border-radius: 4px;
     margin-bottom: 1.5rem;
+
+    @media (orientation: landscape) and (max-height: 600px) {
+        max-height: 50vh;
+    }
 `;
 
 export const CloseButton = styled.button`
-    position: absolute;
-    /* Смещаем крестик ближе к углу */
-    top: 15px;
-    right: 15px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #ff6b6b;
     cursor: pointer;
     transition: transform 0.3s ease;
-    z-index: 10;
+    z-index: 2010;
 
     &:hover {
         transform: scale(1.2);

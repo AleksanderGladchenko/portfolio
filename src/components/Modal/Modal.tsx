@@ -4,21 +4,7 @@ import { Backdrop, ModalContent, ModalImage, CloseButton } from './Modal.styles'
 import { ProjectContent, ProjectTitle, ProjectDescription, TechList, ProjectLinks, IconButton } from '../Projects/Projects.styles';
 import { FaGithub, FaCompressAlt, FaTimes } from 'react-icons/fa';
 
-// Интерфейс, описывающий, как выглядят данные одного проекта
-interface Project {
-    title: string;
-    image: string; // Путь к видео
-    description: string;
-    tech: string[];
-    github: string;
-    live: string;
-}
-
-// Интерфейс для пропсов самого модального окна
-interface ModalProps {
-    project: Project | null;
-    closeModal: () => void;
-}
+// ... (интерфейсы Project и ModalProps без изменений) ...
 
 const Modal = ({ project, closeModal }: ModalProps) => {
     return (
@@ -30,6 +16,11 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                 >
+                    {/* 1. Переместили крестик сюда, чтобы он не прокручивался */}
+                    <CloseButton onClick={closeModal}>
+                        <FaTimes />
+                    </CloseButton>
+
                     <ModalContent
                         onClick={(e) => e.stopPropagation()}
                         initial={{ y: "-50px", opacity: 0 }}
@@ -37,10 +28,7 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                         exit={{ y: "50px", opacity: 0 }}
                         transition={{ ease: "easeOut", duration: 0.3 }}
                     >
-                        <CloseButton onClick={closeModal}>
-                            <FaTimes />
-                        </CloseButton>
-
+                        {/* Крестика здесь больше нет */}
                         <div style={{ flexGrow: 1 }}>
                             <ModalImage as="video" autoPlay loop muted playsInline>
                                 <source src={project.image} type="video/mp4" />
