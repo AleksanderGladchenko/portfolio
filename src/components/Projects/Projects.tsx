@@ -16,6 +16,7 @@ import {
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import projectFlightsImg from '../../assets/project-flights.gif';
 import projectAnalyzerImg from '../../assets/project-analyzer.gif';
+import projectFormImg from '../../assets/project-form.gif';
 import Modal from '../Modal/Modal';
 
 interface Project {
@@ -28,6 +29,14 @@ interface Project {
 }
 
 const projectsData: Project[] = [
+    {
+        title: 'Frontend Engineer Form',
+        image: projectFormImg,
+        description: 'A complex reactive form with dynamic fields and custom validators, built with Angular and Angular Material.',
+        tech: ['Angular', 'TypeScript', 'Reactive Forms', 'Material'],
+        github: 'https://github.com/AleksanderGladchenko/engineer-form',
+        live: '#',
+    },
     {
         title: 'Phrase Analyzer',
         image: projectAnalyzerImg,
@@ -46,20 +55,8 @@ const projectsData: Project[] = [
     }
 ];
 
-const gridVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.2,
-        },
-    },
-};
-
-const cardVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
-};
+const gridVariants = { /* ... */ };
+const cardVariants = { /* ... */ };
 
 const Projects = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);

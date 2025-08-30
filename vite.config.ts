@@ -9,6 +9,5 @@ export default defineConfig({
     react(),
     svgr()
   ],
-  // Эта строка говорит приложению, что все пути должны начинаться с /portfolio/
   base: '/portfolio/',
 })
