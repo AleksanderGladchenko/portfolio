@@ -1,17 +1,20 @@
+// src/components/Modal/Modal.tsx
 import { AnimatePresence } from 'framer-motion';
-import { Backdrop, ModalContent, ModalImage } from './Modal.styles';
-import { ProjectContent, ProjectTitle, ProjectDescription, TechList, ProjectLinks } from '../Projects/Projects.styles';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { Backdrop, ModalContent, ModalImage, CloseButton } from './Modal.styles';
+import { ProjectContent, ProjectTitle, ProjectDescription, TechList, ProjectLinks, IconButton } from '../Projects/Projects.styles';
+import { FaGithub, FaCompressAlt, FaTimes } from 'react-icons/fa';
 
+// Интерфейс, описывающий, как выглядят данные одного проекта
 interface Project {
     title: string;
-    image: string;
+    image: string; // Путь к видео
     description: string;
     tech: string[];
     github: string;
     live: string;
 }
 
+// Интерфейс для пропсов самого модального окна
 interface ModalProps {
     project: Project | null;
     closeModal: () => void;
@@ -34,17 +37,28 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                         exit={{ y: "50px", opacity: 0 }}
                         transition={{ ease: "easeOut", duration: 0.3 }}
                     >
-                        <ModalImage src={project.image} alt={project.title} />
-                        <ProjectContent>
-                            <ProjectTitle>{project.title}</ProjectTitle>
-                            <ProjectDescription>{project.description}</ProjectDescription>
-                            <TechList>
-                                {project.tech.map((tech, j) => <li key={j}>{tech}</li>)}
-                            </TechList>
-                        </ProjectContent>
+                        <CloseButton onClick={closeModal}>
+                            <FaTimes />
+                        </CloseButton>
+
+                        <div style={{ flexGrow: 1 }}>
+                            <ModalImage as="video" autoPlay loop muted playsInline>
+                                <source src={project.image} type="video/mp4" />
+                            </ModalImage>
+                            <ProjectContent>
+                                <ProjectTitle>{project.title}</ProjectTitle>
+                                <ProjectDescription>{project.description}</ProjectDescription>
+                                <TechList>
+                                    {project.tech.map((tech, j) => <li key={j}>{tech}</li>)}
+                                </TechList>
+                            </ProjectContent>
+                        </div>
+
                         <ProjectLinks>
                             <a href={project.github} target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                            <a href={project.live} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                            <IconButton onClick={closeModal}>
+                                <FaCompressAlt />
+                            </IconButton>
                         </ProjectLinks>
                     </ModalContent>
                 </Backdrop>

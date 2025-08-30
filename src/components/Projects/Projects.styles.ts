@@ -44,7 +44,7 @@ export const ProjectCard = styled(motion.div)`
   }
 `;
 
-export const ProjectImage = styled.img`
+export const ProjectImage = styled.video`
   width: 100%;
   height: 180px;
   object-fit: cover;
