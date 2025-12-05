@@ -15,10 +15,14 @@ import {
 } from './Projects.styles';
 import { FaGithub, FaExternalLinkAlt, FaCompressAlt } from 'react-icons/fa';
 
-// 1. Переименовал переменные для видео
+// Импорт видео
 import video1 from '../../assets/1.mp4';
 import video2 from '../../assets/2.mp4';
 import video3 from '../../assets/3.mp4';
+
+// --- ИМПОРТ НАШЕГО СКРИНШОТА ---
+// Убедись, что файл называется farm.png (или поменяй расширение на .jpg тут)
+import farmImg from '../../assets/farm.jpg';
 
 import Modal from '../Modal/Modal';
 
@@ -29,13 +33,25 @@ interface Project {
     tech: string[];
     github: string;
     live: string;
+    mediaType: 'video' | 'image'; // Новое поле: тип медиа
 }
 
-// 2. Изменил порядок проектов и использовал новые переменные
 const projectsData: Project[] = [
+    // --- НАШ НОВЫЙ ПРОЕКТ (С КАРТИНКОЙ) ---
+    {
+        title: 'High-Load Appium Farm',
+        image: farmImg, // Используем картинку
+        mediaType: 'image', // Указываем, что это картинка
+        description: 'Fault-tolerant automation system managing 10+ Android emulators on a dedicated Linux server. Features Flask REST API, Systemd watchdogs for auto-healing, and safe multithreading with SQLAlchemy.',
+        tech: ['Python', 'Appium', 'Flask', 'Linux', 'SQLAlchemy'],
+        github: '#',
+        live: '#',
+    },
+    // ----------------------------------------
     {
         title: 'Phrase Analyzer',
         image: video1,
+        mediaType: 'video',
         description: 'A web tool for text analysis. Allows users to get synonyms for selected words via the Datamuse API and replace them in the text.',
         tech: ['Angular', 'TypeScript', 'RxJS', 'CSS'],
         github: 'https://github.com/AleksanderGladchenko/phrase-analyzer',
@@ -44,6 +60,7 @@ const projectsData: Project[] = [
     {
         title: 'Flight Booking App',
         image: video2,
+        mediaType: 'video',
         description: 'A single-page application for browsing flights, viewing seat details, and adding tickets to a cart. State is managed with Redux.',
         tech: ['React', 'TypeScript', 'Redux', 'MUI', 'Vite'],
         github: 'https://github.com/AleksanderGladchenko/flight-booking-app',
@@ -52,6 +69,7 @@ const projectsData: Project[] = [
     {
         title: 'Frontend Engineer Form',
         image: video3,
+        mediaType: 'video',
         description: 'A complex reactive form with dynamic fields and custom validators, built with Angular and Angular Material.',
         tech: ['Angular', 'TypeScript', 'Reactive Forms', 'Material'],
         github: 'https://github.com/AleksanderGladchenko/engineer-form',
@@ -93,9 +111,16 @@ const Projects = () => {
                         return (
                             <ProjectCard key={project.title} variants={cardVariants}>
                                 <div>
-                                    <ProjectImage as="video" autoPlay loop muted playsInline>
-                                        <source src={project.image} type="video/mp4" />
-                                    </ProjectImage>
+                                    {/* УМНАЯ ОТРИСОВКА: Проверяем, видео это или картинка */}
+                                    {project.mediaType === 'video' ? (
+                                        <ProjectImage as="video" autoPlay loop muted playsInline>
+                                            <source src={project.image} type="video/mp4" />
+                                        </ProjectImage>
+                                    ) : (
+                                        // Если картинка — рендерим img
+                                        <ProjectImage as="img" src={project.image} alt={project.title} />
+                                    )}
+
                                     <ProjectContent>
                                         <ProjectTitleComponent>{project.title}</ProjectTitleComponent>
                                         <ProjectDescription>{project.description}</ProjectDescription>

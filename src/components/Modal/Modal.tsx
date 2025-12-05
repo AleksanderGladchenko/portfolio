@@ -4,7 +4,7 @@ import { Backdrop, ModalContent, ModalImage, CloseButton } from './Modal.styles'
 import { ProjectContent, ProjectTitle, ProjectDescription, TechList, ProjectLinks, IconButton } from '../Projects/Projects.styles';
 import { FaGithub, FaCompressAlt, FaTimes } from 'react-icons/fa';
 
-// 1. Определяем интерфейс для объекта Project
+// 1. Обновляем интерфейс Project (добавляем mediaType)
 interface Project {
     title: string;
     image: string;
@@ -12,9 +12,9 @@ interface Project {
     tech: string[];
     github: string;
     live: string;
+    mediaType?: 'video' | 'image'; // Добавили поле (вопросительный знак делает его необязательным для совместимости)
 }
 
-// 2. Определяем интерфейс для пропсов модального окна (исправляет 'Cannot find name')
 interface ModalProps {
     project: Project | null;
     closeModal: () => void;
@@ -42,14 +42,23 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                         transition={{ ease: "easeOut", duration: 0.3 }}
                     >
                         <div style={{ flexGrow: 1 }}>
-                            <ModalImage as="video" autoPlay loop muted playsInline>
-                                <source src={project.image} type="video/mp4" />
-                            </ModalImage>
+
+                            {/* --- ИСПРАВЛЕНИЕ: ПРОВЕРКА ТИПА КОНТЕНТА --- */}
+                            {project.mediaType === 'image' ? (
+                                // Если это картинка — рендерим img
+                                <ModalImage as="img" src={project.image} alt={project.title} />
+                            ) : (
+                                // Если это видео (или тип не указан) — рендерим video
+                                <ModalImage as="video" autoPlay loop muted playsInline>
+                                    <source src={project.image} type="video/mp4" />
+                                </ModalImage>
+                            )}
+                            {/* ------------------------------------------- */}
+
                             <ProjectContent>
                                 <ProjectTitle>{project.title}</ProjectTitle>
                                 <ProjectDescription>{project.description}</ProjectDescription>
                                 <TechList>
-                                    {/* 3. Явно указываем типы для 'tech' и 'j' */}
                                     {project.tech.map((tech: string, j: number) => <li key={j}>{tech}</li>)}
                                 </TechList>
                             </ProjectContent>

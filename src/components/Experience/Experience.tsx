@@ -1,7 +1,21 @@
+// src/components/Experience/Experience.tsx
 import { useState } from 'react';
 import { ExperienceSection, SectionTitle, TabsContainer, TabList, TabButton, TabContent } from './Experience.styles';
 
 const jobs = [
+    // --- НОВЫЙ ОПЫТ (ДОБАВЛЕН ПЕРВЫМ) ---
+    {
+        company: 'Freelance / High-Load',
+        role: 'Full Stack Engineer (Python/DevOps)',
+        period: 'Nov 2025 - Present',
+        tasks: [
+            'Architected and deployed a scalable automation farm running 10+ Android emulators simultaneously on a dedicated Linux (Ubuntu) server.',
+            'Developed a RESTful API using Flask & SQLAlchemy to orchestrate Appium instances, implementing thread-safe database operations with file locking.',
+            'Optimized server performance and stability by configuring Systemd services, Watchdogs, and Gunicorn workers to prevent OOM (Out Of Memory) crashes.',
+            'Managed DevOps tasks including UFW firewall configuration, dynamic port allocation, and automated process cleanup scripts (Bash/Python).'
+        ]
+    },
+    // -------------------------------------
     {
         company: 'E-commerce Project',
         role: 'Junior Front-End Developer',

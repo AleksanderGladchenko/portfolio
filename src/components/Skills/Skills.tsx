@@ -1,41 +1,54 @@
 // src/components/Skills/Skills.tsx
 import { SkillsSection, SectionTitle, SkillsGrid, SkillCard, SkillIcon } from './Skills.styles';
 import {
-    FaReact, FaAngular, FaJsSquare, FaHtml5, FaGithub, FaFigma, FaSass
+    FaReact, FaAngular, FaJsSquare, FaHtml5, FaGithub, FaFigma, FaSass,
+    FaPython, FaLinux, FaTerminal // <-- Новые иконки (Python, Linux, Terminal)
 } from 'react-icons/fa';
 import {
     SiTypescript,
     SiStyledcomponents,
-    SiRedux,        // <-- Новый импорт
-    SiMui,          // <-- Новый импорт
-    SiReactivex     // <-- Новый импорт (для RxJS)
+    SiRedux,
+    SiMui,
+    SiReactivex,
+    SiFlask,        // <-- Flask
+    SiAppium,       // <-- Appium
+    SiSqlalchemy,   // <-- SQLAlchemy
+    SiGunicorn,     // <-- Gunicorn
+    SiGnubash       // <-- Bash
 } from 'react-icons/si';
 import { AiOutlineMail } from 'react-icons/ai';
 import { FiDatabase } from 'react-icons/fi';
-import { TbBrandFramerMotion } from 'react-icons/tb'; // <-- Новый импорт
+import { TbBrandFramerMotion } from 'react-icons/tb';
 
 const skills = [
-    // Основные фреймворки и языки
+    // --- FRONTEND ---
     { name: 'React', icon: <FaReact /> },
     { name: 'Angular', icon: <FaAngular /> },
     { name: 'TypeScript', icon: <SiTypescript /> },
     { name: 'JavaScript', icon: <FaJsSquare /> },
-    // Стилизация
     { name: 'HTML5 & CSS3', icon: <FaHtml5 /> },
     { name: 'SCSS/SASS', icon: <FaSass /> },
     { name: 'Styled-comp.', icon: <SiStyledcomponents /> },
-    { name: 'Material-UI', icon: <SiMui /> }, // <-- ДОБАВЛЕНО
-    // Стейт-менеджмент и асинхронность
-    { name: 'Redux', icon: <SiRedux /> },     // <-- ДОБАВЛЕНО
-    { name: 'RxJS', icon: <SiReactivex /> },  // <-- ДОБАВЛЕНО
-    // Анимации
-    { name: 'Framer Motion', icon: <TbBrandFramerMotion /> }, // <-- ДОБАВЛЕНО
-    // Инструменты и другое
+    { name: 'Material-UI', icon: <SiMui /> },
+    { name: 'Redux', icon: <SiRedux /> },
+    { name: 'RxJS', icon: <SiReactivex /> },
+    { name: 'Framer Motion', icon: <TbBrandFramerMotion /> },
+
+    // --- BACKEND & DEVOPS (Instagram Farm Stack) ---
+    { name: 'Python', icon: <FaPython /> },
+    { name: 'Flask', icon: <SiFlask /> },
+    { name: 'Appium', icon: <SiAppium /> },
+    { name: 'Linux / VPS', icon: <FaLinux /> },
+    { name: 'Systemd', icon: <FaTerminal /> }, // Systemd обычно обозначают терминалом
+    { name: 'SQLAlchemy', icon: <SiSqlalchemy /> },
+    { name: 'Gunicorn', icon: <SiGunicorn /> },
+    { name: 'Bash Scripting', icon: <SiGnubash /> },
+
+    // --- TOOLS ---
     { name: 'GitHub', icon: <FaGithub /> },
+    { name: 'SQL', icon: <FiDatabase /> },
     { name: 'Figma', icon: <FaFigma /> },
     { name: 'MJML', icon: <AiOutlineMail /> },
-    { name: 'SQL', icon: <FiDatabase /> },
-    { name: 'MailChimp', icon: 'MC' },
 ];
 
 const Skills = () => {
@@ -55,7 +68,7 @@ const Skills = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        transition={{ duration: 0.5, delay: index * 0.05 }} // Чуть ускорил анимацию, т.к. элементов стало больше
                     >
                         <SkillIcon>{skill.icon}</SkillIcon>
                         {skill.name}
