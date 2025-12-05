@@ -1,3 +1,4 @@
+// src/components/Contact/Contact.styles.ts
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -32,8 +33,11 @@ export const Text = styled.p`
     max-width: 470px;
 `;
 
+// Базовая кнопка (для Email)
 export const EmailLink = styled(motion.a)`
-    display: inline-block;
+    display: inline-flex; // Используем flex для идеального выравнивания иконки
+    align-items: center;
+    justify-content: center;
     padding: 1rem 2rem;
     border: 1px solid #00aaff;
     border-radius: 4px;
@@ -41,10 +45,20 @@ export const EmailLink = styled(motion.a)`
     text-decoration: none;
     font-size: 1rem;
     font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    outline: none; // Убирает стандартную синюю обводку браузера при нажатии
 
     &:hover {
         background-color: rgba(0, 170, 255, 0.1);
     }
 `;
 
+// Новая кнопка специально для Telegram (наследует базу, но меняет цвета)
+export const TelegramLink = styled(EmailLink)`
+    border-color: #64ffda;
+    color: #64ffda;
+
+    &:hover {
+        background-color: rgba(100, 255, 218, 0.1);
+    }
+`;
