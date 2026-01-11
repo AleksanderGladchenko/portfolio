@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+/* 1. Сначала создаем обычные стилизованные компоненты */
+
 export const HeroContainer = styled.section`
     display: flex;
     justify-content: center;
@@ -10,10 +12,9 @@ export const HeroContainer = styled.section`
     text-align: center;
     padding-top: 60px;
     position: relative;
-    /* УБРАЛИ background и ::before. Теперь тут чисто. */
 `;
 
-export const Subtitle = styled(motion.h2)`
+const SubtitleStyled = styled.h2`
     font-size: 1.5rem;
     font-weight: 500;
     color: var(--text-secondary);
@@ -24,11 +25,10 @@ export const Subtitle = styled(motion.h2)`
     }
 `;
 
-export const Title = styled(motion.h1)`
+const TitleStyled = styled.h1`
     font-size: 5rem;
     line-height: 1.1;
     font-weight: 700;
-    /* Текст градиентом */
     background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -40,7 +40,7 @@ export const Title = styled(motion.h1)`
     }
 `;
 
-export const Description = styled(motion.p)`
+const DescriptionStyled = styled.p`
     font-size: 1.5rem;
     color: var(--text-secondary);
     max-width: 700px;
@@ -53,7 +53,7 @@ export const Description = styled(motion.p)`
     }
 `;
 
-export const CtaButton = styled(motion.a)`
+const CtaButtonStyled = styled.a`
     margin-top: 3rem;
     padding: 14px 32px;
     background-color: var(--text-primary);
@@ -74,3 +74,11 @@ export const CtaButton = styled(motion.a)`
         transform: scale(0.95);
     }
 `;
+
+/* 2. Теперь превращаем их в Motion-компоненты и экспортируем */
+/* Этот способ точно говорит TypeScript, что компоненты анимированные */
+
+export const Subtitle = motion(SubtitleStyled);
+export const Title = motion(TitleStyled);
+export const Description = motion(DescriptionStyled);
+export const CtaButton = motion(CtaButtonStyled);
