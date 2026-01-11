@@ -41,3 +41,8 @@ img, video, picture, svg {
   display: block;
   max-width: 100%;
 }
+
+a, button, input, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent; /* Убирает синий мигающий квадрат при клике */
+}

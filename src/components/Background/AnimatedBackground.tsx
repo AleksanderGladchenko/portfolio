@@ -12,32 +12,37 @@ const BackgroundContainer = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* Жестко на задний план */
+    z-index: -1;
     background: var(--bg-color);
-    overflow: hidden; /* Чтобы шары не вызывали скролл */
-    pointer-events: none; /* Чтобы сквозь него можно было кликать */
+    overflow: hidden;
+
+    /* ВАЖНО: Гарантируем, что фон не перехватывает клики */
+    pointer-events: none;
 `;
 
 const Blob = styled.div`
     position: absolute;
     border-radius: 50%;
-    filter: blur(120px); /* ОЧЕНЬ сильное размытие */
-    opacity: 0.5; /* Полупрозрачность */
+    filter: blur(80px); /* Чуть уменьшил блюр для производительности (было 120) */
+    opacity: 0.5;
     animation: ${move} 20s infinite ease-in-out alternate;
-    will-change: transform; /* Оптимизация производительности */
+
+    /* ОПТИМИЗАЦИЯ: Включаем аппаратное ускорение */
+    will-change: transform;
+    transform: translateZ(0);
 `;
 
-// Шар 1: Огромный синий слева
+// Шар 1
 const Blob1 = styled(Blob)`
     top: -20%;
     left: -20%;
-    width: 90vw; /* Почти на весь экран */
+    width: 90vw;
     height: 90vw;
     background: var(--aurora-1);
     animation-duration: 25s;
 `;
 
-// Шар 2: Огромный фиолетовый справа
+// Шар 2
 const Blob2 = styled(Blob)`
     bottom: -20%;
     right: -20%;
@@ -48,7 +53,7 @@ const Blob2 = styled(Blob)`
     animation-direction: reverse;
 `;
 
-// Шар 3: Центральный связующий
+// Шар 3
 const Blob3 = styled(Blob)`
     top: 20%;
     left: 20%;
@@ -59,7 +64,6 @@ const Blob3 = styled(Blob)`
     opacity: 0.3;
 `;
 
-/* Текстура шума для "дорогого" вида */
 const NoiseOverlay = styled.div`
     position: fixed;
     top: 0;
@@ -68,6 +72,8 @@ const NoiseOverlay = styled.div`
     height: 100%;
     opacity: 0.04;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+    /* ВАЖНО: Шум тоже не должен блокировать мышку */
     pointer-events: none;
     z-index: 0;
 `;
