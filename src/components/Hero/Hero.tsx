@@ -1,32 +1,31 @@
 import { HeroContainer, Title, Subtitle, Description, CtaButton } from './Hero.styles';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
-// Настройки анимации (Apple Style Easing)
-const containerVariants = {
+// Явно указываем тип Variants, чтобы TypeScript не ругался
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
         transition: {
-            // Задержка перед стартом и интервал между появлением элементов
             delayChildren: 0.3,
             staggerChildren: 0.2
         }
     }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: {
         opacity: 0,
-        y: 30, // Элемент выезжает снизу (30px)
-        filter: 'blur(10px)' // Добавляем легкий блюр при появлении для мягкости
+        y: 30,
+        filter: 'blur(10px)'
     },
     visible: {
         opacity: 1,
         y: 0,
         filter: 'blur(0px)',
         transition: {
-            duration: 1, // Длительность 1 секунда (медленно и плавно)
-            ease: [0.25, 0.1, 0.25, 1], // Математическая кривая плавности (Cubic Bezier)
+            duration: 1,
+            ease: "easeInOut", // <--- ИСПРАВЛЕНО: используем строку вместо массива
         }
     }
 };
@@ -42,7 +41,7 @@ const Hero = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    maxWidth: '900px' // Ограничиваем ширину контейнера
+                    maxWidth: '900px'
                 }}
             >
                 {/* 1. Приветствие */}
@@ -64,7 +63,7 @@ const Hero = () => {
 
                 {/* 4. Кнопка */}
                 <CtaButton
-                    href="#projects" // Ссылка на проекты
+                    href="#projects"
                     variants={itemVariants}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
