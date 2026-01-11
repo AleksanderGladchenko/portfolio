@@ -139,7 +139,7 @@ const Projects = () => {
                 </FilterContainer>
 
                 <ProjectsGrid layout>
-                    <AnimatePresence mode='popLayout'>
+                    <AnimatePresence mode='wait'>
                         {filteredProjects.map((project) => (
                             <ProjectCard
                                 layout
