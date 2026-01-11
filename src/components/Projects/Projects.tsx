@@ -142,7 +142,6 @@ const Projects = () => {
                     <AnimatePresence mode='wait'>
                         {filteredProjects.map((project) => (
                             <ProjectCard
-                                layout
                                 key={project.id}
                                 onClick={() => setSelectedProject(project)}
                                 initial={{ opacity: 0, scale: 0.9 }}

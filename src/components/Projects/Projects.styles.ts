@@ -78,6 +78,8 @@ export const ProjectsGrid = styled(motion.div)`
   box-sizing: border-box;
 `;
 
+/* ... остальной код выше ... */
+
 export const ProjectCard = styled(motion.div)`
   background-color: var(--card-bg);
   border-radius: 28px;
@@ -90,9 +92,27 @@ export const ProjectCard = styled(motion.div)`
   border: 1px solid var(--border-color);
   box-shadow: 0 10px 30px var(--shadow-color);
 
-  /* Важно для анимации фильтрации */
+  /* ВАЖНО: */
   transform-origin: center;
+
+  /* --- ОПТИМИЗАЦИЯ ДЛЯ SAFARI (Лечим тормоза) --- */
+  will-change: transform, opacity; /* Говорим браузеру заранее готовиться к анимации */
+  transform: translateZ(0); /* Включаем 3D-ускорение */
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden; /* Убираем мерцание */
+  -webkit-backface-visibility: hidden;
+  /* ----------------------------------------------- */
+
+  transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 20px 50px var(--shadow-color);
+    transform: translateY(-5px) translateZ(0); /* Сохраняем translateZ при ховере */
+    z-index: 2;
+  }
 `;
+
+/* ... остальной код ниже ... */
 
 export const MediaContainer = styled.div`
   width: 100%;
