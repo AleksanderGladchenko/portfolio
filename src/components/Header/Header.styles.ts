@@ -1,93 +1,109 @@
-
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const HeaderContainer = styled.header`
-    width: 100%;
-    padding: 1rem 2rem;
-    background-color: rgba(10, 25, 47, 0.85);
-    border-bottom: 1px solid #00aaff;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+    padding: 0 8px 0 24px;
+    border-radius: 100px;
+    background-color: var(--nav-bg);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px var(--shadow-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1010;
-    backdrop-filter: blur(10px);
+    z-index: 9999;
+    transition: all 0.3s ease;
 
     @media (max-width: 768px) {
-        padding: 1rem;
+        top: 10px; width: 90%; padding: 0 16px;
     }
 `;
 
 export const Logo = styled.div`
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ccd6f6;
-    text-shadow: 0 0 5px #00aaff;
-    z-index: 10;
-
-    @media (max-width: 768px) {
-        font-size: 1.2rem;
-    }
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    margin-right: 30px;
 `;
 
 export const NavLinks = styled.nav`
     display: flex;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 4px;
 
-    @media (max-width: 768px) {
-        display: none;
+    /* ХАК: Принудительно задаем курсор для всех ссылок внутри */
+    & > * {
+        cursor: pointer !important;
     }
+
+    @media (max-width: 768px) { display: none; }
 `;
 
 export const NavLinkStyled = styled.a`
-    color: #FFFFFF !important;
+    color: var(--text-secondary) !important;
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: bold;
-    text-shadow: none !important;
-    transition: color 0.3s ease;
-    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    cursor: pointer !important; /* Еще раз дублируем */
+    position: relative;
+    user-select: none;
 
     &:hover {
-        color: #00aaff !important;
+        color: var(--text-primary) !important;
+        background-color: var(--border-color);
+    }
+
+    &.active {
+        color: var(--text-primary) !important;
+        background-color: var(--card-bg);
+        box-shadow: 0 2px 10px var(--shadow-color);
+    }
+`;
+
+export const ThemeButton = styled.button`
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer !important;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    margin-left: 8px;
+
+    &:hover {
+        transform: scale(1.1);
+        background-color: var(--border-color);
     }
 `;
 
 export const BurgerIcon = styled.div`
-    display: none;
-    font-size: 1.5rem;
-    color: #ccd6f6;
-    cursor: pointer;
-    z-index: 1020;
-
-    @media (max-width: 768px) {
-        display: block;
-    }
+    display: none; font-size: 1.2rem; color: var(--text-primary); cursor: pointer; margin-left: auto;
+    @media (max-width: 768px) { display: block; }
 `;
 
 export const MobileNav = styled(motion.div)`
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(75vw, 400px);
-    height: 100vh;
-    background-color: #112240;
-    box-shadow: -10px 0px 30px -15px rgba(2, 12, 27, 0.7);
-    z-index: 1000;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+    position: fixed; top: 70px; left: 50%; transform: translateX(-50%) !important;
+    width: 90%; border-radius: 24px; background-color: var(--nav-bg);
+    backdrop-filter: blur(20px); border: 1px solid var(--border-color);
+    z-index: 9998; display: flex; flex-direction: column; padding: 20px; gap: 10px;
 
     .mobile-link {
-        color: #ccd6f6;
-        font-size: 1.2rem;
-        font-family: 'SF Mono', 'Fira Code', monospace;
-        cursor: pointer;
+        color: var(--text-primary);
+        font-size: 16px; font-weight: 500; padding: 12px; text-align: center; border-radius: 12px; cursor: pointer;
+        &:active { background-color: var(--border-color); }
     }
 `;

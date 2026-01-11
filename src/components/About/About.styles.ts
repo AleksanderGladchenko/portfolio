@@ -2,84 +2,93 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const AboutSection = styled(motion.section)`
-    padding: 100px 0;
-    display: flex;
-    flex-direction: column;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 120px 24px;
 `;
 
 export const SectionTitle = styled.h2`
-    font-size: 2rem;
-    color: #ccd6f6;
-    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary); /* Используем переменную */
+    margin-bottom: 50px;
     text-align: center;
-    width: 100%;
+    letter-spacing: -0.01em;
 
-    @media (max-width: 768px) {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
+    span {
+        color: var(--text-secondary); /* Используем переменную */
     }
 `;
 
-export const ContentWrapper = styled.div`
+export const ProfileCard = styled.div`
+    background-color: var(--card-bg); /* ВАЖНО: Цвет фона пузыря из темы */
+    border-radius: 40px;
+    padding: 40px;
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 50px;
+    gap: 40px;
+    align-items: center;
+    border: 1px solid var(--border-color); /* Бордер из темы */
+    box-shadow: 0 20px 40px var(--shadow-color); /* Тень из темы */
+    margin: 0 auto;
 
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
         grid-template-columns: 1fr;
+        padding: 30px;
     }
 `;
 
-export const TextBlock = styled.div`
-    color: #8892b0;
+export const TextContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
+
+export const HighlightText = styled.h3`
+    font-size: 1.8rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--text-primary); /* Цвет текста из темы */
+    letter-spacing: -0.02em;
+
+    span {
+        color: var(--accent-color);
+    }
+`;
+
+export const Paragraph = styled.p`
     font-size: 1.1rem;
     line-height: 1.6;
-
-    p {
-        margin: 0 0 15px 0;
-    }
+    color: var(--text-secondary); /* Вторичный текст из темы */
+    font-weight: 400;
 `;
 
-export const SkillsList = styled.ul`
-    display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
-    gap: 0 10px;
-    padding: 0;
-    margin: 20px 0 0 0;
-    list-style: none;
-    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-    font-size: 0.9rem;
-
-    li {
-        position: relative;
-        margin-bottom: 10px;
-        padding-left: 20px;
-        &::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: #00aaff;
-        }
-    }
-`;
-
-export const ImageWrapper = styled.div`
+export const ImageContainer = styled.div`
     position: relative;
+    width: 100%;
     max-width: 300px;
+    margin: 0 auto;
 
-    img {
-        width: 100%;
-        height: auto;
-        border-radius: 4px;
-        filter: grayscale(100%) contrast(1);
-        transition: filter 0.3s ease;
+    &::after {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
     }
+`;
 
-    &:hover img {
-        filter: none;
-    }
+export const ProfileImg = styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px var(--shadow-color);
+    transition: transform 0.3s ease;
 
-    @media (max-width: 768px) {
-        margin: 3rem auto 0;
+    &:hover {
+        transform: scale(1.03);
     }
 `;

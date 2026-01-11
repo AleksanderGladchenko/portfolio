@@ -1,47 +1,47 @@
-// src/components/Contact/Contact.tsx
-import { ContactSection, Title, Text, EmailLink } from './Contact.styles';
-import { FaTelegramPlane, FaEnvelope } from 'react-icons/fa'; // Импорт иконок
+import { ContactSection, Title, Subtitle, ButtonContainer, ContactButton, Footer } from './Contact.styles';
+import { FaTelegramPlane, FaEnvelope, FaArrowUp } from 'react-icons/fa'; // Убрал FaGithub
 
 const Contact = () => {
     return (
         <ContactSection
             id="contact"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.0 }}
         >
-            <Title>Get In Touch</Title>
-            <Text>
-                I'm currently looking for new opportunities and my inbox is always open.
-                Whether you have a question or just want to say hi, I’ll get back to you!
-            </Text>
+            <Title>Let’s Work Together.</Title>
+            <Subtitle>
+                Have a project in mind or just want to discuss the latest tech?
+                My inbox is open for new opportunities.
+            </Subtitle>
 
-            {/* Контейнер для кнопок, чтобы они были рядом */}
-            <div style={{ display: 'flex', gap: '20px', marginTop: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
-
-                {/* Кнопка Email */}
-                <EmailLink
+            <ButtonContainer>
+                {/* Оставили только Email и Telegram */}
+                <ContactButton
                     href="mailto:nininini141998@gmail.com"
-                    whileHover={{ scale: 1.05 }}
+                    className="primary"
                     whileTap={{ scale: 0.95 }}
                 >
-                    <FaEnvelope style={{ marginRight: '8px' }} /> Email
-                </EmailLink>
+                    <FaEnvelope /> Email Me
+                </ContactButton>
 
-                {/* Кнопка Telegram */}
-                <EmailLink
+                <ContactButton
                     href="https://t.me/ai_nfinityg_69"
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
+                    className="secondary"
                     whileTap={{ scale: 0.95 }}
-                    style={{ background: 'transparent', border: '1px solid #64ffda', color: '#64ffda' }} // Немного другой стиль, чтобы отличалась (опционально)
                 >
-                    <FaTelegramPlane style={{ marginRight: '8px' }} /> Telegram
-                </EmailLink>
-            </div>
+                    <FaTelegramPlane /> Telegram
+                </ContactButton>
+            </ButtonContainer>
 
+            <Footer>
+                <p>Designed & Built by Alexander.</p>
+                <div style={{ cursor: 'pointer' }} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                    <FaArrowUp /> Back to Top
+                </div>
+            </Footer>
         </ContactSection>
     );
 };

@@ -2,46 +2,85 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const SkillsSection = styled(motion.section)`
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 100px 0;
-    text-align: center;
+    padding: 80px 24px 100px;
 `;
 
 export const SectionTitle = styled.h2`
-    font-size: 2rem;
-    color: #ccd6f6;
-    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 50px;
+    text-align: center;
 
-    @media (max-width: 768px) {
-        font-size: 1.5rem;
+    span {
+        color: var(--text-secondary);
     }
 `;
 
-export const SkillsGrid = styled.div`
+export const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    justify-content: center;
 `;
 
-export const SkillCard = styled(motion.div)`
+export const CategoryCard = styled(motion.div)`
+    background: var(--card-bg); /* ВАЖНО: Фон пузыря */
+    border-radius: 28px;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px var(--shadow-color);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 1.5rem;
-    background-color: #112240;
-    border-radius: 4px;
-    color: #8892b0;
-    font-size: 1rem;
-    transition: transform 0.3s, color 0.3s;
+    gap: 20px;
+    transition: transform 0.3s;
 
     &:hover {
         transform: translateY(-5px);
-        color: #00aaff;
     }
 `;
 
-export const SkillIcon = styled.div`
-    font-size: 3rem;
+export const CategoryHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary); /* Цвет заголовка */
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+
+    svg {
+        color: var(--accent-color);
+        font-size: 1.4rem;
+    }
+`;
+
+export const SkillsList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+`;
+
+export const SkillItem = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-secondary); /* Цвет текста */
+
+    svg {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        min-width: 20px;
+    }
+
+    &:hover {
+        color: var(--text-primary);
+        svg {
+            color: var(--accent-color);
+        }
+    }
 `;

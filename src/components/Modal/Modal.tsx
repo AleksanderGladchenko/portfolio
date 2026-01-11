@@ -1,24 +1,41 @@
-// src/components/Modal/Modal.tsx
 import { AnimatePresence } from 'framer-motion';
-import { Backdrop, ModalContent, ModalImage, CloseButton } from './Modal.styles';
-import { ProjectContent, ProjectTitle, ProjectDescription, TechList, ProjectLinks, IconButton } from '../Projects/Projects.styles';
-import { FaGithub, FaCompressAlt, FaTimes } from 'react-icons/fa';
+import { Backdrop, ModalContent, ModalImage, CloseButton, ModalBody, ModalLinks, LinkButton } from './Modal.styles';
+import { ProjectTitle, ProjectDescription, TechList, TechTag } from '../Projects/Projects.styles';
+import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import styled from 'styled-components';
 
-// 1. Обновляем интерфейс Project (добавляем mediaType)
+// 1. Обновляем интерфейс (копия из Projects.tsx)
 interface Project {
+    id: number;
     title: string;
-    image: string;
+    category: 'app' | 'cms' | 'automation';
+    image: string | null;
+    mediaType: 'video' | 'image' | 'none'; // Добавили 'none'
     description: string;
     tech: string[];
     github: string;
     live: string;
-    mediaType?: 'video' | 'image'; // Добавили поле (вопросительный знак делает его необязательным для совместимости)
+    icon?: React.ReactNode; // Новое поле
+    color?: string; // Новое поле
 }
 
 interface ModalProps {
     project: Project | null;
     closeModal: () => void;
 }
+
+// Специальный компонент для заголовка в модалке без картинки
+const ColoredHeader = styled.div<{ $bg?: string }>`
+    width: 100%;
+    height: 200px;
+    background: ${({ $bg }) => $bg || '#333'};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid var(--border-color);
+`;
 
 const Modal = ({ project, closeModal }: ModalProps) => {
     return (
@@ -30,46 +47,64 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                 >
-                    <CloseButton onClick={closeModal}>
-                        <FaTimes />
-                    </CloseButton>
-
                     <ModalContent
                         onClick={(e) => e.stopPropagation()}
-                        initial={{ y: "-50px", opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: "50px", opacity: 0 }}
-                        transition={{ ease: "easeOut", duration: 0.3 }}
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.9, opacity: 0 }}
+                        transition={{ type: "spring", damping: 25, stiffness: 300 }}
                     >
-                        <div style={{ flexGrow: 1 }}>
+                        <CloseButton onClick={closeModal}>
+                            <FaTimes />
+                        </CloseButton>
 
-                            {/* --- ИСПРАВЛЕНИЕ: ПРОВЕРКА ТИПА КОНТЕНТА --- */}
-                            {project.mediaType === 'image' ? (
-                                // Если это картинка — рендерим img
-                                <ModalImage as="img" src={project.image} alt={project.title} />
-                            ) : (
-                                // Если это видео (или тип не указан) — рендерим video
-                                <ModalImage as="video" autoPlay loop muted playsInline>
-                                    <source src={project.image} type="video/mp4" />
-                                </ModalImage>
-                            )}
-                            {/* ------------------------------------------- */}
+                        {/* ЛОГИКА ОТОБРАЖЕНИЯ МЕДИА */}
+                        {project.mediaType === 'none' ? (
+                            // Если нет картинки/видео — показываем цветной хедер с иконкой
+                            <ColoredHeader $bg={project.color}>
+                                {project.icon}
+                            </ColoredHeader>
+                        ) : (
+                            <ModalImage>
+                                {project.mediaType === 'image' && project.image ? (
+                                    <img src={project.image} alt={project.title} />
+                                ) : project.mediaType === 'video' && project.image ? (
+                                    <video autoPlay loop muted playsInline>
+                                        <source src={project.image} type="video/mp4" />
+                                    </video>
+                                ) : null}
+                            </ModalImage>
+                        )}
 
-                            <ProjectContent>
-                                <ProjectTitle>{project.title}</ProjectTitle>
-                                <ProjectDescription>{project.description}</ProjectDescription>
-                                <TechList>
-                                    {project.tech.map((tech: string, j: number) => <li key={j}>{tech}</li>)}
-                                </TechList>
-                            </ProjectContent>
-                        </div>
+                        <ModalBody>
+                            <ProjectTitle style={{ fontSize: '2rem', marginBottom: '16px' }}>
+                                {project.title}
+                            </ProjectTitle>
 
-                        <ProjectLinks>
-                            <a href={project.github} target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                            <IconButton onClick={closeModal}>
-                                <FaCompressAlt />
-                            </IconButton>
-                        </ProjectLinks>
+                            <TechList style={{ marginBottom: '24px' }}>
+                                {project.tech.map((tech, j) => (
+                                    <TechTag key={j}>{tech}</TechTag>
+                                ))}
+                            </TechList>
+
+                            <ProjectDescription style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
+                                {project.description}
+                            </ProjectDescription>
+
+                            <ModalLinks>
+                                {project.live && project.live !== '#' && (
+                                    <LinkButton href={project.live} target="_blank" rel="noopener noreferrer">
+                                        <FaExternalLinkAlt /> Open Live
+                                    </LinkButton>
+                                )}
+
+                                {project.github && project.github !== '#' && (
+                                    <LinkButton href={project.github} target="_blank" rel="noopener noreferrer" className="secondary">
+                                        <FaGithub /> Source Code
+                                    </LinkButton>
+                                )}
+                            </ModalLinks>
+                        </ModalBody>
                     </ModalContent>
                 </Backdrop>
             )}
