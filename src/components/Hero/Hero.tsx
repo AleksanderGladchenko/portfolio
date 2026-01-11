@@ -1,7 +1,7 @@
 import { HeroContainer, Title, Subtitle, Description, CtaButton } from './Hero.styles';
-import { motion, Variants } from 'framer-motion';
+// ВОТ ТУТ ГЛАВНОЕ ИСПРАВЛЕНИЕ: слово type
+import { motion, type Variants } from 'framer-motion';
 
-// Явно указываем тип Variants, чтобы TypeScript не ругался
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,7 +25,7 @@ const itemVariants: Variants = {
         filter: 'blur(0px)',
         transition: {
             duration: 1,
-            ease: "easeInOut", // <--- ИСПРАВЛЕНО: используем строку вместо массива
+            ease: "easeInOut",
         }
     }
 };
@@ -44,24 +44,20 @@ const Hero = () => {
                     maxWidth: '900px'
                 }}
             >
-                {/* 1. Приветствие */}
                 <Subtitle variants={itemVariants}>
                     Hi, my name is
                 </Subtitle>
 
-                {/* 2. Имя (Градиент) */}
                 <Title variants={itemVariants}>
                     Alexander.
                 </Title>
 
-                {/* 3. Описание */}
                 <Description variants={itemVariants}>
                     I build impressive things for the web. I'm a Front-End Developer with
                     a unique background in engineering, specializing in creating
                     responsive, pixel-perfect user interfaces in Angular & React.
                 </Description>
 
-                {/* 4. Кнопка */}
                 <CtaButton
                     href="#projects"
                     variants={itemVariants}
