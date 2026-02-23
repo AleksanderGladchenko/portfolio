@@ -23,11 +23,14 @@ import video1 from '../../assets/1.mp4';
 import video2 from '../../assets/2.mp4';
 import video3 from '../../assets/3.mp4';
 import farmImg from '../../assets/farm.jpg';
+import server1 from '../../assets/server1.jpg';
+import server2 from '../../assets/server2.jpg';
+import server3 from '../../assets/server3.jpg';
 
-// Импорт иконок (оставил только используемые)
-import { FaWordpress, FaShoppingCart } from 'react-icons/fa';
+// Импорт иконок (добавляем FaServer для бекенда)
+import { FaWordpress, FaShoppingCart, FaServer } from 'react-icons/fa';
 
-// Интерфейс должен совпадать с Modal
+/* ОБНОВЛЯЕМ ИНТЕРФЕЙС (строка ~30) */
 export interface Project {
     id: number;
     title: string;
@@ -40,6 +43,7 @@ export interface Project {
     live: string;
     icon?: React.ReactNode;
     color?: string;
+    gallery?: string[]; // Добавили поле
 }
 
 const projectsData: Project[] = [
@@ -115,7 +119,21 @@ const projectsData: Project[] = [
         tech: ['Angular', 'Material', 'Forms'],
         github: 'https://github.com/AleksanderGladchenko/engineer-form',
         live: '#',
-    }
+    },
+    {
+        id: 7, // Уникальный ID
+        title: 'Game Server Monitoring Platform',
+        category: 'cms',
+        image: null,
+        mediaType: 'none',
+        icon: <FaServer />, // Иконка сервера
+        color: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)', // Стильный зеленый градиент
+        description: 'Architected a custom server monitoring architecture within a classifieds CMS. Engineered an automated Cron-based system querying servers every 5 minutes to fetch and store real-time player metrics. Transformed the UI logic to replace standard pricing with dynamic live stats, integrated interactive historical graphs (Chart.js), and successfully deployed Monobank acquiring for seamless transactions. Executed full database migration and production deployment via Adminer.',
+        tech: ['PHP', 'MySQL', 'Cron', 'Monobank API', 'Data Viz', 'Adminer'],
+        github: '#',
+        live: '#',
+        gallery: [server1, server2, server3] // Передаем картинки в модалку
+    },
 ];
 
 const Projects = () => {

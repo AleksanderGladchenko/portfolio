@@ -1,5 +1,4 @@
 import { HeroContainer, Title, Subtitle, Description, CtaButton } from './Hero.styles';
-// ВОТ ТУТ ГЛАВНОЕ ИСПРАВЛЕНИЕ: слово type
 import { motion, type Variants } from 'framer-motion';
 
 const containerVariants: Variants = {
@@ -45,7 +44,7 @@ const Hero = () => {
                 }}
             >
                 <Subtitle variants={itemVariants}>
-                    Hi, my name is
+                    Strong Full-Stack Developer & Technical Architect
                 </Subtitle>
 
                 <Title variants={itemVariants}>
@@ -53,9 +52,17 @@ const Hero = () => {
                 </Title>
 
                 <Description variants={itemVariants}>
-                    I build impressive things for the web. I'm a Front-End Developer with
-                    a unique background in engineering, specializing in creating
-                    responsive, pixel-perfect user interfaces in Angular & React.
+                    <div>
+                        I specialize in engineering high-performance web applications and complex
+                        automated systems. With a <strong>focus on scalable architecture</strong>,
+                        I transform sophisticated business logic into seamless user experiences.
+                    </div>
+                    <ul>
+                        <li><strong>Core:</strong> React, TypeScript, Angular, Node.js</li>
+                        <li><strong>System:</strong> Database Design, API Architectures, Cron Jobs</li>
+                        <li><strong>FinTech:</strong> Monobank / Stripe API Integrations</li>
+                        <li><strong>Infrastructure:</strong> Linux (SSH/Bash), Nginx, CI/CD</li>
+                    </ul>
                 </Description>
 
                 <CtaButton
@@ -64,7 +71,7 @@ const Hero = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    Check out my work!
+                    Explore My Projects
                 </CtaButton>
             </motion.div>
         </HeroContainer>

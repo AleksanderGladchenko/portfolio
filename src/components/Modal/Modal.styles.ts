@@ -83,3 +83,114 @@ export const LinkButton = styled.a`
 
     &.secondary { background: var(--bg-color); color: var(--text-primary); border: 1px solid var(--border-color); }
 `;
+
+/* СТИЛИ ДЛЯ ГАЛЕРЕИ ВНУТРИ МОДАЛКИ */
+export const ProjectGallery = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+`;
+
+export const GalleryImage = styled.img`
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: zoom-in; /* Намек, что можно открыть (на будущее) */
+
+    &:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 24px var(--shadow-color);
+    }
+`;
+
+/* --- СТИЛИ ДЛЯ ПОЛНОЭКРАННОЙ ГАЛЕРЕИ (LIGHTBOX) --- */
+
+export const LightboxBackdrop = styled(motion.div)`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 9999; /* Поверх всего, даже основной модалки */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const LightboxContent = styled(motion.div)`
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        user-select: none; /* Чтобы не выделялась при кликах */
+    }
+`;
+
+export const LightboxButton = styled.button`
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 10000;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        /* На мобильных делаем кнопки чуть меньше и ближе к краям */
+        width: 40px;
+        height: 40px;
+    }
+`;
+
+export const LightboxPrev = styled(LightboxButton)`
+    left: -70px;
+    @media (max-width: 1024px) { left: 10px; } /* На планшетах и телефонах наезжает на картинку */
+`;
+
+export const LightboxNext = styled(LightboxButton)`
+    right: -70px;
+    @media (max-width: 1024px) { right: 10px; }
+`;
+
+export const LightboxClose = styled(LightboxButton)`
+    top: -60px;
+    right: -60px;
+    width: 40px;
+    height: 40px;
+    @media (max-width: 1024px) { 
+        top: 10px; 
+        right: 10px; 
+    }
+`;
