@@ -64,8 +64,11 @@ Error generating stack: `+a.message+`
     padding: 0 8px 0 24px;
     border-radius: 100px;
     background-color: var(--nav-bg);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+    /* ОПТИМИЗИРОВАНО: Снизили радиус с 20px до 8px */
+    backdrop-filter: saturate(180%) blur(8px);
+    -webkit-backdrop-filter: saturate(180%) blur(8px);
+
     border: 1px solid var(--border-color);
     box-shadow: 0 10px 40px var(--shadow-color);
     display: flex;
@@ -204,15 +207,17 @@ Error generating stack: `+a.message+`
     margin-bottom: 3.5rem;
     max-width: 800px;
 `,ax=$.span`
-    background: var(--glass-panel); /* Полупрозрачный фон из App.tsx */
+    /* Слегка затемняем фон, чтобы он читался и без блюра */
+    background: rgba(28, 28, 30, 0.85);
     border: 1px solid var(--border-color);
     padding: 10px 20px;
     border-radius: 50px;
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-primary);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+
+    /* УБРАЛИ: backdrop-filter: blur(10px); */
+
     box-shadow: 0 4px 15px var(--shadow-color);
     transition: transform 0.2s ease, background 0.2s ease;
 
@@ -609,18 +614,18 @@ Error generating stack: `+a.message+`
   right: 10px;
   padding: 16px 20px;
 
-  background-color: var(--glass-panel);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  /* ОПТИМИЗИРОВАНО ДЛЯ 60 FPS: 
+     Заменили тяжелый blur на красивый полупрозрачный градиент */
+  background: linear-gradient(to top, var(--card-bg) 0%, rgba(28, 28, 30, 0.85) 100%);
 
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 
   z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* Усилили тень для контраста */
 `,$g=$.h3`
   margin: 0 0 4px;
   font-size: 1.3rem;
