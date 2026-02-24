@@ -207,17 +207,15 @@ Error generating stack: `+a.message+`
     margin-bottom: 3.5rem;
     max-width: 800px;
 `,ax=$.span`
-    /* Слегка затемняем фон, чтобы он читался и без блюра */
-    background: rgba(28, 28, 30, 0.85);
+    /* ИСПРАВЛЕНО: Теперь фон адаптируется под тему */
+    background: var(--card-bg);
+    opacity: 0.9;
     border: 1px solid var(--border-color);
     padding: 10px 20px;
     border-radius: 50px;
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-primary);
-
-    /* УБРАЛИ: backdrop-filter: blur(10px); */
-
     box-shadow: 0 4px 15px var(--shadow-color);
     transition: transform 0.2s ease, background 0.2s ease;
 
@@ -621,9 +619,9 @@ Error generating stack: `+a.message+`
   right: 10px;
   padding: 16px 20px;
 
-  /* ОПТИМИЗИРОВАНО ДЛЯ 60 FPS: 
-     Заменили тяжелый blur на красивый полупрозрачный градиент */
-  background: linear-gradient(to top, var(--card-bg) 0%, rgba(28, 28, 30, 0.85) 100%);
+  /* ИСПРАВЛЕНО: Адаптивный фон вместо темного хардкода */
+  background: var(--card-bg);
+  opacity: 0.95;
 
   border-radius: 20px;
   border: 1px solid var(--border-color);
@@ -632,7 +630,7 @@ Error generating stack: `+a.message+`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* Усилили тень для контраста */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* Чуть смягчили тень для светлой темы */
 `,$g=$.h3`
   margin: 0 0 4px;
   font-size: 1.3rem;
