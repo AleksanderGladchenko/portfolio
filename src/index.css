@@ -46,3 +46,19 @@ a, button, input, [role="button"] {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent; /* Убирает синий мигающий квадрат при клике */
 }
+
+/* --- СУПЕР-ОПТИМИЗАЦИЯ РЕНДЕРИНГА (GPU BOOST) --- */
+section {
+  /* Запрещаем браузеру рендерить секции, которые не видны на экране */
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px; /* Примерная высота секции, чтобы не прыгал скролл */
+
+  /* Изолируем стили секций друг от друга, чтобы изменения в одной не вызывали перерисовку всего сайта */
+  contain: paint layout;
+}
+
+/* Форсируем аппаратное ускорение для всего сайта */
+body {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

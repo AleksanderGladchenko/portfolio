@@ -1,4 +1,4 @@
-import { HeroContainer, Title, Subtitle, Description, CtaButton } from './Hero.styles';
+import { HeroContainer, Title, Subtitle, Description, SkillsWrapper, SkillPill, CtaButton } from './Hero.styles';
 import { motion, type Variants } from 'framer-motion';
 
 const containerVariants: Variants = {
@@ -6,28 +6,31 @@ const containerVariants: Variants = {
     visible: {
         opacity: 1,
         transition: {
-            delayChildren: 0.3,
-            staggerChildren: 0.2
+            delayChildren: 0.2,
+            staggerChildren: 0.15 // Ускорили появление
         }
     }
 };
 
 const itemVariants: Variants = {
-    hidden: {
-        opacity: 0,
-        y: 30,
-        filter: 'blur(10px)'
-    },
+    hidden: { opacity: 0, y: 20, filter: 'blur(5px)' },
     visible: {
         opacity: 1,
         y: 0,
         filter: 'blur(0px)',
-        transition: {
-            duration: 1,
-            ease: "easeInOut",
-        }
+        transition: { duration: 0.8, ease: "easeOut" }
     }
 };
+
+// Выносим навыки в массив для удобства
+const skills = [
+    "React & TypeScript",
+    "Node.js & API Architecture",
+    "Database Design",
+    "FinTech Integrations",
+    "CI/CD & DevOps",
+    "System Monitoring"
+];
 
 const Hero = () => {
     return (
@@ -44,7 +47,7 @@ const Hero = () => {
                 }}
             >
                 <Subtitle variants={itemVariants}>
-                    Strong Full-Stack Developer & Technical Architect
+                    Technical Architect & Full-Stack Engineer
                 </Subtitle>
 
                 <Title variants={itemVariants}>
@@ -52,31 +55,29 @@ const Hero = () => {
                 </Title>
 
                 <Description variants={itemVariants}>
-                    <div>
-                        I specialize in engineering high-performance web applications and complex
-                        automated systems. With a <strong>focus on scalable architecture</strong>,
-                        I transform sophisticated business logic into seamless user experiences.
-                    </div>
-                    <ul>
-                        <li><strong>Core:</strong> React, TypeScript, Angular, Node.js</li>
-                        <li><strong>System:</strong> Database Design, API Architectures, Cron Jobs</li>
-                        <li><strong>FinTech:</strong> Monobank / Stripe API Integrations</li>
-                        <li><strong>Infrastructure:</strong> Linux (SSH/Bash), Nginx, CI/CD</li>
-                    </ul>
+                    I specialize in engineering high-performance web applications and robust automated systems.
+                    I bridge the gap between complex backend architecture and pixel-perfect user interfaces.
                 </Description>
+
+                {/* НОВЫЙ БЛОК НАВЫКОВ */}
+                <SkillsWrapper variants={itemVariants}>
+                    {skills.map((skill, index) => (
+                        <SkillPill key={index} variants={itemVariants}>
+                            {skill}
+                        </SkillPill>
+                    ))}
+                </SkillsWrapper>
 
                 <CtaButton
                     href="#projects"
                     variants={itemVariants}
-                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    Explore My Projects
+                    Explore My Work
                 </CtaButton>
             </motion.div>
         </HeroContainer>
     );
 };
-
 
 export default Hero;

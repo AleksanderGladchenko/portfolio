@@ -2,33 +2,53 @@ import { ExperienceSection, SectionTitle, TimelineContainer, TimelineItem, Conte
 
 const jobs = [
     {
-        company: 'Freelance / High-Load Project',
-        role: 'Full Stack Engineer',
-        period: 'Nov 2025 - Present',
+        company: 'SaaS Platform / Custom Web Solutions',
+        role: 'Technical Architect & Full-Stack Engineer',
+        period: 'Dec 2025 - Present',
         tasks: [
-            'Architected a scalable automation farm running 10+ Android emulators.',
-            'Developed a thread-safe RESTful API using Flask & SQLAlchemy.',
-            'Optimized system stability with Systemd watchdogs to prevent OOM.',
+            'Architected a custom CMS featuring an automated game server monitoring system with Cron-based data aggregation.',
+            'Integrated secure payment processing via the Monobank API, ensuring fault-tolerant financial transactions.',
+            'Designed interactive data visualization dashboards using Chart.js to monitor real-time server metrics.'
         ]
     },
     {
-        company: 'IT Company',
+        company: 'Freelance / B2B Projects',
+        role: 'Full-Stack Web Developer',
+        period: 'May 2025 - Nov 2025',
+        tasks: [
+            'Developed and deployed specialized WordPress and Osclass plugins, including a custom Geo-Traffic Shield.',
+            'Optimized high-load marketplace performance by restructuring SQL queries and automating XML product feeds.',
+            'Managed full-cycle deployment across dedicated Linux servers using Nginx and Adminer.'
+        ]
+    },
+    {
+        company: 'High-Load Automation Project',
+        role: 'Backend & Automation Engineer',
+        period: 'Sep 2024 - Apr 2025',
+        tasks: [
+            'Engineered a scalable automation farm running 10+ Android emulators simultaneously.',
+            'Developed a thread-safe RESTful API using Python, Flask, and SQLAlchemy.',
+            'Implemented robust Systemd watchdogs and Linux bash scripts to prevent OOM errors and ensure 24/7 uptime.'
+        ]
+    },
+    {
+        company: 'E-commerce / Digital Agency',
+        role: 'Middle Front-End Engineer',
+        period: 'Dec 2023 - Aug 2024',
+        tasks: [
+            'Maintained and optimized live e-commerce platforms, significantly improving core web vitals and rendering speed.',
+            'Developed responsive, high-performance web interfaces and complex pixel-perfect HTML architectures.',
+            'Collaborated with backend teams to integrate secure third-party APIs and payment gateways.'
+        ]
+    },
+    {
+        company: 'Web Development Studio',
         role: 'Front-End Developer',
-        period: 'Feb 2025 - Jul 2025',
+        period: 'Jan 2023 - Nov 2023',
         tasks: [
-            'Developed complex, responsive HTML emails from scratch.',
-            'Ensured cross-client compatibility (Gmail, Outlook) using MJML.',
-            'Optimized rendering performance for high-volume campaigns.'
-        ]
-    },
-    {
-        company: 'E-commerce Project',
-        role: 'Junior Front-End Developer',
-        period: 'Jan 2024 - Dec 2024',
-        tasks: [
-            'Maintained a live e-commerce platform with 99.9% availability.',
-            'Resolved layout bugs and implemented UI enhancements.',
-            'Collaborated with senior developers on payment gateways.'
+            'Built dynamic Single Page Applications (SPAs) using React, Redux, Angular, and RxJS.',
+            'Designed reusable UI component libraries and complex form validation logic (Smart Forms).',
+            'Implemented real-time search and filtering algorithms for data-heavy applications (Phrase Analyzer).'
         ]
     }
 ];
@@ -50,7 +70,7 @@ const Experience = () => {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: index * 0.2, duration: 0.5 }}
+                        transition={{ delay: index * 0.15, duration: 0.5 }}
                     >
                         <ContentBox className="content-box">
                             <DateText>{job.period}</DateText>

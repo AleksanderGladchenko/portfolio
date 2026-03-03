@@ -1,14 +1,16 @@
 import { SkillsSection, SectionTitle, Grid, CategoryCard, CategoryHeader, SkillsList, SkillItem } from './Skills.styles';
-import { FaLaptopCode, FaServer, FaTools } from 'react-icons/fa';
-/* УБРАЛ SiSass из этой строки */
+
+// Импортируем новые иконки для БД, кредиток (API оплат) и графиков
+import { FaLaptopCode, FaServer, FaTools, FaCreditCard, FaDatabase } from 'react-icons/fa';
+
+// Импортируем логотипы технологий (добавили PHP, Chart.js, Node.js)
 import {
-    SiReact, SiAngular, SiTypescript, SiJavascript, SiHtml5, SiStyledcomponents,
-    SiPython, SiFlask, SiAppium, SiLinux, SiGnubash, SiDocker,
-    SiGit, SiFigma, SiPostman
+    SiReact, SiAngular, SiTypescript, SiHtml5, SiStyledcomponents,
+    SiPython, SiAppium, SiLinux, SiGnubash, SiDocker,
+    SiGit, SiPostman, SiPhp, SiChartdotjs, SiNodedotjs
 } from 'react-icons/si';
 
 const Skills = () => {
-    /* ... (остальной код без изменений) ... */
     const categories = [
         {
             title: "Frontend Ecosystem",
@@ -16,33 +18,34 @@ const Skills = () => {
             skills: [
                 { name: "React / Redux", icon: <SiReact /> },
                 { name: "Angular / RxJS", icon: <SiAngular /> },
-                { name: "TypeScript", icon: <SiTypescript /> },
-                { name: "JavaScript (ES6+)", icon: <SiJavascript /> },
+                { name: "TypeScript / ES6+", icon: <SiTypescript /> },
+                { name: "Data Viz (Chart.js)", icon: <SiChartdotjs /> }, // Новое
                 { name: "Styled Components", icon: <SiStyledcomponents /> },
                 { name: "HTML5 / SCSS", icon: <SiHtml5 /> },
             ]
         },
         {
-            title: "Backend & Automation",
+            title: "Backend Architecture",
             icon: <FaServer />,
             skills: [
-                { name: "Python 3", icon: <SiPython /> },
-                { name: "Flask API", icon: <SiFlask /> },
+                { name: "Python / Flask", icon: <SiPython /> },
+                { name: "PHP & MySQL", icon: <SiPhp /> }, // Новое
+                { name: "Node.js & APIs", icon: <SiNodedotjs /> },
+                { name: "FinTech (Monobank API)", icon: <FaCreditCard /> }, // Новое
+                { name: "Cron Jobs & Automation", icon: <SiGnubash /> }, // Выделили Cron
                 { name: "Appium / Selenium", icon: <SiAppium /> },
-                { name: "Linux Administration", icon: <SiLinux /> },
-                { name: "Bash Scripting", icon: <SiGnubash /> },
-                { name: "SQLAlchemy", icon: <SiPython /> },
             ]
         },
         {
-            title: "Tools & Workflow",
+            title: "DevOps & Workflow",
             icon: <FaTools />,
             skills: [
-                { name: "Git / GitHub", icon: <SiGit /> },
+                { name: "Linux Administration", icon: <SiLinux /> },
                 { name: "Docker / Systemd", icon: <SiDocker /> },
-                { name: "Figma", icon: <SiFigma /> },
-                { name: "Postman", icon: <SiPostman /> },
-                { name: "Vite / Webpack", icon: <SiReact /> },
+                { name: "DB Mgt (Adminer / SQL)", icon: <FaDatabase /> }, // Новое
+                { name: "Git / GitHub", icon: <SiGit /> },
+                { name: "Postman / API Testing", icon: <SiPostman /> },
+                { name: "Vite / Webpack", icon: <FaTools /> },
             ]
         }
     ];

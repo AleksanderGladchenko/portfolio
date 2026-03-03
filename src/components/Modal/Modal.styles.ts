@@ -146,11 +146,12 @@ export const LightboxContent = styled(motion.div)`
 
 export const LightboxButton = styled.button`
     position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+
+    /* ИСПРАВЛЕНО: Адаптивный плотный фон и цвет иконки */
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -159,38 +160,46 @@ export const LightboxButton = styled.button`
     align-items: center;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease;
     z-index: 10000;
 
+    /* Жесткая тень, чтобы кнопка не сливалась с картинкой */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+
     &:hover {
-        background: rgba(255, 255, 255, 0.2);
         transform: scale(1.1);
+        background-color: var(--border-color);
     }
 
     @media (max-width: 768px) {
-        /* На мобильных делаем кнопки чуть меньше и ближе к краям */
-        width: 40px;
-        height: 40px;
+        /* Делаем удобный размер для тапа пальцем на мобилке */
+        width: 44px;
+        height: 44px;
     }
 `;
 
 export const LightboxPrev = styled(LightboxButton)`
     left: -70px;
-    @media (max-width: 1024px) { left: 10px; } /* На планшетах и телефонах наезжает на картинку */
+    @media (max-width: 1024px) { left: 16px; }
 `;
 
 export const LightboxNext = styled(LightboxButton)`
     right: -70px;
-    @media (max-width: 1024px) { right: 10px; }
+    @media (max-width: 1024px) { right: 16px; }
 `;
 
 export const LightboxClose = styled(LightboxButton)`
     top: -60px;
     right: -60px;
-    width: 40px;
+    /* На десктопе крестик чуть меньше стрелок, это нормально */
+    width: 40px;    
     height: 40px;
-    @media (max-width: 1024px) { 
-        top: 10px; 
-        right: 10px; 
+
+    @media (max-width: 1024px) {
+        top: 16px;
+        right: 16px;
+        /* А на мобилке уравниваем размеры для удобства */
+        width: 44px;
+        height: 44px;
     }
 `;

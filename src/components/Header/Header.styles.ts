@@ -10,8 +10,11 @@ export const HeaderContainer = styled.header`
     padding: 0 8px 0 24px;
     border-radius: 100px;
     background-color: var(--nav-bg);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+    /* ОПТИМИЗИРОВАНО: Снизили радиус с 20px до 8px */
+    backdrop-filter: saturate(180%) blur(8px);
+    -webkit-backdrop-filter: saturate(180%) blur(8px);
+
     border: 1px solid var(--border-color);
     box-shadow: 0 10px 40px var(--shadow-color);
     display: flex;

@@ -68,6 +68,12 @@ export const ImageContainer = styled.div`
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
+    cursor: pointer; /* Добавили курсор */
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.05); /* Легкое увеличение, намек на клик */
+    }
 
     &::after {
         content: '';
@@ -90,5 +96,45 @@ export const ProfileImg = styled.img`
 
     &:hover {
         transform: scale(1.03);
+    }
+`;
+
+/* --- СТИЛИ ДЛЯ ПАСХАЛКИ (EASTER EGG) --- */
+export const EasterEggBackdrop = styled(motion.div)`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`;
+
+export const RatVideoContainer = styled.video`
+    max-width: 90vw;
+    max-height: 75vh;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--accent-color); /* Фирменная обводка */
+    outline: none;
+`;
+
+export const RatCloseHint = styled.p`
+    color: #ffffff;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 1;
     }
 `;

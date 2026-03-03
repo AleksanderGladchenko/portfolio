@@ -13,6 +13,7 @@ import {
     ProjectDescription,
     TechList,
     TechTag,
+    GalleryBadge,
     NoImagePlaceholder
 } from './Projects.styles';
 import Modal from '../Modal/Modal';
@@ -28,7 +29,7 @@ import server2 from '../../assets/server2.jpg';
 import server3 from '../../assets/server3.jpg';
 
 // Импорт иконок (добавляем FaServer для бекенда)
-import { FaWordpress, FaShoppingCart, FaServer } from 'react-icons/fa';
+import { FaWordpress, FaShoppingCart, FaServer, FaImages } from 'react-icons/fa';
 
 /* ОБНОВЛЯЕМ ИНТЕРФЕЙС (строка ~30) */
 export interface Project {
@@ -156,7 +157,7 @@ const Projects = () => {
                     <FilterButton $active={filter === 'automation'} onClick={() => setFilter('automation')}>Automation</FilterButton>
                 </FilterContainer>
 
-                <ProjectsGrid layout>
+                <ProjectsGrid>
                     <AnimatePresence mode='wait'>
                         {filteredProjects.map((project) => (
                             <ProjectCard
@@ -168,6 +169,12 @@ const Projects = () => {
                                 transition={{ duration: 0.3 }}
                                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                             >
+                                {project.gallery && project.gallery.length > 0 && (
+                                    <GalleryBadge>
+                                        <FaImages />
+                                        {project.gallery.length} Images
+                                    </GalleryBadge>
+                                )}
                                 <MediaContainer>
                                     {project.mediaType === 'video' && project.image ? (
                                         <ProjectImage

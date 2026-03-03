@@ -128,10 +128,17 @@ export const ProjectImage = styled.video`
   height: 100%;
   object-fit: cover;
   opacity: 0.9;
+
+  /* Оптимизация видео: выносим декодинг на отдельный GPU-слой */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  pointer-events: none; /* Чтобы видео не перехватывало события мыши */
+
   transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   ${ProjectCard}:hover & {
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(0);
   }
 `;
 
@@ -164,18 +171,18 @@ export const ProjectContent = styled.div`
   right: 10px;
   padding: 16px 20px;
 
-  background-color: var(--glass-panel);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  /* ИСПРАВЛЕНО: Адаптивный фон вместо темного хардкода */
+  background: var(--card-bg);
+  opacity: 0.95;
 
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 
   z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* Чуть смягчили тень для светлой темы */
 `;
 
 export const ProjectTitle = styled.h3`
@@ -210,4 +217,35 @@ export const TechTag = styled.span`
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-primary);
+`;
+
+/* --- ИНДИКАТОР ГАЛЕРЕИ ДЛЯ КАРТОЧЕК --- */
+export const GalleryBadge = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  
+  /* Адаптивные цвета */
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  
+  /* Важно: чтобы клик проходил сквозь бейдж на саму карточку */
+  pointer-events: none; 
+  opacity: 0.95;
+
+  svg {
+    font-size: 0.9rem;
+    color: var(--accent-color); /* Иконка будет фирменного синего цвета */
+  }
 `;
