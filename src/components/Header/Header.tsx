@@ -1,15 +1,10 @@
 import { useState } from 'react';
-import { HeaderContainer, Logo, NavLinks, NavLinkStyled, BurgerIcon, MobileNav, ThemeButton } from './Header.styles';
+import { HeaderContainer, Logo, NavLinks, NavLinkStyled, BurgerIcon, MobileNav } from './Header.styles';
 import { Link } from 'react-scroll';
-import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { AnimatePresence } from 'framer-motion';
 
-interface HeaderProps {
-    toggleTheme: () => void;
-    currentTheme: string;
-}
-
-const Header = ({ toggleTheme, currentTheme }: HeaderProps) => {
+const Header = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
     const navLinks = [
@@ -32,6 +27,7 @@ const Header = ({ toggleTheme, currentTheme }: HeaderProps) => {
                         <Link
                             key={link.to}
                             to={link.to}
+                            href={`#${link.to}`}
                             smooth={true}
                             duration={700}
                             offset={-100}
@@ -42,11 +38,6 @@ const Header = ({ toggleTheme, currentTheme }: HeaderProps) => {
                             {link.label}
                         </Link>
                     ))}
-
-                    {/* Кнопка смены темы */}
-                    <ThemeButton onClick={toggleTheme}>
-                        {currentTheme === 'dark' ? <FaSun /> : <FaMoon />}
-                    </ThemeButton>
                 </NavLinks>
 
                 <BurgerIcon onClick={() => setMenuOpen(!isMenuOpen)}>
@@ -66,6 +57,7 @@ const Header = ({ toggleTheme, currentTheme }: HeaderProps) => {
                             <Link
                                 key={link.to}
                                 to={link.to}
+                                href={`#${link.to}`}
                                 smooth={true}
                                 duration={700}
                                 offset={-100}
@@ -75,12 +67,6 @@ const Header = ({ toggleTheme, currentTheme }: HeaderProps) => {
                                 {link.label}
                             </Link>
                         ))}
-                        {/* Кнопка смены темы для мобилки */}
-                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-                            <ThemeButton onClick={() => { toggleTheme(); setMenuOpen(false); }} style={{ width: '100%' }}>
-                                {currentTheme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                            </ThemeButton>
-                        </div>
                     </MobileNav>
                 )}
             </AnimatePresence>

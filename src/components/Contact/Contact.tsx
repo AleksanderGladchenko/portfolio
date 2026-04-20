@@ -1,5 +1,5 @@
 import { ContactSection, Title, Subtitle, ButtonContainer, ContactButton, Footer } from './Contact.styles';
-import { FaTelegramPlane, FaEnvelope, FaArrowUp } from 'react-icons/fa'; // Убрал FaGithub
+import { FaTelegramPlane, FaEnvelope, FaArrowUp, FaCalendarCheck } from 'react-icons/fa';
 
 const Contact = () => {
     return (
@@ -16,10 +16,20 @@ const Contact = () => {
             </Subtitle>
 
             <ButtonContainer>
-                {/* Оставили только Email и Telegram */}
+                {/* ГЛАВНАЯ ВОРОНКА: Звонок */}
+                <ContactButton
+                    href="https://calendly.com/nininini141998/15-min-sync"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="primary"
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <FaCalendarCheck /> Book a 15-min Sync
+                </ContactButton>
+
                 <ContactButton
                     href="mailto:nininini141998@gmail.com"
-                    className="primary"
+                    className="secondary"
                     whileTap={{ scale: 0.95 }}
                 >
                     <FaEnvelope /> Email Me

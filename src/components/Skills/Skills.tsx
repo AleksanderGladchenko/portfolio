@@ -1,13 +1,13 @@
 import { SkillsSection, SectionTitle, Grid, CategoryCard, CategoryHeader, SkillsList, SkillItem } from './Skills.styles';
 
-// Импортируем новые иконки для БД, кредиток (API оплат) и графиков
-import { FaLaptopCode, FaServer, FaTools, FaCreditCard, FaDatabase } from 'react-icons/fa';
+// Добавлены FaShopify и FaShoppingCart
+import { FaLaptopCode, FaServer, FaTools, FaCreditCard, FaDatabase, FaShopify, FaShoppingCart } from 'react-icons/fa';
 
-// Импортируем логотипы технологий (добавили PHP, Chart.js, Node.js)
+// Добавлен SiJavascript для нативной JS логики
 import {
     SiReact, SiAngular, SiTypescript, SiHtml5, SiStyledcomponents,
     SiPython, SiAppium, SiLinux, SiGnubash, SiDocker,
-    SiGit, SiPostman, SiPhp, SiChartdotjs, SiNodedotjs
+    SiGit, SiPostman, SiPhp, SiChartdotjs, SiNodedotjs, SiJavascript
 } from 'react-icons/si';
 
 const Skills = () => {
@@ -18,22 +18,24 @@ const Skills = () => {
             skills: [
                 { name: "React / Redux", icon: <SiReact /> },
                 { name: "Angular / RxJS", icon: <SiAngular /> },
-                { name: "TypeScript / ES6+", icon: <SiTypescript /> },
-                { name: "Data Viz (Chart.js)", icon: <SiChartdotjs /> }, // Новое
-                { name: "Styled Components", icon: <SiStyledcomponents /> },
+                { name: "TypeScript", icon: <SiTypescript /> },
+                { name: "Advanced JS (DOM/AJAX)", icon: <SiJavascript /> }, // Добавлено из ТЗ
+                { name: "Data Viz (Chart.js)", icon: <SiChartdotjs /> },
                 { name: "HTML5 / SCSS", icon: <SiHtml5 /> },
+                { name: "Styled Components", icon: <SiStyledcomponents /> },
             ]
         },
         {
-            title: "Backend Architecture",
+            title: "Backend & E-commerce", // Переименовано для Shopify
             icon: <FaServer />,
             skills: [
+                { name: "Shopify Liquid", icon: <FaShopify /> }, // Добавлено
+                { name: "Cart API Integrations", icon: <FaShoppingCart /> }, // Добавлено
                 { name: "Python / Flask", icon: <SiPython /> },
-                { name: "PHP & MySQL", icon: <SiPhp /> }, // Новое
+                { name: "PHP & MySQL", icon: <SiPhp /> },
                 { name: "Node.js & APIs", icon: <SiNodedotjs /> },
-                { name: "FinTech (Monobank API)", icon: <FaCreditCard /> }, // Новое
-                { name: "Cron Jobs & Automation", icon: <SiGnubash /> }, // Выделили Cron
-                { name: "Appium / Selenium", icon: <SiAppium /> },
+                { name: "FinTech (Monobank)", icon: <FaCreditCard /> },
+                { name: "Cron & Automation", icon: <SiGnubash /> },
             ]
         },
         {
@@ -42,7 +44,8 @@ const Skills = () => {
             skills: [
                 { name: "Linux Administration", icon: <SiLinux /> },
                 { name: "Docker / Systemd", icon: <SiDocker /> },
-                { name: "DB Mgt (Adminer / SQL)", icon: <FaDatabase /> }, // Новое
+                { name: "DB Mgt (Adminer/SQL)", icon: <FaDatabase /> },
+                { name: "Appium / Selenium", icon: <SiAppium /> }, // Перенесено для баланса
                 { name: "Git / GitHub", icon: <SiGit /> },
                 { name: "Postman / API Testing", icon: <SiPostman /> },
                 { name: "Vite / Webpack", icon: <FaTools /> },

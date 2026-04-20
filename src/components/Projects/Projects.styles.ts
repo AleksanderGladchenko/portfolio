@@ -96,7 +96,6 @@ export const ProjectCard = styled(motion.div)`
   transform-origin: center;
 
   /* --- ОПТИМИЗАЦИЯ ДЛЯ SAFARI (Лечим тормоза) --- */
-  will-change: transform, opacity; /* Говорим браузеру заранее готовиться к анимации */
   transform: translateZ(0); /* Включаем 3D-ускорение */
   -webkit-transform: translateZ(0);
   backface-visibility: hidden; /* Убираем мерцание */
@@ -130,7 +129,6 @@ export const ProjectImage = styled.video`
   opacity: 0.9;
 
   /* Оптимизация видео: выносим декодинг на отдельный GPU-слой */
-  will-change: transform, opacity;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   pointer-events: none; /* Чтобы видео не перехватывало события мыши */
@@ -198,10 +196,19 @@ export const ProjectDescription = styled.p`
   font-size: 0.85rem;
   line-height: 1.4;
   margin-bottom: 10px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+
+  /* УБРАЛИ ЖЕСТКУЮ ОБРЕЗКУ ТЕКСТА */
+
+  /* ДОБАВИЛИ СКРЫТЫЙ СКРОЛЛ ДЛЯ ДЛИННЫХ ОПИСАНИЙ */
+  max-height: 75px;
+  overflow-y: auto;
+  pointer-events: auto; /* Позволяем скроллить текст */
+
+  /* Прячем визуальный скроллбар (Apple Style), но скролл работает */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const TechList = styled.div`

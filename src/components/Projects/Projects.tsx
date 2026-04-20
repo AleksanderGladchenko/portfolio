@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     ProjectsSection,
     SectionTitle,
@@ -13,13 +13,13 @@ import {
     ProjectDescription,
     TechList,
     TechTag,
-    GalleryBadge,
-    NoImagePlaceholder
+    NoImagePlaceholder,
+    GalleryBadge
 } from './Projects.styles';
-import Modal from '../Modal/Modal';
+import Modal, { type Project } from '../Modal/Modal';
 import { AnimatePresence } from 'framer-motion';
 
-// Импорт медиа
+// Импорт старых медиа
 import video1 from '../../assets/1.mp4';
 import video2 from '../../assets/2.mp4';
 import video3 from '../../assets/3.mp4';
@@ -28,31 +28,65 @@ import server1 from '../../assets/server1.jpg';
 import server2 from '../../assets/server2.jpg';
 import server3 from '../../assets/server3.jpg';
 
-// Импорт иконок (добавляем FaServer для бекенда)
-import { FaWordpress, FaShoppingCart, FaServer, FaImages } from 'react-icons/fa';
+// НОВЫЕ ИМПОРТЫ КАРТИНОК БОТА
+import karma1 from '../../assets/karma1.jpg';
+import karma2 from '../../assets/karma2.jpg';
+import karma3 from '../../assets/karma3.jpg';
+import karma4 from '../../assets/karma4.jpg';
 
-/* ОБНОВЛЯЕМ ИНТЕРФЕЙС (строка ~30) */
-export interface Project {
-    id: number;
-    title: string;
-    category: 'app' | 'cms' | 'automation';
-    image: string | null;
-    mediaType: 'video' | 'image' | 'none';
-    description: string;
-    tech: string[];
-    github: string;
-    live: string;
-    icon?: React.ReactNode;
-    color?: string;
-    gallery?: string[]; // Добавили поле
-}
+import { FaWordpress, FaShoppingCart, FaServer, FaImages, FaShopify, FaTelegramPlane } from 'react-icons/fa';
 
 const projectsData: Project[] = [
-    // --- НОВЫЙ ПРОЕКТ 1 (Freelance Osclass) ---
+    // --- НОВЫЙ ПРОЕКТ: KARMA-CASE TELEGRAM WEB APP ---
+    {
+        id: 9,
+        title: 'Karma-Case Telegram Web App',
+        category: 'app',
+        image: karma1, // Главная обложка карточки
+        mediaType: 'image',
+        icon: <FaTelegramPlane />,
+        color: 'linear-gradient(135deg, #0088cc 0%, #005580 100%)',
+        description: 'High-load Telegram Web App functioning as a gamified platform. Engineered via Webhook architecture with a secure dual-tier Role-Based Access Control (RBAC) system for administrators.',
+        tech: ['Python 3.10', 'Aiogram 3', 'Nginx', 'Systemd', 'aiosqlite'],
+        github: '#',
+        live: '#',
+        nda: true,
+        gallery: [karma1, karma2, karma3, karma4],
+        challenges: [
+            'Preventing database lockups (database is locked) and race conditions during simultaneous high-frequency transactions from multiple users.',
+            'Guaranteeing strict mathematical validity of roulette odds (strict sum of 1.0) on the backend.'
+        ],
+        solutions: [
+            'Implemented an asynchronous SQLite driver (aiosqlite) ensuring thread-safe, non-blocking I/O operations.',
+            'Configured a production-grade Linux environment utilizing Nginx as a reverse proxy with Let\'s Encrypt SSL and automated Systemd watchdogs for zero-downtime recovery.'
+        ]
+    },
+    {
+        id: 8,
+        title: 'Shopify Configurator & Cart API',
+        category: 'ecommerce',
+        image: null,
+        mediaType: 'none',
+        icon: <FaShopify />,
+        color: 'linear-gradient(135deg, #95bf47 0%, #5e8e3e 100%)',
+        description: 'Integrated a complex HTML/JS product configurator with the Shopify Cart API. Implemented dynamic price calculations and ensured custom user parameters (line item properties) are strictly passed to the checkout via AJAX Cart routing.',
+        tech: ['Shopify Liquid', 'Cart API', 'JavaScript', 'HTML'],
+        github: '#',
+        live: '#',
+        nda: true,
+        challenges: [
+            'Synchronizing custom JS state with the native Shopify Cart API without breaking the checkout flow.',
+            'Handling complex line-item properties for custom user inputs (dimensions, custom text).'
+        ],
+        solutions: [
+            'Developed a vanilla JS reactive bridge to intercept native form submissions.',
+            'Utilized Shopify AJAX API to construct and push multi-variant payloads reliably.'
+        ]
+    },
     {
         id: 1,
         title: 'Osclass Marketplace Optimization',
-        category: 'cms',
+        category: 'ecommerce',
         image: null,
         mediaType: 'none',
         icon: <FaShoppingCart />,
@@ -61,12 +95,12 @@ const projectsData: Project[] = [
         tech: ['PHP', 'Osclass', 'XML Feeds', 'GTM'],
         github: '#',
         live: '#',
+        nda: true
     },
-    // --- НОВЫЙ ПРОЕКТ 2 (WP Plugin) ---
     {
         id: 2,
         title: 'WP Geo-Traffic Shield',
-        category: 'cms',
+        category: 'ecommerce',
         image: null,
         mediaType: 'none',
         icon: <FaWordpress />,
@@ -75,8 +109,8 @@ const projectsData: Project[] = [
         tech: ['WordPress', 'PHP', 'GeoIP', 'Security'],
         github: '#',
         live: '#',
+        nda: true
     },
-    // --- СТАРЫЕ ПРОЕКТЫ ---
     {
         id: 3,
         title: 'Automation Farm',
@@ -122,24 +156,44 @@ const projectsData: Project[] = [
         live: '#',
     },
     {
-        id: 7, // Уникальный ID
-        title: 'Game Server Monitoring Platform',
-        category: 'cms',
+        id: 7,
+        title: 'Game Server Monitoring',
+        category: 'ecommerce',
         image: null,
         mediaType: 'none',
-        icon: <FaServer />, // Иконка сервера
-        color: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)', // Стильный зеленый градиент
-        description: 'Architected a custom server monitoring architecture within a classifieds CMS. Engineered an automated Cron-based system querying servers every 5 minutes to fetch and store real-time player metrics. Transformed the UI logic to replace standard pricing with dynamic live stats, integrated interactive historical graphs (Chart.js), and successfully deployed Monobank acquiring for seamless transactions. Executed full database migration and production deployment via Adminer.',
+        icon: <FaServer />,
+        color: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+        description: 'Architected a custom server monitoring architecture within a classifieds CMS. Engineered an automated Cron-based system querying servers every 5 minutes to fetch and store real-time player metrics.',
         tech: ['PHP', 'MySQL', 'Cron', 'Monobank API', 'Data Viz', 'Adminer'],
         github: '#',
         live: '#',
-        gallery: [server1, server2, server3] // Передаем картинки в модалку
+        nda: true,
+        gallery: [server1, server2, server3],
+        challenges: [
+            'Extremely high database load due to continuous polling of real-time player metrics across multiple servers.',
+            'Integrating a modern visualization library (Chart.js) into a legacy PHP monolithic architecture.'
+        ],
+        solutions: [
+            'Implemented a decoupled Cron-job architecture with optimized SQL indexing to drastically reduce query times.',
+            'Built an asynchronous JS wrapper to fetch cached metrics and render Chart.js graphics without blocking the main thread.'
+        ]
     },
 ];
 
 const Projects = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-    const [filter, setFilter] = useState<'all' | 'app' | 'cms' | 'automation'>('all');
+    const [filter, setFilter] = useState<'all' | 'app' | 'ecommerce' | 'automation'>('all');
+
+    useEffect(() => {
+        const handleFilterChange = (e: Event) => {
+            const customEvent = e as CustomEvent;
+            if (customEvent.detail) {
+                setFilter(customEvent.detail as 'all' | 'app' | 'ecommerce' | 'automation');
+            }
+        };
+        window.addEventListener('setProjectFilter', handleFilterChange);
+        return () => window.removeEventListener('setProjectFilter', handleFilterChange);
+    }, []);
 
     const filteredProjects = filter === 'all'
         ? projectsData
@@ -152,9 +206,9 @@ const Projects = () => {
 
                 <FilterContainer>
                     <FilterButton $active={filter === 'all'} onClick={() => setFilter('all')}>All Work</FilterButton>
-                    <FilterButton $active={filter === 'app'} onClick={() => setFilter('app')}>Web Apps</FilterButton>
-                    <FilterButton $active={filter === 'cms'} onClick={() => setFilter('cms')}>CMS & Solutions</FilterButton>
-                    <FilterButton $active={filter === 'automation'} onClick={() => setFilter('automation')}>Automation</FilterButton>
+                    <FilterButton $active={filter === 'app'} onClick={() => setFilter('app')}>Web Applications</FilterButton>
+                    <FilterButton $active={filter === 'ecommerce'} onClick={() => setFilter('ecommerce')}>E-commerce & CMS</FilterButton>
+                    <FilterButton $active={filter === 'automation'} onClick={() => setFilter('automation')}>Scripts & Automation</FilterButton>
                 </FilterContainer>
 
                 <ProjectsGrid>
@@ -175,23 +229,16 @@ const Projects = () => {
                                         {project.gallery.length} Images
                                     </GalleryBadge>
                                 )}
+
                                 <MediaContainer>
                                     {project.mediaType === 'video' && project.image ? (
-                                        <ProjectImage
-                                            as="video"
-                                            autoPlay loop muted playsInline
-                                            src={project.image}
-                                        />
+                                        <ProjectImage as="video" autoPlay loop muted playsInline src={project.image} />
                                     ) : project.mediaType === 'image' && project.image ? (
-                                        <ProjectImage
-                                            as="img"
-                                            src={project.image}
-                                            alt={project.title}
-                                        />
+                                        <ProjectImage as="img" src={project.image} alt={project.title} />
                                     ) : (
-                                        <NoImagePlaceholder style={{ background: project.color }}>
-                                            <div className="icon-wrapper">
-                                                {project.icon}
+                                        <NoImagePlaceholder style={{ background: project.color || '#333' }}>
+                                            <div className="icon-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%'}}>
+                                                {project.icon || <span>No Icon</span>}
                                             </div>
                                         </NoImagePlaceholder>
                                     )}

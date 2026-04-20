@@ -7,11 +7,16 @@ import {
 } from './About.styles';
 
 import profileImage from '../../assets/135319167.jpeg';
-import ratVideo from '../../assets/rat.mp4'; // Импортируем наше видео
+import ratVideo from '../../assets/rat.mp4';
 
 const About = () => {
-    // Состояние для отображения пасхалки
     const [showRat, setShowRat] = useState(false);
+    const [videoLoaded, setVideoLoaded] = useState(false);
+
+    const closeRatMode = () => {
+        setShowRat(false);
+        setVideoLoaded(false);
+    };
 
     return (
         <AboutSection
@@ -26,44 +31,53 @@ const About = () => {
             <ProfileCard>
                 <TextContent>
                     <HighlightText>
-                        Inspired by engineering.<br />
-                        Perfected by <span>Code</span>.
+                        Eliminating system bottlenecks.<br />
+                        Delivering <span>Scalable Architecture</span>.
                     </HighlightText>
 
                     <Paragraph>
                         I'm Alexander, a Full-Stack Software Engineer with a background in Aviation & Rocketry. This foundational engineering experience taught me to approach software not just as lines of code, but as complex, interconnected systems where reliability, optimization, and fault tolerance are critical.
                     </Paragraph>
 
+                    {/* ОБНОВЛЕНО: Добавлены Telegram Web Apps */}
                     <Paragraph>
-                        Today, I design and build end-to-end web solutions. From architecting robust databases and custom API integrations (like Monobank/Stripe) to crafting pixel-perfect React interfaces, I handle the full development lifecycle. My focus is on delivering secure, scalable, and business-driven results that work flawlessly under the hood.
+                        Today, I design and build end-to-end web solutions. From architecting robust databases, complex Telegram Web Apps (Python/Aiogram), and custom API integrations to crafting pixel-perfect React interfaces, I handle the full development lifecycle. My focus is on delivering secure, scalable, and business-driven results that work flawlessly under the hood.
                     </Paragraph>
                 </TextContent>
 
-                {/* Навешиваем клик на фото */}
                 <ImageContainer onClick={() => setShowRat(true)} title="Vibe Check">
                     <ProfileImg src={profileImage} alt="Alexander" />
                 </ImageContainer>
             </ProfileCard>
 
-            {/* --- СЕКРЕТНЫЙ РЕЖИМ С КРЫСОЙ --- */}
             <AnimatePresence>
                 {showRat && (
                     <EasterEggBackdrop
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        onClick={() => setShowRat(false)} // Закрываем при клике на фон
+                        onClick={closeRatMode}
                     >
                         <RatVideoContainer
                             src={ratVideo}
-                            autoPlay // Сразу начинает играть
+                            autoPlay
                             playsInline
-                            loop // Зацикливаем видео
-                            onClick={(e) => e.stopPropagation()} // Чтобы клик по видео не закрывал его
+                            loop
+                            onClick={(e) => e.stopPropagation()}
+                            onLoadedData={() => setVideoLoaded(true)}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{
+                                opacity: videoLoaded ? 1 : 0,
+                                scale: videoLoaded ? 1 : 0.95,
+                                transition: { duration: 0.5, ease: "easeOut" }
+                            }}
                         />
-                        <RatCloseHint onClick={() => setShowRat(false)}>
-                            Click anywhere to close
-                        </RatCloseHint>
+
+                        {videoLoaded && (
+                            <RatCloseHint onClick={closeRatMode}>
+                                Click anywhere to close
+                            </RatCloseHint>
+                        )}
                     </EasterEggBackdrop>
                 )}
             </AnimatePresence>

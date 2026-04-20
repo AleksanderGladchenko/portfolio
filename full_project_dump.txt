@@ -1,0 +1,2302 @@
+
+
+=== src/App.tsx ===
+
+import { useEffect } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
+import Header from './components/Header/Header';
+import Hero from './components/Hero/Hero';
+import About from './components/About/About';
+import Skills from './components/Skills/Skills';
+import Experience from './components/Experience/Experience';
+import Projects from './components/Projects/Projects';
+import Contact from './components/Contact/Contact';
+import AnimatedBackground from './components/Background/AnimatedBackground';
+
+// Определение тем
+const GlobalStyle = createGlobalStyle`
+    :root {
+        /* --- DARK MODE --- */
+        --bg-color: #050505;
+        --card-bg: #1c1c1e;
+        --text-primary: #f5f5f7;
+        --text-secondary: #86868b;
+        --accent-color: #2997ff;
+        --border-color: rgba(255, 255, 255, 0.1);
+        --shadow-color: rgba(0, 0, 0, 0.5);
+        --nav-bg: rgba(28, 28, 30, 0.75);
+        --glass-panel: rgba(20, 20, 20, 0.6);
+
+        /* Цвета Aurora Dark */
+        --aurora-1: #004060;
+        --aurora-2: #3a0ca3;
+        --aurora-3: #005f73;
+    }
+
+    /* --- LIGHT MODE (Оставлено как фоллбэк на всякий случай) --- */
+    [data-theme='light'] {
+        --bg-color: #ffffff;
+        --card-bg: #ffffff;
+        --text-primary: #1d1d1f;
+        --text-secondary: #86868b;
+        --accent-color: #0071e3;
+        --border-color: rgba(0, 0, 0, 0.05);
+        --shadow-color: rgba(0, 0, 0, 0.05);
+        --nav-bg: rgba(255, 255, 255, 0.75);
+        --glass-panel: rgba(255, 255, 255, 0.65);
+
+        --aurora-1: #dbeafe;
+        --aurora-2: #f3e8ff;
+        --aurora-3: #ccfbf1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+    a:visited {
+        color: inherit !important;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        transition: background-color 0.5s ease;
+        overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--text-secondary);
+        border-radius: 10px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+    }
+`;
+
+const MainContent = styled.main`
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 24px;
+`;
+
+function App() {
+    // Архитектурное решение: навсегда фиксируем темную тему при загрузке
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }, []);
+
+    return (
+        <>
+            <GlobalStyle />
+            <AnimatedBackground />
+
+            <Header />
+
+            <MainContent>
+                <Hero />
+                <About />
+                <Skills />
+                <Experience />
+                <Projects />
+                <Contact />
+            </MainContent>
+        </>
+    );
+}
+
+export default App;
+
+=== src/main.tsx ===
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+
+=== src/components/Experience/Experience.tsx ===
+
+import { ExperienceSection, SectionTitle, TimelineContainer, TimelineItem, ContentBox, DateText, RoleTitle, CompanyName, DescriptionList, DescriptionItem } from './Experience.styles';
+
+const jobs = [
+    {
+        company: 'SaaS Platform / Custom Web Solutions',
+        role: 'Technical Architect & Full-Stack Engineer',
+        period: 'Dec 2025 - Present',
+        tasks: [
+            'Architected a custom CMS with an automated game server monitoring system, reducing manual tracking overhead by 100% via Cron-based data aggregation.',
+            'Integrated Monobank API for secure payment processing, achieving a 99.9% success rate for fault-tolerant financial transactions.',
+            'Designed interactive real-time dashboards (Chart.js), improving data visibility and business decision-making speed.'
+        ]
+    },
+    {
+        company: 'Freelance / B2B Projects',
+        role: 'Full-Stack Web Developer',
+        period: 'May 2025 - Nov 2025',
+        tasks: [
+            'Engineered a custom WordPress Geo-Traffic Shield, effectively blocking 10,000+ malicious bot requests monthly and securing landing pages.',
+            'Optimized high-load Osclass marketplace: restructured SQL queries and automated XML feeds, decreasing server CPU load by 40% and cutting feed generation time in half.',
+            'Managed zero-downtime deployments across dedicated Linux servers using Nginx.'
+        ]
+    },
+    {
+        company: 'High-Load Automation Project',
+        role: 'Backend & Automation Engineer',
+        period: 'Sep 2024 - Apr 2025',
+        tasks: [
+            'Scaled a robust automation farm to 10+ concurrent Android emulators on a single dedicated server without performance degradation.',
+            'Developed a thread-safe RESTful API (Python/Flask/SQLAlchemy), increasing task processing throughput by 300%.',
+            'Eliminated Out-Of-Memory (OOM) crashes and achieved 24/7 uptime by implementing Systemd watchdogs and custom Bash recovery scripts.'
+        ]
+    },
+    {
+        company: 'E-commerce / Digital Agency',
+        role: 'Middle Front-End Engineer',
+        period: 'Dec 2023 - Aug 2024',
+        tasks: [
+            'Optimized live e-commerce platforms, improving Core Web Vitals (LCP under 1.5s) and boosting organic conversion rates.',
+            'Refactored legacy codebase into a scalable, pixel-perfect HTML/React architecture, reducing technical debt.',
+            'Collaborated seamlessly with backend teams to integrate third-party APIs and payment gateways ahead of strict deadlines.'
+        ]
+    },
+    {
+        company: 'Web Development Studio',
+        role: 'Front-End Developer',
+        period: 'Jan 2023 - Nov 2023',
+        tasks: [
+            'Delivered dynamic Single Page Applications (React, Angular, RxJS) ensuring 60 FPS rendering performance.',
+            'Developed "Smart Forms" with complex reactive validation logic, reducing user input errors by over 60%.',
+            'Implemented real-time search and filtering algorithms (Phrase Analyzer) capable of processing large datasets client-side without lag.'
+        ]
+    }
+];
+
+const Experience = () => {
+    return (
+        <ExperienceSection
+            id="experience"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+        >
+            <SectionTitle>Career <span>History</span></SectionTitle>
+
+            <TimelineContainer>
+                {jobs.map((job, index) => (
+                    <TimelineItem
+                        key={index}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.15, duration: 0.5 }}
+                    >
+                        <ContentBox className="content-box">
+                            <DateText>{job.period}</DateText>
+                            <RoleTitle>{job.role}</RoleTitle>
+                            <CompanyName>{job.company}</CompanyName>
+                            <DescriptionList>
+                                {job.tasks.map((task, i) => (
+                                    <DescriptionItem key={i}>{task}</DescriptionItem>
+                                ))}
+                            </DescriptionList>
+                        </ContentBox>
+                    </TimelineItem>
+                ))}
+            </TimelineContainer>
+        </ExperienceSection>
+    );
+};
+
+export default Experience;
+
+=== src/components/Experience/Experience.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const ExperienceSection = styled(motion.section)`
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 100px 24px;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        padding: 60px 16px;
+    }
+`;
+
+export const SectionTitle = styled.h2`
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 60px;
+    text-align: center;
+    span { color: var(--text-secondary); }
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+`;
+
+export const TimelineContainer = styled.div`
+    position: relative;
+    padding: 20px 0;
+    &::after {
+        content: ''; position: absolute; width: 2px;
+        background: var(--border-color);
+        top: 0; bottom: 0; left: 50%; margin-left: -1px;
+    }
+
+    /* АДАПТИВ ЛИНИИ */
+    @media (max-width: 768px) {
+        &::after { left: 20px; margin-left: 0; }
+    }
+`;
+
+export const TimelineItem = styled(motion.div)`
+    position: relative; width: 50%; padding: 10px 40px; box-sizing: border-box;
+
+    &:nth-child(odd) { left: 0; text-align: right; .content-box { align-items: flex-end; } .date-badge { right: -60px; text-align: left; } }
+    &:nth-child(even) { left: 50%; text-align: left; .content-box { align-items: flex-start; } .date-badge { left: -60px; text-align: right; } }
+
+    &::after {
+        content: ''; position: absolute; width: 14px; height: 14px; right: -7px;
+        background-color: var(--card-bg);
+        border: 3px solid var(--accent-color);
+        top: 25px; border-radius: 50%; z-index: 2;
+    }
+    &:nth-child(even)::after { left: -7px; }
+
+    /* МОБИЛЬНАЯ ВЕРСИЯ */
+    @media (max-width: 768px) {
+        width: 100%;
+        padding-left: 50px; /* Отступ от линии */
+        padding-right: 0;
+        text-align: left !important;
+        margin-bottom: 20px;
+
+        &:nth-child(odd), &:nth-child(even) { left: 0; }
+        &:nth-child(odd) .content-box, &:nth-child(even) .content-box { align-items: flex-start; }
+
+        /* Точка переезжает влево */
+        &::after { left: 14px !important; right: auto; }
+
+        .date-badge { position: static; margin-bottom: 5px; text-align: left !important; }
+    }
+`;
+
+export const ContentBox = styled.div`
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    display: flex; flex-direction: column;
+
+    @media (max-width: 768px) {
+        padding: 16px;
+    }
+`;
+
+export const DateText = styled.span`
+    display: inline-block; font-size: 0.8rem; font-weight: 700;
+    text-transform: uppercase; color: var(--accent-color); margin-bottom: 8px;
+`;
+export const RoleTitle = styled.h3`
+    font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin: 0 0 4px 0;
+    @media (max-width: 768px) { font-size: 1.1rem; }
+`;
+export const CompanyName = styled.h4`
+    font-size: 1rem; font-weight: 500; color: var(--text-secondary); margin: 0 0 16px 0;
+`;
+export const DescriptionList = styled.ul`
+    list-style: none; padding: 0; margin: 0; text-align: left;
+`;
+export const DescriptionItem = styled.li`
+    position: relative; padding-left: 16px; margin-bottom: 8px;
+    color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;
+    &::before { content: '•'; position: absolute; left: 0; color: var(--accent-color); }
+`;
+
+=== src/components/Background/AnimatedBackground.tsx ===
+
+import styled, { keyframes } from 'styled-components';
+
+const move = keyframes`
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(50px, -50px, 0) scale(1.2); }
+    100% { transform: translate3d(-20px, 20px, 0) scale(0.9); }
+`;
+
+const BackgroundContainer = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-color: var(--bg-color);
+    overflow: hidden;
+    pointer-events: none;
+`;
+
+const Blob = styled.div`
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: ${move} 20s infinite ease-in-out alternate;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+`;
+
+const Blob1 = styled(Blob)`
+    top: -20%;
+    left: -20%;
+    width: 90vw;
+    height: 90vw;
+    background: radial-gradient(circle at center, var(--aurora-1) 0%, transparent 70%);
+    animation-duration: 25s;
+`;
+
+const Blob2 = styled(Blob)`
+    bottom: -20%;
+    right: -20%;
+    width: 90vw;
+    height: 90vw;
+    background: radial-gradient(circle at center, var(--aurora-2) 0%, transparent 70%);
+    animation-duration: 30s;
+    animation-direction: reverse;
+`;
+
+const Blob3 = styled(Blob)`
+    top: 20%;
+    left: 20%;
+    width: 80vw;
+    height: 80vw;
+    background: radial-gradient(circle at center, var(--aurora-3) 0%, transparent 70%);
+    animation-duration: 35s;
+    opacity: 0.4;
+`;
+
+const AnimatedBackground = () => {
+    return (
+        <BackgroundContainer>
+            <Blob1 />
+            <Blob2 />
+            <Blob3 />
+            {/* NoiseOverlay ПОЛНОСТЬЮ УДАЛЕН ДЛЯ 60 FPS В CHROME */}
+        </BackgroundContainer>
+    );
+};
+
+export default AnimatedBackground;
+
+=== src/components/Contact/Contact.tsx ===
+
+import { ContactSection, Title, Subtitle, ButtonContainer, ContactButton, Footer } from './Contact.styles';
+import { FaTelegramPlane, FaEnvelope, FaArrowUp, FaCalendarCheck } from 'react-icons/fa';
+
+const Contact = () => {
+    return (
+        <ContactSection
+            id="contact"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+        >
+            <Title>Let’s Work Together.</Title>
+            <Subtitle>
+                Have a project in mind or just want to discuss the latest tech?
+                My inbox is open for new opportunities.
+            </Subtitle>
+
+            <ButtonContainer>
+                {/* ГЛАВНАЯ ВОРОНКА: Звонок */}
+                <ContactButton
+                    href="https://calendly.com/nininini141998/15-min-sync"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="primary"
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <FaCalendarCheck /> Book a 15-min Sync
+                </ContactButton>
+
+                <ContactButton
+                    href="mailto:nininini141998@gmail.com"
+                    className="secondary"
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <FaEnvelope /> Email Me
+                </ContactButton>
+
+                <ContactButton
+                    href="https://t.me/ai_nfinityg_69"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="secondary"
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <FaTelegramPlane /> Telegram
+                </ContactButton>
+            </ButtonContainer>
+
+            <Footer>
+                <p>Designed & Built by Alexander.</p>
+                <div style={{ cursor: 'pointer' }} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                    <FaArrowUp /> Back to Top
+                </div>
+            </Footer>
+        </ContactSection>
+    );
+};
+
+export default Contact;
+
+=== src/components/Contact/Contact.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const ContactSection = styled(motion.section)`
+    /* Делаем его пузырем */
+    max-width: 1000px;
+    margin: 60px auto 40px; /* Отступы сверху и снизу */
+    padding: 80px 40px 40px;
+
+    background-color: var(--card-bg); /* Цвет карточки темы */
+    border-radius: 40px; /* Скругленные углы */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 60px var(--shadow-color);
+
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        padding: 60px 20px 30px;
+        margin: 60px 16px 40px; /* Отступы по бокам на мобиле */
+        border-radius: 32px;
+    }
+`;
+
+export const Title = styled.h2`
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) { font-size: 2.2rem; }
+`;
+
+export const Subtitle = styled.p`
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+`;
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+`;
+
+export const ContactButton = styled(motion.a)`
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 980px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s;
+    cursor: pointer;
+
+    &.primary {
+        background: var(--accent-color);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        &:hover { transform: scale(1.05); }
+    }
+
+    &.secondary {
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        &:hover {
+            transform: scale(1.05);
+            background: var(--border-color);
+        }
+    }
+`;
+
+export const Footer = styled.footer`
+    border-top: 1px solid var(--border-color);
+    padding-top: 30px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    div {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: color 0.2s;
+        &:hover { color: var(--text-primary); }
+    }
+`;
+
+=== src/components/Projects/Projects.tsx ===
+
+import { useState, useEffect } from 'react';
+import {
+    ProjectsSection,
+    SectionTitle,
+    FilterContainer,
+    FilterButton,
+    ProjectsGrid,
+    ProjectCard,
+    MediaContainer,
+    ProjectImage,
+    ProjectContent,
+    ProjectTitle,
+    ProjectDescription,
+    TechList,
+    TechTag,
+    NoImagePlaceholder,
+    GalleryBadge
+} from './Projects.styles';
+import Modal, { type Project } from '../Modal/Modal';
+import { AnimatePresence } from 'framer-motion';
+
+// Импорт старых медиа
+import video1 from '../../assets/1.mp4';
+import video2 from '../../assets/2.mp4';
+import video3 from '../../assets/3.mp4';
+import farmImg from '../../assets/farm.jpg';
+import server1 from '../../assets/server1.jpg';
+import server2 from '../../assets/server2.jpg';
+import server3 from '../../assets/server3.jpg';
+
+// НОВЫЕ ИМПОРТЫ КАРТИНОК БОТА
+import karma1 from '../../assets/karma1.jpg';
+import karma2 from '../../assets/karma2.jpg';
+import karma3 from '../../assets/karma3.jpg';
+import karma4 from '../../assets/karma4.jpg';
+
+import { FaWordpress, FaShoppingCart, FaServer, FaImages, FaShopify, FaTelegramPlane } from 'react-icons/fa';
+
+const projectsData: Project[] = [
+    // --- НОВЫЙ ПРОЕКТ: KARMA-CASE TELEGRAM WEB APP ---
+    {
+        id: 9,
+        title: 'Karma-Case Telegram Web App',
+        category: 'app',
+        image: karma1, // Главная обложка карточки
+        mediaType: 'image',
+        icon: <FaTelegramPlane />,
+        color: 'linear-gradient(135deg, #0088cc 0%, #005580 100%)',
+        description: 'High-load Telegram Web App functioning as a gamified platform. Engineered via Webhook architecture with a secure dual-tier Role-Based Access Control (RBAC) system for administrators.',
+        tech: ['Python 3.10', 'Aiogram 3', 'Nginx', 'Systemd', 'aiosqlite'],
+        github: '#',
+        live: '#',
+        nda: true,
+        gallery: [karma1, karma2, karma3, karma4],
+        challenges: [
+            'Preventing database lockups (database is locked) and race conditions during simultaneous high-frequency transactions from multiple users.',
+            'Guaranteeing strict mathematical validity of roulette odds (strict sum of 1.0) on the backend.'
+        ],
+        solutions: [
+            'Implemented an asynchronous SQLite driver (aiosqlite) ensuring thread-safe, non-blocking I/O operations.',
+            'Configured a production-grade Linux environment utilizing Nginx as a reverse proxy with Let\'s Encrypt SSL and automated Systemd watchdogs for zero-downtime recovery.'
+        ]
+    },
+    {
+        id: 8,
+        title: 'Shopify Configurator & Cart API',
+        category: 'ecommerce',
+        image: null,
+        mediaType: 'none',
+        icon: <FaShopify />,
+        color: 'linear-gradient(135deg, #95bf47 0%, #5e8e3e 100%)',
+        description: 'Integrated a complex HTML/JS product configurator with the Shopify Cart API. Implemented dynamic price calculations and ensured custom user parameters (line item properties) are strictly passed to the checkout via AJAX Cart routing.',
+        tech: ['Shopify Liquid', 'Cart API', 'JavaScript', 'HTML'],
+        github: '#',
+        live: '#',
+        nda: true,
+        challenges: [
+            'Synchronizing custom JS state with the native Shopify Cart API without breaking the checkout flow.',
+            'Handling complex line-item properties for custom user inputs (dimensions, custom text).'
+        ],
+        solutions: [
+            'Developed a vanilla JS reactive bridge to intercept native form submissions.',
+            'Utilized Shopify AJAX API to construct and push multi-variant payloads reliably.'
+        ]
+    },
+    {
+        id: 1,
+        title: 'Osclass Marketplace Optimization',
+        category: 'ecommerce',
+        image: null,
+        mediaType: 'none',
+        icon: <FaShoppingCart />,
+        color: 'linear-gradient(135deg, #FF9966 0%, #FF5E62 100%)',
+        description: 'Comprehensive platform localization (UA/RU) and automated XML product feed generation. Integrated Google Tag Manager for advanced e-commerce analytics.',
+        tech: ['PHP', 'Osclass', 'XML Feeds', 'GTM'],
+        github: '#',
+        live: '#',
+        nda: true
+    },
+    {
+        id: 2,
+        title: 'WP Geo-Traffic Shield',
+        category: 'ecommerce',
+        image: null,
+        mediaType: 'none',
+        icon: <FaWordpress />,
+        color: 'linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%)',
+        description: 'High-performance geo-redirection plugin with bot filtering logic. Implemented "White Page" technology to protect landing pages from unwanted bot traffic.',
+        tech: ['WordPress', 'PHP', 'GeoIP', 'Security'],
+        github: '#',
+        live: '#',
+        nda: true
+    },
+    {
+        id: 3,
+        title: 'Automation Farm',
+        category: 'automation',
+        image: farmImg,
+        mediaType: 'image',
+        description: 'Fault-tolerant automation system managing 10+ Android emulators on a dedicated Linux server with auto-healing capabilities.',
+        tech: ['Python', 'Appium', 'Flask', 'Linux'],
+        github: '#',
+        live: '#',
+    },
+    {
+        id: 4,
+        title: 'Phrase Analyzer',
+        category: 'app',
+        image: video1,
+        mediaType: 'video',
+        description: 'Web tool for text analysis with synonym replacement using Datamuse API.',
+        tech: ['Angular', 'TypeScript', 'RxJS'],
+        github: 'https://github.com/AleksanderGladchenko/phrase-analyzer',
+        live: 'https://github.com/AleksanderGladchenko/phrase-analyzer',
+    },
+    {
+        id: 5,
+        title: 'Flight Booking',
+        category: 'app',
+        image: video2,
+        mediaType: 'video',
+        description: 'SPA for browsing flights and managing tickets with Redux state management.',
+        tech: ['React', 'Redux', 'MUI'],
+        github: 'https://github.com/AleksanderGladchenko/flight-booking-app',
+        live: 'https://github.com/AleksanderGladchenko/flight-booking-app',
+    },
+    {
+        id: 6,
+        title: 'Smart Forms',
+        category: 'app',
+        image: video3,
+        mediaType: 'video',
+        description: 'Complex reactive forms with dynamic fields and custom validators.',
+        tech: ['Angular', 'Material', 'Forms'],
+        github: 'https://github.com/AleksanderGladchenko/engineer-form',
+        live: '#',
+    },
+    {
+        id: 7,
+        title: 'Game Server Monitoring',
+        category: 'ecommerce',
+        image: null,
+        mediaType: 'none',
+        icon: <FaServer />,
+        color: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+        description: 'Architected a custom server monitoring architecture within a classifieds CMS. Engineered an automated Cron-based system querying servers every 5 minutes to fetch and store real-time player metrics.',
+        tech: ['PHP', 'MySQL', 'Cron', 'Monobank API', 'Data Viz', 'Adminer'],
+        github: '#',
+        live: '#',
+        nda: true,
+        gallery: [server1, server2, server3],
+        challenges: [
+            'Extremely high database load due to continuous polling of real-time player metrics across multiple servers.',
+            'Integrating a modern visualization library (Chart.js) into a legacy PHP monolithic architecture.'
+        ],
+        solutions: [
+            'Implemented a decoupled Cron-job architecture with optimized SQL indexing to drastically reduce query times.',
+            'Built an asynchronous JS wrapper to fetch cached metrics and render Chart.js graphics without blocking the main thread.'
+        ]
+    },
+];
+
+const Projects = () => {
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [filter, setFilter] = useState<'all' | 'app' | 'ecommerce' | 'automation'>('all');
+
+    useEffect(() => {
+        const handleFilterChange = (e: Event) => {
+            const customEvent = e as CustomEvent;
+            if (customEvent.detail) {
+                setFilter(customEvent.detail as 'all' | 'app' | 'ecommerce' | 'automation');
+            }
+        };
+        window.addEventListener('setProjectFilter', handleFilterChange);
+        return () => window.removeEventListener('setProjectFilter', handleFilterChange);
+    }, []);
+
+    const filteredProjects = filter === 'all'
+        ? projectsData
+        : projectsData.filter(p => p.category === filter);
+
+    return (
+        <>
+            <ProjectsSection id="projects">
+                <SectionTitle>Selected <span>Projects</span></SectionTitle>
+
+                <FilterContainer>
+                    <FilterButton $active={filter === 'all'} onClick={() => setFilter('all')}>All Work</FilterButton>
+                    <FilterButton $active={filter === 'app'} onClick={() => setFilter('app')}>Web Applications</FilterButton>
+                    <FilterButton $active={filter === 'ecommerce'} onClick={() => setFilter('ecommerce')}>E-commerce & CMS</FilterButton>
+                    <FilterButton $active={filter === 'automation'} onClick={() => setFilter('automation')}>Scripts & Automation</FilterButton>
+                </FilterContainer>
+
+                <ProjectsGrid>
+                    <AnimatePresence mode='wait'>
+                        {filteredProjects.map((project) => (
+                            <ProjectCard
+                                key={project.id}
+                                onClick={() => setSelectedProject(project)}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.3 }}
+                                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                            >
+                                {project.gallery && project.gallery.length > 0 && (
+                                    <GalleryBadge>
+                                        <FaImages />
+                                        {project.gallery.length} Images
+                                    </GalleryBadge>
+                                )}
+
+                                <MediaContainer>
+                                    {project.mediaType === 'video' && project.image ? (
+                                        <ProjectImage as="video" autoPlay loop muted playsInline src={project.image} />
+                                    ) : project.mediaType === 'image' && project.image ? (
+                                        <ProjectImage as="img" src={project.image} alt={project.title} />
+                                    ) : (
+                                        <NoImagePlaceholder style={{ background: project.color }}>
+                                            <div className="icon-wrapper">{project.icon}</div>
+                                        </NoImagePlaceholder>
+                                    )}
+                                </MediaContainer>
+
+                                <ProjectContent>
+                                    <ProjectTitle>{project.title}</ProjectTitle>
+                                    <ProjectDescription>{project.description}</ProjectDescription>
+                                    <TechList>
+                                        {project.tech.slice(0, 3).map((t, i) => (
+                                            <TechTag key={i}>{t}</TechTag>
+                                        ))}
+                                    </TechList>
+                                </ProjectContent>
+                            </ProjectCard>
+                        ))}
+                    </AnimatePresence>
+                </ProjectsGrid>
+            </ProjectsSection>
+
+            <Modal project={selectedProject} closeModal={() => setSelectedProject(null)} />
+        </>
+    );
+};
+
+export default Projects;
+
+=== src/components/Projects/Projects.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const ProjectsSection = styled(motion.section)`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 24px;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 80px 16px;
+  }
+`;
+
+export const SectionTitle = styled.h2`
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: -0.02em;
+
+  span {
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+`;
+
+/* НОВЫЙ БЛОК: ФИЛЬТРЫ (Segmented Control) */
+export const FilterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+
+  background: var(--card-bg);
+  padding: 6px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const FilterButton = styled.button<{ $active: boolean }>`
+  background: ${({ $active }) => ($active ? 'var(--text-primary)' : 'transparent')};
+  color: ${({ $active }) => ($active ? 'var(--bg-color)' : 'var(--text-secondary)')};
+  border: none;
+  padding: 8px 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: ${({ $active }) => ($active ? 'var(--bg-color)' : 'var(--text-primary)')};
+  }
+`;
+
+export const ProjectsGrid = styled(motion.div)`
+  display: grid;
+  /* Используем minmax, чтобы карточки не сжимались в точку */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  width: 100%;
+
+  /* ЖЕСТКАЯ ФИКСАЦИЯ, чтобы не прыгало */
+  min-height: 600px; /* Резервируем место под проекты */
+  align-content: start; /* Карточки всегда сверху */
+
+  /* Исправление бага "поплывшей" ширины */
+  box-sizing: border-box;
+`;
+
+/* ... остальной код выше ... */
+
+export const ProjectCard = styled(motion.div)`
+  background-color: var(--card-bg);
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px var(--shadow-color);
+
+  /* ВАЖНО: */
+  transform-origin: center;
+
+  /* --- ОПТИМИЗАЦИЯ ДЛЯ SAFARI (Лечим тормоза) --- */
+  will-change: transform, opacity; /* Говорим браузеру заранее готовиться к анимации */
+  transform: translateZ(0); /* Включаем 3D-ускорение */
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden; /* Убираем мерцание */
+  -webkit-backface-visibility: hidden;
+  /* ----------------------------------------------- */
+
+  transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 20px 50px var(--shadow-color);
+    transform: translateY(-5px) translateZ(0); /* Сохраняем translateZ при ховере */
+    z-index: 2;
+  }
+`;
+
+/* ... остальной код ниже ... */
+
+export const MediaContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+`;
+
+export const ProjectImage = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+
+  /* Оптимизация видео: выносим декодинг на отдельный GPU-слой */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  pointer-events: none; /* Чтобы видео не перехватывало события мыши */
+
+  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  ${ProjectCard}:hover & {
+    transform: scale(1.05) translateZ(0);
+  }
+`;
+
+/* ЗАГЛУШКА ДЛЯ ПРОЕКТОВ БЕЗ КАРТИНКИ */
+export const NoImagePlaceholder = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Иконка в центре */
+  .icon-wrapper {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.9);
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+    transform: translateY(-20px); /* Чуть выше центра, чтобы текст влез */
+    transition: transform 0.3s ease;
+  }
+
+  ${ProjectCard}:hover .icon-wrapper {
+    transform: translateY(-25px) scale(1.1);
+  }
+`;
+
+export const ProjectContent = styled.div`
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  padding: 16px 20px;
+
+  /* ИСПРАВЛЕНО: Адаптивный фон вместо темного хардкода */
+  background: var(--card-bg);
+  opacity: 0.95;
+
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* Чуть смягчили тень для светлой темы */
+`;
+
+export const ProjectTitle = styled.h3`
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+`;
+
+export const ProjectDescription = styled.p`
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+
+  /* УБРАЛИ ЖЕСТКУЮ ОБРЕЗКУ ТЕКСТА */
+
+  /* ДОБАВИЛИ СКРЫТЫЙ СКРОЛЛ ДЛЯ ДЛИННЫХ ОПИСАНИЙ */
+  max-height: 75px;
+  overflow-y: auto;
+  pointer-events: auto; /* Позволяем скроллить текст */
+
+  /* Прячем визуальный скроллбар (Apple Style), но скролл работает */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const TechList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+`;
+
+export const TechTag = styled.span`
+  background: rgba(128, 128, 128, 0.2); 
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-primary);
+`;
+
+/* --- ИНДИКАТОР ГАЛЕРЕИ ДЛЯ КАРТОЧЕК --- */
+export const GalleryBadge = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  
+  /* Адаптивные цвета */
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  
+  /* Важно: чтобы клик проходил сквозь бейдж на саму карточку */
+  pointer-events: none; 
+  opacity: 0.95;
+
+  svg {
+    font-size: 0.9rem;
+    color: var(--accent-color); /* Иконка будет фирменного синего цвета */
+  }
+`;
+
+=== src/components/About/About.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const AboutSection = styled(motion.section)`
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 120px 24px;
+`;
+
+export const SectionTitle = styled.h2`
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 50px;
+    text-align: center;
+    letter-spacing: -0.01em;
+
+    span {
+        color: var(--text-secondary);
+    }
+`;
+
+export const ProfileCard = styled.div`
+    background-color: var(--card-bg);
+    border-radius: 40px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 40px;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px var(--shadow-color);
+    margin: 0 auto;
+
+    @media (max-width: 850px) {
+        grid-template-columns: 1fr;
+        padding: 30px;
+    }
+`;
+
+export const TextContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
+
+export const HighlightText = styled.h3`
+    font-size: 1.8rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+
+    span {
+        color: var(--accent-color);
+    }
+`;
+
+export const Paragraph = styled.p`
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-weight: 400;
+`;
+
+export const ImageContainer = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &::after {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+    }
+`;
+
+export const ProfileImg = styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px var(--shadow-color);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.03);
+    }
+`;
+
+/* --- СТИЛИ ДЛЯ ПАСХАЛКИ (EASTER EGG) --- */
+export const EasterEggBackdrop = styled(motion.div)`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`;
+
+export const RatVideoContainer = styled(motion.video)`
+    max-width: 90vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--accent-color);
+    outline: none;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    object-fit: contain;
+    background-color: #000000;
+`;
+
+export const RatCloseHint = styled.p`
+    color: #ffffff;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 0.95rem;
+    }
+`;
+
+=== src/components/About/About.tsx ===
+
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import {
+    AboutSection, SectionTitle, ProfileCard, TextContent, HighlightText,
+    Paragraph, ImageContainer, ProfileImg,
+    EasterEggBackdrop, RatVideoContainer, RatCloseHint
+} from './About.styles';
+
+import profileImage from '../../assets/135319167.jpeg';
+import ratVideo from '../../assets/rat.mp4';
+
+const About = () => {
+    const [showRat, setShowRat] = useState(false);
+    const [videoLoaded, setVideoLoaded] = useState(false);
+
+    const closeRatMode = () => {
+        setShowRat(false);
+        setVideoLoaded(false);
+    };
+
+    return (
+        <AboutSection
+            id="about"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+        >
+            <SectionTitle>About <span>Me</span></SectionTitle>
+
+            <ProfileCard>
+                <TextContent>
+                    <HighlightText>
+                        Eliminating system bottlenecks.<br />
+                        Delivering <span>Scalable Architecture</span>.
+                    </HighlightText>
+
+                    <Paragraph>
+                        I'm Alexander, a Full-Stack Software Engineer with a background in Aviation & Rocketry. This foundational engineering experience taught me to approach software not just as lines of code, but as complex, interconnected systems where reliability, optimization, and fault tolerance are critical.
+                    </Paragraph>
+
+                    {/* ОБНОВЛЕНО: Добавлены Telegram Web Apps */}
+                    <Paragraph>
+                        Today, I design and build end-to-end web solutions. From architecting robust databases, complex Telegram Web Apps (Python/Aiogram), and custom API integrations to crafting pixel-perfect React interfaces, I handle the full development lifecycle. My focus is on delivering secure, scalable, and business-driven results that work flawlessly under the hood.
+                    </Paragraph>
+                </TextContent>
+
+                <ImageContainer onClick={() => setShowRat(true)} title="Vibe Check">
+                    <ProfileImg src={profileImage} alt="Alexander" />
+                </ImageContainer>
+            </ProfileCard>
+
+            <AnimatePresence>
+                {showRat && (
+                    <EasterEggBackdrop
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={closeRatMode}
+                    >
+                        <RatVideoContainer
+                            src={ratVideo}
+                            autoPlay
+                            playsInline
+                            loop
+                            onClick={(e) => e.stopPropagation()}
+                            onLoadedData={() => setVideoLoaded(true)}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{
+                                opacity: videoLoaded ? 1 : 0,
+                                scale: videoLoaded ? 1 : 0.95,
+                                transition: { duration: 0.5, ease: "easeOut" }
+                            }}
+                        />
+
+                        {videoLoaded && (
+                            <RatCloseHint onClick={closeRatMode}>
+                                Click anywhere to close
+                            </RatCloseHint>
+                        )}
+                    </EasterEggBackdrop>
+                )}
+            </AnimatePresence>
+        </AboutSection>
+    );
+};
+
+export default About;
+
+=== src/components/Skills/Skills.tsx ===
+
+import { SkillsSection, SectionTitle, Grid, CategoryCard, CategoryHeader, SkillsList, SkillItem } from './Skills.styles';
+
+// Добавлены FaShopify и FaShoppingCart
+import { FaLaptopCode, FaServer, FaTools, FaCreditCard, FaDatabase, FaShopify, FaShoppingCart } from 'react-icons/fa';
+
+// Добавлен SiJavascript для нативной JS логики
+import {
+    SiReact, SiAngular, SiTypescript, SiHtml5, SiStyledcomponents,
+    SiPython, SiAppium, SiLinux, SiGnubash, SiDocker,
+    SiGit, SiPostman, SiPhp, SiChartdotjs, SiNodedotjs, SiJavascript
+} from 'react-icons/si';
+
+const Skills = () => {
+    const categories = [
+        {
+            title: "Frontend Ecosystem",
+            icon: <FaLaptopCode />,
+            skills: [
+                { name: "React / Redux", icon: <SiReact /> },
+                { name: "Angular / RxJS", icon: <SiAngular /> },
+                { name: "TypeScript", icon: <SiTypescript /> },
+                { name: "Advanced JS (DOM/AJAX)", icon: <SiJavascript /> }, // Добавлено из ТЗ
+                { name: "Data Viz (Chart.js)", icon: <SiChartdotjs /> },
+                { name: "HTML5 / SCSS", icon: <SiHtml5 /> },
+                { name: "Styled Components", icon: <SiStyledcomponents /> },
+            ]
+        },
+        {
+            title: "Backend & E-commerce", // Переименовано для Shopify
+            icon: <FaServer />,
+            skills: [
+                { name: "Shopify Liquid", icon: <FaShopify /> }, // Добавлено
+                { name: "Cart API Integrations", icon: <FaShoppingCart /> }, // Добавлено
+                { name: "Python / Flask", icon: <SiPython /> },
+                { name: "PHP & MySQL", icon: <SiPhp /> },
+                { name: "Node.js & APIs", icon: <SiNodedotjs /> },
+                { name: "FinTech (Monobank)", icon: <FaCreditCard /> },
+                { name: "Cron & Automation", icon: <SiGnubash /> },
+            ]
+        },
+        {
+            title: "DevOps & Workflow",
+            icon: <FaTools />,
+            skills: [
+                { name: "Linux Administration", icon: <SiLinux /> },
+                { name: "Docker / Systemd", icon: <SiDocker /> },
+                { name: "DB Mgt (Adminer/SQL)", icon: <FaDatabase /> },
+                { name: "Appium / Selenium", icon: <SiAppium /> }, // Перенесено для баланса
+                { name: "Git / GitHub", icon: <SiGit /> },
+                { name: "Postman / API Testing", icon: <SiPostman /> },
+                { name: "Vite / Webpack", icon: <FaTools /> },
+            ]
+        }
+    ];
+
+    return (
+        <SkillsSection
+            id="skills"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+        >
+            <SectionTitle>Technical <span>Specs</span></SectionTitle>
+
+            <Grid>
+                {categories.map((cat, index) => (
+                    <CategoryCard
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1, duration: 0.5 }}
+                    >
+                        <CategoryHeader>
+                            {cat.icon}
+                            {cat.title}
+                        </CategoryHeader>
+                        <SkillsList>
+                            {cat.skills.map((skill, i) => (
+                                <SkillItem key={i}>
+                                    {skill.icon}
+                                    {skill.name}
+                                </SkillItem>
+                            ))}
+                        </SkillsList>
+                    </CategoryCard>
+                ))}
+            </Grid>
+        </SkillsSection>
+    );
+};
+
+export default Skills;
+
+=== src/components/Skills/Skills.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const SkillsSection = styled(motion.section)`
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+`;
+
+export const SectionTitle = styled.h2`
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 50px;
+    text-align: center;
+
+    span {
+        color: var(--text-secondary);
+    }
+`;
+
+export const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    justify-content: center;
+`;
+
+export const CategoryCard = styled(motion.div)`
+    background: var(--card-bg);
+    border-radius: 28px;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+`;
+
+export const CategoryHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+
+    svg {
+        color: var(--accent-color);
+        font-size: 1.4rem;
+    }
+`;
+
+/* --- РАДИКАЛЬНАЯ ОПТИМИЗАЦИЯ СЕТКИ --- */
+export const SkillsList = styled.div`
+    display: flex;
+    flex-wrap: wrap; /* Элементы автоматически переносятся на новую строку */
+    gap: 10px; /* Аккуратный отступ между плашками */
+`;
+
+export const SkillItem = styled.div`
+    display: inline-flex; /* Плашка облегает текст */
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+
+    background: var(--glass-panel); /* Полупрозрачный фон */
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 50px; /* Круглые края как у тегов */
+    transition: all 0.2s ease;
+
+    svg {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        transition: color 0.2s ease;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        background: var(--border-color);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        svg {
+            color: var(--accent-color); /* Иконка загорается при наведении */
+        }
+    }
+`;
+
+=== src/components/Hero/Hero.tsx ===
+
+import { HeroContainer, Title, Subtitle, Description, SkillsWrapper, SkillPill, ButtonGroup, CtaButton, SecondaryCtaButton } from './Hero.styles';
+import { motion, type Variants } from 'framer-motion';
+import { Link } from 'react-scroll';
+import { FaDownload } from 'react-icons/fa';
+
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { delayChildren: 0.2, staggerChildren: 0.15 }
+    }
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20, filter: 'blur(5px)' },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const skills = [
+    { name: "React & UI/UX", filter: "app" },
+    { name: "Telegram Web Apps", filter: "app" },
+    { name: "Node.js & APIs", filter: "ecommerce" },
+    { name: "Shopify & CMS", filter: "ecommerce" },
+    { name: "Python Automation", filter: "automation" }
+];
+
+const Hero = () => {
+    const handleTagClick = (filterCategory: string) => {
+        window.dispatchEvent(new CustomEvent('setProjectFilter', { detail: filterCategory }));
+    };
+
+    return (
+        <HeroContainer>
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '900px' }}
+            >
+                <Subtitle variants={itemVariants}>
+                    Technical Architect & Full-Stack Engineer
+                </Subtitle>
+
+                <Title variants={itemVariants}>
+                    Alexander.
+                </Title>
+
+                <Description variants={itemVariants}>
+                    I specialize in engineering high-performance web applications, robust automated systems, and enterprise-grade Telegram Bots.
+                    I bridge the gap between heavy backend architecture and pixel-perfect user interfaces.
+                </Description>
+
+                <SkillsWrapper variants={itemVariants}>
+                    {skills.map((skill, index) => (
+                        <Link
+                            key={index}
+                            to="projects"
+                            href="#projects" // ИСПРАВЛЕНО: SEO fix
+                            smooth={true}
+                            duration={700}
+                            offset={-100}
+                            onClick={() => handleTagClick(skill.filter)}
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <SkillPill variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                {skill.name}
+                            </SkillPill>
+                        </Link>
+                    ))}
+                </SkillsWrapper>
+
+                <ButtonGroup variants={itemVariants}>
+                    <CtaButton href="#projects" whileTap={{ scale: 0.95 }}>
+                        Explore My Work
+                    </CtaButton>
+
+                    <SecondaryCtaButton
+                        href="/portfolio/Alexander_Gladchenko_CV.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <FaDownload style={{ marginRight: '8px', fontSize: '0.9rem' }} /> Resume
+                    </SecondaryCtaButton>
+                </ButtonGroup>
+            </motion.div>
+        </HeroContainer>
+    );
+};
+
+export default Hero;
+
+=== src/components/Hero/Hero.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const HeroContainer = styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    padding: 100px 20px 60px;
+    position: relative;
+`;
+
+const SubtitleStyled = styled.h2`
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+    }
+`;
+
+const TitleStyled = styled.h1`
+    font-size: 5.5rem;
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+    @media (max-width: 768px) {
+        font-size: 3.5rem;
+    }
+`;
+
+const DescriptionStyled = styled.p`
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    opacity: 0.85;
+    max-width: 750px;
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }
+`;
+
+const SkillsWrapperStyled = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 3.5rem;
+    max-width: 800px;
+`;
+
+const SkillPillStyled = styled.div`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--card-bg);
+    opacity: 0.9;
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.2s ease, background 0.2s ease;
+
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-2px);
+        background: var(--border-color);
+    }
+`;
+
+/* --- КНОПКИ --- */
+const ButtonGroupStyled = styled.div`
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
+const CtaButtonStyled = styled.a`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 40px;
+    background-color: var(--text-primary);
+    color: var(--bg-color);
+    border-radius: 980px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+    &:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+`;
+
+const SecondaryCtaButtonStyled = styled.a`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        border-color: var(--text-secondary);
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+`;
+
+export const Subtitle = motion(SubtitleStyled);
+export const Title = motion(TitleStyled);
+export const Description = motion(DescriptionStyled);
+export const SkillsWrapper = motion(SkillsWrapperStyled);
+export const SkillPill = motion(SkillPillStyled);
+export const ButtonGroup = motion(ButtonGroupStyled);
+export const CtaButton = motion(CtaButtonStyled);
+export const SecondaryCtaButton = motion(SecondaryCtaButtonStyled);
+
+=== src/components/Scene/Scene.tsx ===
+
+
+
+=== src/components/Modal/Modal.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const Backdrop = styled(motion.div)`
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+    z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px;
+
+    @media (max-width: 768px) {
+        padding: 0;
+        align-items: flex-end;
+    }
+`;
+
+export const ModalContent = styled(motion.div)`
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 24px;
+    width: 100%; max-width: 850px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 40px 80px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    display: flex; flex-direction: column;
+    color: var(--text-primary);
+
+    &::-webkit-scrollbar { width: 6px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { background-color: var(--text-secondary); border-radius: 4px; }
+
+    @media (max-width: 768px) {
+        max-height: 85vh;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+`;
+
+export const ModalImage = styled.div`
+    width: 100%;
+    video, img { width: 100%; max-height: 40vh; object-fit: cover; display: block; border-bottom: 1px solid var(--border-color); }
+`;
+
+export const CloseButton = styled.button`
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: #ffffff !important;
+    border: none;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+    & > * {
+        color: #000000 !important;
+        fill: #000000 !important;
+        font-size: 20px;
+    }
+`;
+
+export const ModalBody = styled.div`
+    padding: 32px;
+    p { color: var(--text-secondary) !important; }
+    @media (max-width: 768px) { padding: 24px; }
+`;
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ АРХИТЕКТУРНОГО БЛОКА --- */
+export const TitleRow = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+`;
+
+export const NdaBadge = styled.span`
+    background: rgba(255, 69, 58, 0.1);
+    color: #ff453a;
+    border: 1px solid rgba(255, 69, 58, 0.3);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+`;
+
+export const ArchBlock = styled.div`
+    margin-top: 24px;
+    background: rgba(128, 128, 128, 0.05);
+    border-left: 3px solid var(--accent-color);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+`;
+
+export const ArchTitle = styled.h4`
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+`;
+
+export const ArchList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        position: relative;
+        padding-left: 16px;
+        margin-bottom: 8px;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.5;
+
+        &::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+    }
+`;
+
+export const ModalLinks = styled.div` display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; `;
+
+export const LinkButton = styled.a`
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px;
+    background: var(--accent-color); color: white; text-decoration: none; border-radius: 980px;
+    font-size: 0.9rem; font-weight: 600;
+
+    &.secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-color); }
+    &:hover { filter: brightness(1.1); }
+`;
+
+export const ProjectGallery = styled.div`
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px; margin-bottom: 16px;
+`;
+
+export const GalleryImage = styled.img`
+    width: 100%; height: 140px; object-fit: cover; border-radius: 16px; border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: zoom-in;
+
+    &:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 24px var(--shadow-color); }
+`;
+
+export const LightboxBackdrop = styled(motion.div)`
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 9999; display: flex; justify-content: center; align-items: center;
+`;
+
+export const LightboxContent = styled(motion.div)`
+    position: relative; max-width: 90vw; max-height: 90vh; display: flex; justify-content: center; align-items: center;
+    img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); user-select: none; }
+`;
+
+export const LightboxButton = styled.button`
+    position: absolute; background-color: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-color);
+    width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-size: 1.2rem; cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease; z-index: 10000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); 
+    &:hover { transform: scale(1.1); background-color: var(--border-color); }
+    @media (max-width: 768px) { width: 44px; height: 44px; }
+`;
+
+export const LightboxPrev = styled(LightboxButton)` left: -70px; @media (max-width: 1024px) { left: 16px; } `;
+export const LightboxNext = styled(LightboxButton)` right: -70px; @media (max-width: 1024px) { right: 16px; } `;
+export const LightboxClose = styled(LightboxButton)` top: -60px; right: -60px; width: 40px; height: 40px; @media (max-width: 1024px) { top: 16px; right: 16px; width: 44px; height: 44px; } `;
+
+=== src/components/Modal/Modal.tsx ===
+
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+    Backdrop, ModalContent, ModalImage, CloseButton, ModalBody,
+    ModalLinks, LinkButton, ProjectGallery, GalleryImage,
+    LightboxBackdrop, LightboxContent, LightboxPrev, LightboxNext, LightboxClose,
+    TitleRow, NdaBadge, ArchBlock, ArchTitle, ArchList
+} from './Modal.styles';
+import { ProjectTitle, ProjectDescription, TechList, TechTag } from '../Projects/Projects.styles';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaChevronLeft, FaChevronRight, FaTools, FaLightbulb } from 'react-icons/fa';
+import styled from 'styled-components';
+
+export interface Project {
+    id: number;
+    title: string;
+    category: 'app' | 'ecommerce' | 'automation';
+    image: string | null;
+    mediaType: 'video' | 'image' | 'none';
+    description: string;
+    tech: string[];
+    github: string;
+    live: string;
+    icon?: React.ReactNode;
+    color?: string;
+    gallery?: string[];
+    nda?: boolean;
+    challenges?: string[];
+    solutions?: string[];
+}
+
+interface ModalProps {
+    project: Project | null;
+    closeModal: () => void;
+}
+
+const ColoredHeader = styled.div<{ $bg?: string }>`
+    width: 100%; height: 200px; background: ${({ $bg }) => $bg || '#333'};
+    display: flex; align-items: center; justify-content: center; font-size: 5rem;
+    color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid var(--border-color);
+`;
+
+const Modal = ({ project, closeModal }: ModalProps) => {
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (project) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = 'unset';
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [project]);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (lightboxIndex === null || !project?.gallery) return;
+            if (e.key === 'Escape') setLightboxIndex(null);
+            if (e.key === 'ArrowRight') setLightboxIndex((prev) => prev !== null && prev === project.gallery!.length - 1 ? 0 : prev! + 1);
+            if (e.key === 'ArrowLeft') setLightboxIndex((prev) => prev !== null && prev === 0 ? project.gallery!.length - 1 : prev! - 1);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [lightboxIndex, project]);
+
+    const nextImage = (e: React.MouseEvent) => { e.stopPropagation(); if (project?.gallery) setLightboxIndex((prev) => prev !== null && prev === project.gallery!.length - 1 ? 0 : prev! + 1); };
+    const prevImage = (e: React.MouseEvent) => { e.stopPropagation(); if (project?.gallery) setLightboxIndex((prev) => prev !== null && prev === 0 ? project.gallery!.length - 1 : prev! - 1); };
+
+    return (
+        <>
+            <AnimatePresence>
+                {project && (
+                    <Backdrop onClick={closeModal} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <ModalContent
+                            onClick={(e) => e.stopPropagation()}
+                            initial={{ scale: 0.9, opacity: 0, y: 50 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 50 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                        >
+                            <CloseButton onClick={closeModal}><FaTimes /></CloseButton>
+
+                            {project.mediaType === 'none' ? (
+                                <ColoredHeader $bg={project.color}>{project.icon}</ColoredHeader>
+                            ) : (
+                                <ModalImage>
+                                    {project.mediaType === 'image' && project.image ? ( <img src={project.image} alt={project.title} /> ) : project.mediaType === 'video' && project.image ? ( <video autoPlay loop muted playsInline><source src={project.image} type="video/mp4" /></video> ) : null}
+                                </ModalImage>
+                            )}
+
+                            <ModalBody>
+                                <TitleRow>
+                                    <ProjectTitle style={{ fontSize: '2rem', margin: 0 }}>{project.title}</ProjectTitle>
+                                    {project.nda && <NdaBadge>NDA Protected</NdaBadge>}
+                                </TitleRow>
+
+                                <TechList style={{ marginBottom: '24px' }}>
+                                    {project.tech.map((tech, j) => <TechTag key={j}>{tech}</TechTag>)}
+                                </TechList>
+
+                                <ProjectDescription style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
+                                    {project.description}
+                                </ProjectDescription>
+
+                                {/* АРХИТЕКТУРНЫЙ БЛОК */}
+                                {(project.challenges || project.solutions) && (
+                                    <ArchBlock>
+                                        {project.challenges && (
+                                            <div style={{ marginBottom: project.solutions ? '20px' : '0' }}>
+                                                <ArchTitle><FaTools /> Architectural Challenges</ArchTitle>
+                                                <ArchList>{project.challenges.map((c, i) => <li key={i}>{c}</li>)}</ArchList>
+                                            </div>
+                                        )}
+                                        {project.solutions && (
+                                            <div>
+                                                <ArchTitle><FaLightbulb style={{ color: '#ffcc00' }} /> Solutions & Execution</ArchTitle>
+                                                <ArchList>{project.solutions.map((s, i) => <li key={i}>{s}</li>)}</ArchList>
+                                            </div>
+                                        )}
+                                    </ArchBlock>
+                                )}
+
+                                {project.gallery && project.gallery.length > 0 && (
+                                    <ProjectGallery>
+                                        {project.gallery.map((img, idx) => ( <GalleryImage key={idx} src={img} alt={`Screenshot ${idx + 1}`} onClick={() => setLightboxIndex(idx)} /> ))}
+                                    </ProjectGallery>
+                                )}
+
+                                <ModalLinks>
+                                    {project.live && project.live !== '#' && (
+                                        <LinkButton href={project.live} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> Open Live</LinkButton>
+                                    )}
+                                    {project.github && project.github !== '#' && (
+                                        <LinkButton href={project.github} target="_blank" rel="noopener noreferrer" className="secondary"><FaGithub /> Source Code</LinkButton>
+                                    )}
+                                </ModalLinks>
+                            </ModalBody>
+                        </ModalContent>
+                    </Backdrop>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {lightboxIndex !== null && project?.gallery && (
+                    <LightboxBackdrop onClick={() => setLightboxIndex(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <LightboxContent onClick={(e) => e.stopPropagation()} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ type: "spring", damping: 25, stiffness: 300 }}>
+                            <LightboxClose onClick={() => setLightboxIndex(null)}><FaTimes /></LightboxClose>
+                            {project.gallery.length > 1 && ( <> <LightboxPrev onClick={prevImage}><FaChevronLeft /></LightboxPrev> <LightboxNext onClick={nextImage}><FaChevronRight /></LightboxNext> </> )}
+                            <motion.img key={lightboxIndex} src={project.gallery[lightboxIndex]} alt="Full screen preview" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }} />
+                        </LightboxContent>
+                    </LightboxBackdrop>
+                )}
+            </AnimatePresence>
+        </>
+    );
+};
+
+export default Modal;
+
+=== src/components/Header/Header.styles.ts ===
+
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const HeaderContainer = styled.header`
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+
+    /* ИСПРАВЛЕНО: Симметричный отступ со всех сторон */
+    padding: 0 24px;
+
+    border-radius: 100px;
+    background-color: var(--nav-bg);
+    backdrop-filter: saturate(180%) blur(8px);
+    -webkit-backdrop-filter: saturate(180%) blur(8px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px var(--shadow-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+        top: 10px; width: 90%; padding: 0 16px;
+    }
+`;
+
+export const Logo = styled.div`
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    margin-right: 30px;
+`;
+
+export const NavLinks = styled.nav`
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    /* ХАК: Принудительно задаем курсор для всех ссылок внутри */
+    & > * {
+        cursor: pointer !important;
+    }
+
+    @media (max-width: 768px) { display: none; }
+`;
+
+export const NavLinkStyled = styled.a`
+    color: var(--text-primary) !important;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    cursor: pointer !important; /* Еще раз дублируем */
+    position: relative;
+    user-select: none;
+    
+
+    &:hover {
+        color: var(--text-primary) !important;
+        background-color: var(--border-color);
+    }
+
+    &.active {
+        color: var(--text-primary) !important;
+        background-color: var(--card-bg);
+        box-shadow: 0 2px 10px var(--shadow-color);
+    }
+`;
+
+export const BurgerIcon = styled.div`
+    display: none; font-size: 1.2rem; color: var(--text-primary); cursor: pointer; margin-left: auto;
+    @media (max-width: 768px) { display: block; }
+`;
+
+export const MobileNav = styled(motion.div)`
+    position: fixed; top: 70px; left: 50%; transform: translateX(-50%) !important;
+    width: 90%; border-radius: 24px; background-color: var(--nav-bg);
+    backdrop-filter: blur(20px); border: 1px solid var(--border-color);
+    z-index: 9998; display: flex; flex-direction: column; padding: 20px; gap: 10px;
+
+    .mobile-link {
+        font-size: 16px; font-weight: 500; padding: 12px; text-align: center; border-radius: 12px; cursor: pointer;
+        &:active { background-color: var(--border-color); }
+        color: var(--text-primary) !important;
+        text-decoration: none !important;
+    }
+`;
+
+=== src/components/Header/Header.tsx ===
+
+import { useState } from 'react';
+import { HeaderContainer, Logo, NavLinks, NavLinkStyled, BurgerIcon, MobileNav } from './Header.styles';
+import { Link } from 'react-scroll';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { AnimatePresence } from 'framer-motion';
+
+const Header = () => {
+    const [isMenuOpen, setMenuOpen] = useState(false);
+
+    const navLinks = [
+        { to: 'about', label: 'About' },
+        { to: 'skills', label: 'Skills' },
+        { to: 'projects', label: 'Projects' },
+        { to: 'experience', label: 'Experience' },
+        { to: 'contact', label: 'Contact' },
+    ];
+
+    return (
+        <>
+            <HeaderContainer>
+                <Logo onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                    Alexander
+                </Logo>
+
+                <NavLinks>
+                    {navLinks.map(link => (
+                        <Link
+                            key={link.to}
+                            to={link.to}
+                            href={`#${link.to}`} // ИСПРАВЛЕНО: SEO fix
+                            smooth={true}
+                            duration={700}
+                            offset={-100}
+                            spy={true}
+                            activeClass="active"
+                            as={NavLinkStyled}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                </NavLinks>
+
+                <BurgerIcon onClick={() => setMenuOpen(!isMenuOpen)}>
+                    {isMenuOpen ? <FaTimes /> : <FaBars />}
+                </BurgerIcon>
+            </HeaderContainer>
+
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <MobileNav
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        {navLinks.map(link => (
+                            <Link
+                                key={link.to}
+                                to={link.to}
+                                href={`#${link.to}`} // ИСПРАВЛЕНО: SEO fix
+                                smooth={true}
+                                duration={700}
+                                offset={-100}
+                                className="mobile-link"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </MobileNav>
+                )}
+            </AnimatePresence>
+        </>
+    );
+};
+
+export default Header;
+
+=== src/vite-env.d.ts ===
+
+/// <reference types="vite/client" />

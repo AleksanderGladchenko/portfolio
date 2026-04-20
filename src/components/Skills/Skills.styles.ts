@@ -27,7 +27,7 @@ export const Grid = styled.div`
 `;
 
 export const CategoryCard = styled(motion.div)`
-    background: var(--card-bg); /* ВАЖНО: Фон пузыря */
+    background: var(--card-bg);
     border-radius: 28px;
     padding: 30px;
     border: 1px solid var(--border-color);
@@ -48,7 +48,7 @@ export const CategoryHeader = styled.div`
     gap: 12px;
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--text-primary); /* Цвет заголовка */
+    color: var(--text-primary);
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border-color);
 
@@ -58,29 +58,39 @@ export const CategoryHeader = styled.div`
     }
 `;
 
+/* --- РАДИКАЛЬНАЯ ОПТИМИЗАЦИЯ СЕТКИ --- */
 export const SkillsList = styled.div`
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-wrap: wrap; /* Элементы автоматически переносятся на новую строку */
+    gap: 10px; /* Аккуратный отступ между плашками */
 `;
 
 export const SkillItem = styled.div`
-    display: flex;
+    display: inline-flex; /* Плашка облегает текст */
     align-items: center;
-    gap: 12px;
-    font-size: 0.95rem;
-    color: var(--text-secondary); /* Цвет текста */
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+
+    background: var(--glass-panel); /* Полупрозрачный фон */
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 50px; /* Круглые края как у тегов */
+    transition: all 0.2s ease;
 
     svg {
         font-size: 1.1rem;
         color: var(--text-secondary);
-        min-width: 20px;
+        transition: color 0.2s ease;
     }
 
     &:hover {
-        color: var(--text-primary);
+        transform: translateY(-2px);
+        background: var(--border-color);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         svg {
-            color: var(--accent-color);
+            color: var(--accent-color); /* Иконка загорается при наведении */
         }
     }
 `;

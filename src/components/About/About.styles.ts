@@ -10,26 +10,26 @@ export const AboutSection = styled(motion.section)`
 export const SectionTitle = styled.h2`
     font-size: 2.5rem;
     font-weight: 600;
-    color: var(--text-primary); /* Используем переменную */
+    color: var(--text-primary);
     margin-bottom: 50px;
     text-align: center;
     letter-spacing: -0.01em;
 
     span {
-        color: var(--text-secondary); /* Используем переменную */
+        color: var(--text-secondary);
     }
 `;
 
 export const ProfileCard = styled.div`
-    background-color: var(--card-bg); /* ВАЖНО: Цвет фона пузыря из темы */
+    background-color: var(--card-bg);
     border-radius: 40px;
     padding: 40px;
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 40px;
     align-items: center;
-    border: 1px solid var(--border-color); /* Бордер из темы */
-    box-shadow: 0 20px 40px var(--shadow-color); /* Тень из темы */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px var(--shadow-color);
     margin: 0 auto;
 
     @media (max-width: 850px) {
@@ -48,7 +48,7 @@ export const HighlightText = styled.h3`
     font-size: 1.8rem;
     line-height: 1.3;
     font-weight: 600;
-    color: var(--text-primary); /* Цвет текста из темы */
+    color: var(--text-primary);
     letter-spacing: -0.02em;
 
     span {
@@ -59,7 +59,7 @@ export const HighlightText = styled.h3`
 export const Paragraph = styled.p`
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--text-secondary); /* Вторичный текст из темы */
+    color: var(--text-secondary);
     font-weight: 400;
 `;
 
@@ -68,11 +68,11 @@ export const ImageContainer = styled.div`
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
-    cursor: pointer; /* Добавили курсор */
+    cursor: pointer;
     transition: transform 0.2s ease;
 
     &:hover {
-        transform: scale(1.05); /* Легкое увеличение, намек на клик */
+        transform: scale(1.05);
     }
 
     &::after {
@@ -106,7 +106,7 @@ export const EasterEggBackdrop = styled(motion.div)`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     z-index: 10000;
@@ -116,13 +116,19 @@ export const EasterEggBackdrop = styled(motion.div)`
     flex-direction: column;
 `;
 
-export const RatVideoContainer = styled.video`
+export const RatVideoContainer = styled(motion.video)`
     max-width: 90vw;
-    max-height: 75vh;
-    border-radius: 24px;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-    border: 2px solid var(--accent-color); /* Фирменная обводка */
+    border: 2px solid var(--accent-color);
     outline: none;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    object-fit: contain;
+    background-color: #000000;
 `;
 
 export const RatCloseHint = styled.p`
@@ -136,5 +142,9 @@ export const RatCloseHint = styled.p`
 
     &:hover {
         opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 0.95rem;
     }
 `;
