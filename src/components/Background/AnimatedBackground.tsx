@@ -1,8 +1,21 @@
-import { useRef, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import heroVideoPath from '../../assets/hero-bg.mp4';
+import styled, { keyframes } from 'styled-components';
 
-const BackgroundContainer = styled.div`
+// Ускоренные и более амплитудные анимации
+const morph1 = keyframes`
+  0% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  33% { transform: translate(-15%, 20%) scale(1.1) rotate(15deg); }
+  66% { transform: translate(15%, -15%) scale(0.9) rotate(-15deg); }
+  100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+`;
+
+const morph2 = keyframes`
+  0% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  33% { transform: translate(20%, -15%) scale(1.2) rotate(-15deg); }
+  66% { transform: translate(-20%, 20%) scale(0.8) rotate(15deg); }
+  100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+`;
+
+const BackgroundWrapper = styled.div`
     position: fixed;
     top: 0;
     left: 0;
@@ -14,141 +27,39 @@ const BackgroundContainer = styled.div`
     pointer-events: none;
 `;
 
-const VideoOverlay = styled.div`
+const GlowBlob = styled.div`
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(5, 5, 5, 0.3) 0%, rgba(5, 5, 5, 0.9) 100%);
-    z-index: 1;
+    border-radius: 50%;
+    filter: blur(100px); /* Уменьшили блюр, чтобы пятно было более концентрированным */
+    will-change: transform;
+    opacity: 0.8; 
+`;
+
+const MainBlob = styled(GlowBlob)`
+    top: 15%;
+    left: 25%;
+    width: 45vw; /* Было 80vw — уменьшили почти в 2 раза */
+    height: 45vh;
+    background: radial-gradient(circle, rgba(234, 88, 12, 0.75) 0%, rgba(217, 119, 6, 0.3) 40%, rgba(0, 0, 0, 0) 70%);
+    animation: ${morph1} 10s ease-in-out infinite; /* Ускорили с 18s до 10s */
+`;
+
+const AccentBlob = styled(GlowBlob)`
+    bottom: 15%;
+    right: 20%;
+    width: 40vw; /* Было 70vw */
+    height: 40vh;
+    background: radial-gradient(circle, rgba(194, 65, 12, 0.65) 0%, rgba(234, 88, 12, 0.25) 50%, rgba(0, 0, 0, 0) 70%);
+    animation: ${morph2} 12s ease-in-out infinite; /* Ускорили с 22s до 12s */
+    animation-delay: -3s;
 `;
 
 const AnimatedBackground = () => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const videoRef = useRef<HTMLVideoElement | null>(null);
-    const [isReady, setIsReady] = useState(false);
-
-    // Рефы для хранения математики без ререндера компонента
-    const targetTimeRef = useRef(0);
-    const maxProgressRef = useRef(0); // ЗАМОК: Хранит максимальный достигнутый прогресс
-    const heightRef = useRef(0);
-
-    // 1. Инициализация видео
-    useEffect(() => {
-        const video = document.createElement('video');
-        video.src = heroVideoPath;
-        video.muted = true;
-        video.playsInline = true;
-        video.preload = "auto";
-        video.style.display = 'none';
-
-        const initVideo = async () => {
-            try {
-                await video.play();
-                video.pause();
-
-                if (canvasRef.current) {
-                    canvasRef.current.width = video.videoWidth;
-                    canvasRef.current.height = video.videoHeight;
-                    videoRef.current = video;
-                    setIsReady(true);
-
-                    // Рисуем первый кадр сразу
-                    const ctx = canvasRef.current.getContext('2d');
-                    ctx?.drawImage(video, 0, 0, canvasRef.current.width, canvasRef.current.height);
-                }
-            } catch (e) {
-                console.warn("Autoplay blocked:", e);
-            }
-        };
-
-        video.addEventListener('loadeddata', initVideo);
-        video.load();
-
-        return () => video.removeEventListener('loadeddata', initVideo);
-    }, []);
-
-    // 2. Отслеживание точной высоты документа (защита от скачков анимаций)
-    useEffect(() => {
-        const updateHeight = () => {
-            heightRef.current = document.documentElement.scrollHeight - window.innerHeight;
-        };
-
-        // Обновляем высоту при изменении DOM (появлении карточек)
-        const observer = new ResizeObserver(updateHeight);
-        observer.observe(document.body);
-        updateHeight();
-
-        return () => observer.disconnect();
-    }, []);
-
-    // 3. Главный Render Loop (Работает вне реактивности React)
-    useEffect(() => {
-        if (!isReady || !videoRef.current || !canvasRef.current) return;
-
-        const video = videoRef.current;
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d', { alpha: false }); // Оптимизация производительности
-        let animationId: number;
-
-        const renderLoop = () => {
-            // 3.1 Вычисляем текущий прогресс скролла
-            const currentScroll = window.scrollY || document.documentElement.scrollTop;
-            let rawProgress = heightRef.current > 0 ? currentScroll / heightRef.current : 0;
-            rawProgress = Math.max(0, Math.min(1, rawProgress));
-
-            // 3.2 ЗАМОК РЕВЕРСА: Прогресс может только расти (пока мы не докрутили до конца)
-            // Это жестко блокирует скачки видео назад при динамическом изменении высоты
-            if (rawProgress > maxProgressRef.current) {
-                maxProgressRef.current = rawProgress;
-            } else if (rawProgress < maxProgressRef.current - 0.05) {
-                // Если пользователь явно и сильно крутит вверх, сбрасываем замок
-                maxProgressRef.current = rawProgress;
-            }
-
-            // 3.3 Устанавливаем целевое время
-            if (video.duration) {
-                const safeDuration = video.duration - 0.1; // Оставляем 0.1с до конца видео
-                targetTimeRef.current = maxProgressRef.current * safeDuration;
-            }
-
-            // 3.4 LERP (Плавное догоняние)
-            const easing = 0.08; // Коэффициент плавности
-            const diff = targetTimeRef.current - video.currentTime;
-
-            // Двигаем видео только если разница существенна
-            if (Math.abs(diff) > 0.005) {
-                video.currentTime += diff * easing;
-            }
-
-            // 3.5 Отрисовка кадра
-            if (ctx && video.readyState >= 2) {
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            }
-
-            animationId = requestAnimationFrame(renderLoop);
-        };
-
-        renderLoop();
-
-        return () => cancelAnimationFrame(animationId);
-    }, [isReady]);
-
     return (
-        <BackgroundContainer>
-            <canvas
-                ref={canvasRef}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    opacity: 0.5,
-                    willChange: 'transform' /* Подсказка для GPU */
-                }}
-            />
-            <VideoOverlay />
-        </BackgroundContainer>
+        <BackgroundWrapper>
+            <MainBlob />
+            <AccentBlob />
+        </BackgroundWrapper>
     );
 };
 

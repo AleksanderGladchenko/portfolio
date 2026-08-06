@@ -7,22 +7,20 @@ import Skills from './components/Skills/Skills';
 import Experience from './components/Experience/Experience';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
+import AnimatedBackground from './components/Background/AnimatedBackground'; // ВЕРНУЛИ ИМПОРТ ФОНА
 import Lenis from 'lenis';
 
 const GlobalStyle = createGlobalStyle`
     :root {
-        /* --- SOLID BACKGROUND --- */
-        --bg-color: #060b14; /* Глухой цвет на стыке черного и темно-синего */
-
-        /* --- ORIGINAL APPLE-STYLE ELEMENTS --- */
-        --card-bg: #1c1c1e;
-        --text-primary: #f5f5f7;
-        --text-secondary: #86868b;
-        --accent-color: #2997ff;
-        --border-color: rgba(255, 255, 255, 0.1);
-        --shadow-color: rgba(0, 0, 0, 0.5);
-        --nav-bg: rgba(28, 28, 30, 0.75);
-        --glass-panel: rgba(20, 20, 20, 0.6);
+        --bg-color: #000000;
+        --card-bg: rgba(20, 20, 20, 0.6);
+        --text-primary: #ffffff;
+        --text-secondary: #a1a1aa;
+        --accent-color: #ea580c;
+        --accent-glow: rgba(234, 88, 12, 0.4);
+        --border-color: rgba(255, 255, 255, 0.08);
+        --shadow-color: rgba(0, 0, 0, 0.8);
+        --nav-bg: rgba(10, 10, 10, 0.75);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,13 +37,14 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
     }
 
-    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--bg-color); }
     ::-webkit-scrollbar-thumb {
-        background-color: var(--text-secondary);
+        background-color: #333333;
         border-radius: 10px;
-        border: 3px solid var(--bg-color);
-        background-clip: content-box;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--accent-color);
     }
 `;
 
@@ -61,7 +60,6 @@ function App() {
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', 'dark');
 
-        // Инициализация кинематографичного скролла
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -83,7 +81,8 @@ function App() {
     return (
         <>
             <GlobalStyle />
-            {/* Анимированный фон удален для чистоты и максимальной производительности */}
+            {/* РЕНДЕРИМ МАССИВНЫЙ ФОН */}
+            <AnimatedBackground />
 
             <Header />
 

@@ -107,7 +107,7 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                                         )}
                                         {project.solutions && (
                                             <div>
-                                                <ArchTitle><FaLightbulb style={{ color: '#ffcc00' }} /> Solutions & Execution</ArchTitle>
+                                                <ArchTitle><FaLightbulb style={{ color: 'var(--accent-color)' }} /> Solutions & Execution</ArchTitle>
                                                 <ArchList>{project.solutions.map((s, i) => <li key={i}>{s}</li>)}</ArchList>
                                             </div>
                                         )}

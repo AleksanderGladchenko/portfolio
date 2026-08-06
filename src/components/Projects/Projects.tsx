@@ -19,7 +19,6 @@ import {
 import Modal, { type Project } from '../Modal/Modal';
 import { AnimatePresence } from 'framer-motion';
 
-// Импорт старых медиа
 import video1 from '../../assets/1.mp4';
 import video2 from '../../assets/2.mp4';
 import video3 from '../../assets/3.mp4';
@@ -28,7 +27,6 @@ import server1 from '../../assets/server1.jpg';
 import server2 from '../../assets/server2.jpg';
 import server3 from '../../assets/server3.jpg';
 
-// НОВЫЕ ИМПОРТЫ КАРТИНОК БОТА
 import karma1 from '../../assets/karma1.jpg';
 import karma2 from '../../assets/karma2.jpg';
 import karma3 from '../../assets/karma3.jpg';
@@ -37,12 +35,11 @@ import karma4 from '../../assets/karma4.jpg';
 import { FaWordpress, FaShoppingCart, FaServer, FaImages, FaShopify, FaTelegramPlane } from 'react-icons/fa';
 
 const projectsData: Project[] = [
-    // --- НОВЫЙ ПРОЕКТ: KARMA-CASE TELEGRAM WEB APP ---
     {
         id: 9,
         title: 'Karma-Case Telegram Web App',
         category: 'app',
-        image: karma1, // Главная обложка карточки
+        image: karma1,
         mediaType: 'image',
         icon: <FaTelegramPlane />,
         color: 'linear-gradient(135deg, #0088cc 0%, #005580 100%)',
@@ -213,48 +210,51 @@ const Projects = () => {
 
                 <ProjectsGrid>
                     <AnimatePresence mode='wait'>
-                        {filteredProjects.map((project) => (
-                            <ProjectCard
-                                key={project.id}
-                                onClick={() => setSelectedProject(project)}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3 }}
-                                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                            >
-                                {project.gallery && project.gallery.length > 0 && (
-                                    <GalleryBadge>
-                                        <FaImages />
-                                        {project.gallery.length} Images
-                                    </GalleryBadge>
-                                )}
+                        {filteredProjects.map((project, i) => {
+                            // Логика Bento Grid: делаем большие карточки для разнообразия (индексы 0, 5, 8)
 
-                                <MediaContainer>
-                                    {project.mediaType === 'video' && project.image ? (
-                                        <ProjectImage as="video" autoPlay loop muted playsInline src={project.image} />
-                                    ) : project.mediaType === 'image' && project.image ? (
-                                        <ProjectImage as="img" src={project.image} alt={project.title} />
-                                    ) : (
-                                        <NoImagePlaceholder style={{ background: project.color || '#333' }}>
-                                            <div className="icon-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%'}}>
-                                                {project.icon || <span>No Icon</span>}
-                                            </div>
-                                        </NoImagePlaceholder>
+                            return (
+                                <ProjectCard
+                                    key={project.id}
+                                    onClick={() => setSelectedProject(project)}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 20 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    {project.gallery && project.gallery.length > 0 && (
+                                        <GalleryBadge>
+                                            <FaImages />
+                                            {project.gallery.length} Images
+                                        </GalleryBadge>
                                     )}
-                                </MediaContainer>
 
-                                <ProjectContent>
-                                    <ProjectTitle>{project.title}</ProjectTitle>
-                                    <ProjectDescription>{project.description}</ProjectDescription>
-                                    <TechList>
-                                        {project.tech.slice(0, 3).map((t, i) => (
-                                            <TechTag key={i}>{t}</TechTag>
-                                        ))}
-                                    </TechList>
-                                </ProjectContent>
-                            </ProjectCard>
-                        ))}
+                                    <MediaContainer>
+                                        {project.mediaType === 'video' && project.image ? (
+                                            <ProjectImage as="video" autoPlay loop muted playsInline src={project.image} />
+                                        ) : project.mediaType === 'image' && project.image ? (
+                                            <ProjectImage as="img" src={project.image} alt={project.title} />
+                                        ) : (
+                                            <NoImagePlaceholder style={{ background: project.color || '#111' }}>
+                                                <div className="icon-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%'}}>
+                                                    {project.icon || <span>No Icon</span>}
+                                                </div>
+                                            </NoImagePlaceholder>
+                                        )}
+                                    </MediaContainer>
+
+                                    <ProjectContent>
+                                        <ProjectTitle>{project.title}</ProjectTitle>
+                                        <ProjectDescription>{project.description}</ProjectDescription>
+                                        <TechList>
+                                            {project.tech.slice(0, 3).map((t, index) => (
+                                                <TechTag key={index}>{t}</TechTag>
+                                            ))}
+                                        </TechList>
+                                    </ProjectContent>
+                                </ProjectCard>
+                            );
+                        })}
                     </AnimatePresence>
                 </ProjectsGrid>
             </ProjectsSection>

@@ -30,15 +30,17 @@ export const CategoryCard = styled(motion.div)`
     background: var(--card-bg);
     border-radius: 28px;
     padding: 30px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px var(--shadow-color);
+    border: 1px solid var(--border-color); /* Возвращаем строгую границу */
+    box-shadow: 0 10px 30px var(--shadow-color); /* Базовая черная тень */
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 
     &:hover {
         transform: translateY(-5px);
+        border-color: rgba(234, 88, 12, 0.4); /* Только цвет рамки */
+        box-shadow: 0 15px 40px var(--shadow-color); /* Тень остается черной, просто становится чуть больше из-за поднятия */
     }
 `;
 
@@ -58,25 +60,24 @@ export const CategoryHeader = styled.div`
     }
 `;
 
-/* --- РАДИКАЛЬНАЯ ОПТИМИЗАЦИЯ СЕТКИ --- */
 export const SkillsList = styled.div`
     display: flex;
-    flex-wrap: wrap; /* Элементы автоматически переносятся на новую строку */
-    gap: 10px; /* Аккуратный отступ между плашками */
+    flex-wrap: wrap;
+    gap: 10px;
 `;
 
 export const SkillItem = styled.div`
-    display: inline-flex; /* Плашка облегает текст */
+    display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--text-primary);
 
-    background: var(--glass-panel); /* Полупрозрачный фон */
+    background: rgba(255, 255, 255, 0.03); /* Очень легкая прозрачность вместо глухого цвета */
     border: 1px solid var(--border-color);
     padding: 8px 16px;
-    border-radius: 50px; /* Круглые края как у тегов */
+    border-radius: 50px;
     transition: all 0.2s ease;
 
     svg {
@@ -87,10 +88,12 @@ export const SkillItem = styled.div`
 
     &:hover {
         transform: translateY(-2px);
-        background: var(--border-color);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        background: rgba(234, 88, 12, 0.1);
+        border-color: var(--accent-color);
+        box-shadow: 0 4px 10px rgba(234, 88, 12, 0.2);
+        
         svg {
-            color: var(--accent-color); /* Иконка загорается при наведении */
+            color: var(--accent-color);
         }
     }
 `;

@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
     top: 20px;
     left: 0;
     right: 0;
-    margin: 0 auto; /* Центрирование без конфликтов с анимацией */
+    margin: 0 auto;
     width: 90%;
     max-width: 1200px;
     height: 60px;
@@ -35,6 +35,12 @@ export const Logo = styled.div`
     color: var(--text-primary);
     letter-spacing: -0.02em;
     cursor: pointer;
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+    
+    &:hover {
+        color: var(--accent-color);
+        text-shadow: 0 0 15px var(--accent-glow);
+    }
 `;
 
 export const NavLinks = styled.nav`
@@ -55,11 +61,26 @@ export const NavLinkStyled = styled.a`
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: opacity 0.2s ease;
-    opacity: 0.8;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+    position: relative;
 
     &:hover, &.active {
         opacity: 1;
+        color: var(--accent-color) !important;
+    }
+
+    &.active::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--accent-color);
     }
 `;
 
@@ -68,6 +89,9 @@ export const BurgerIcon = styled.div`
     font-size: 1.5rem;
     color: var(--text-primary);
     cursor: pointer;
+    transition: color 0.2s ease;
+    
+    &:hover { color: var(--accent-color); }
 
     @media (max-width: 768px) {
         display: flex;
@@ -76,11 +100,11 @@ export const BurgerIcon = styled.div`
 `;
 
 export const MobileNav = styled(motion.div)`
-    position: fixed; /* Прибиваем к экрану, а не к документу */
+    position: fixed;
     top: 80px;
     left: 0;
     right: 0;
-    margin: 0 auto; /* Центрируем жестко */
+    margin: 0 auto;
     width: 95%;
     background-color: var(--nav-bg);
     padding: 24px;
@@ -92,23 +116,24 @@ export const MobileNav = styled(motion.div)`
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     box-shadow: 0 30px 60px var(--shadow-color);
-    z-index: 9999; /* Жестко поверх всего сайта, чтобы тапы работали */
+    z-index: 9999;
 
     a {
         color: var(--text-primary) !important;
         text-decoration: none !important;
         font-size: 1.1rem;
         font-weight: 600;
-        display: block; /* Расширяем зону клика */
+        display: block;
         padding: 10px;
         text-align: center;
         border-radius: 12px;
-        transition: background 0.2s;
+        transition: all 0.2s ease;
         cursor: pointer;
     }
 
-    a:active {
-        background: rgba(255, 255, 255, 0.1);
+    a:active, a.active {
+        background: rgba(234, 88, 12, 0.1);
+        color: var(--accent-color) !important;
     }
 
     @media (min-width: 769px) {

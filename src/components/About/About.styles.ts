@@ -28,9 +28,14 @@ export const ProfileCard = styled.div`
     grid-template-columns: 3fr 2fr;
     gap: 40px;
     align-items: center;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 20px 40px var(--shadow-color);
+    border: 1px solid var(--border-color); /* Возвращаем строгую границу */
+    box-shadow: 0 20px 40px var(--shadow-color); /* Оставляем только базовую черную тень для глубины */
     margin: 0 auto;
+    transition: border-color 0.3s ease;
+
+    &:hover {
+        border-color: rgba(234, 88, 12, 0.4); /* Легкая подсветка самой рамки, БЕЗ свечения вокруг */
+    }
 
     @media (max-width: 850px) {
         grid-template-columns: 1fr;
@@ -92,14 +97,14 @@ export const ProfileImg = styled.img`
     border-radius: 30px;
     border: 1px solid var(--border-color);
     box-shadow: 0 20px 40px var(--shadow-color);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 
     &:hover {
         transform: scale(1.03);
+        border-color: var(--accent-color);
     }
 `;
 
-/* --- СТИЛИ ДЛЯ ПАСХАЛКИ (EASTER EGG) --- */
 export const EasterEggBackdrop = styled(motion.div)`
     position: fixed;
     top: 0;
@@ -142,6 +147,7 @@ export const RatCloseHint = styled.p`
 
     &:hover {
         opacity: 1;
+        color: var(--accent-color);
     }
 
     @media (max-width: 768px) {
