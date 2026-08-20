@@ -25,7 +25,6 @@ import geoprint1 from '../../assets/geoprint1.jpg';
 import geoprint2 from '../../assets/geoprint2.jpg';
 import geoprint3 from '../../assets/geoprint3.jpg';
 import geoprint4 from '../../assets/geoprint4.jpg';
-import video2 from '../../assets/2.mp4';
 import video3 from '../../assets/3.mp4';
 import farmImg from '../../assets/farm.jpg';
 import server1 from '../../assets/server1.jpg';
