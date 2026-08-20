@@ -8,70 +8,95 @@ export const Backdrop = styled(motion.div)`
 
     @media (max-width: 768px) {
         padding: 0;
-        align-items: flex-end;
+        align-items: flex-end; /* На мобилках прижимаем к низу (Bottom Sheet) */
     }
 `;
 
 export const ModalContent = styled(motion.div)`
     position: relative;
-    background: var(--bg-color); /* Строгий черный для контраста с контентом */
+    background: var(--bg-color);
     border-radius: 24px;
     width: 100%; max-width: 850px;
     max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
-    border: 1px solid var(--accent-color); /* Оранжевая окантовка */
     display: flex; flex-direction: column;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--border-color);
+    overflow: hidden; /* ВАЖНО: Внешний контейнер больше не скроллится! */
     color: var(--text-primary);
+
+    @media (max-width: 768px) {
+        max-height: 90vh;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+    }
+`;
+
+/* НОВЫЙ КОНТЕЙНЕР ДЛЯ СКРОЛЛА */
+export const ScrollableArea = styled.div`
+    flex-grow: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
 
     &::-webkit-scrollbar { width: 6px; }
     &::-webkit-scrollbar-track { background: transparent; }
     &::-webkit-scrollbar-thumb { background-color: var(--text-secondary); border-radius: 4px; }
     &::-webkit-scrollbar-thumb:hover { background-color: var(--accent-color); }
+`;
+
+/* Визуальный индикатор для мобилок (полоска сверху) */
+export const MobileDragHandle = styled.div`
+    display: none;
+    width: 40px;
+    height: 4px;
+    background: var(--text-secondary);
+    border-radius: 4px;
+    margin: 12px auto;
+    opacity: 0.5;
+
+    @media (max-width: 768px) { display: block; }
+`;
+
+/* Минималистичный премиальный крестик */
+export const CloseButton = styled.button`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.6) !important; /* Полупрозрачный фон */
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 100; /* Поверх всего */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+
+    & > * {
+        color: var(--text-secondary) !important;
+        font-size: 16px;
+        transition: color 0.2s ease;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+        border-color: var(--accent-color);
+    }
+    
+    &:hover > * {
+        color: var(--accent-color) !important;
+    }
 
     @media (max-width: 768px) {
-        max-height: 85vh;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        top: 12px; right: 16px; /* На мобилках чуть сдвигаем */
     }
 `;
 
 export const ModalImage = styled.div`
     width: 100%;
-    video, img { width: 100%; max-height: 40vh; object-fit: cover; display: block; border-bottom: 1px solid var(--border-color); }
-`;
-
-export const CloseButton = styled.button`
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    background: #ffffff !important;
-    border: none;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    z-index: 20;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    transition: transform 0.2s ease, background 0.2s ease;
-
-    &:hover {
-        transform: scale(1.1);
-        background: var(--accent-color) !important;
-    }
-
-    & > * {
-        color: #000000 !important;
-        fill: #000000 !important;
-        font-size: 20px;
-        transition: fill 0.2s ease;
-    }
-    
-    &:hover > * {
-        fill: #ffffff !important;
-        color: #ffffff !important;
-    }
+    video, img { width: 100%; max-height: 45vh; object-fit: cover; display: block; border-bottom: 1px solid var(--border-color); }
 `;
 
 export const ModalBody = styled.div`
@@ -147,14 +172,14 @@ export const LinkButton = styled.a`
     font-size: 0.9rem; font-weight: 600; transition: all 0.2s ease;
     box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
 
-    &.secondary { 
-        background: transparent; color: var(--text-primary); 
+    &.secondary {
+        background: transparent; color: var(--text-primary);
         border: 1px solid var(--border-color); box-shadow: none;
     }
-    
-    &:hover { 
+
+    &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5); 
+        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5);
     }
     &.secondary:hover {
         border-color: var(--accent-color);
@@ -170,9 +195,9 @@ export const GalleryImage = styled.img`
     width: 100%; height: 140px; object-fit: cover; border-radius: 16px; border: 1px solid var(--border-color);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: zoom-in;
 
-    &:hover { 
-        transform: translateY(-4px) scale(1.02); 
-        box-shadow: 0 12px 24px var(--accent-glow); 
+    &:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 24px var(--accent-glow);
         border-color: var(--accent-color);
     }
 `;
@@ -191,10 +216,10 @@ export const LightboxButton = styled.button`
     position: absolute; background-color: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-color);
     width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
     font-size: 1.2rem; cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; z-index: 10000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); 
-    
-    &:hover { 
-        transform: scale(1.1); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+    &:hover {
+        transform: scale(1.1);
         background-color: var(--accent-color);
         border-color: var(--accent-color);
         color: #ffffff;

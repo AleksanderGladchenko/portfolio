@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-    Backdrop, ModalContent, ModalImage, CloseButton, ModalBody,
+    Backdrop, ModalContent, ScrollableArea, MobileDragHandle, ModalImage, CloseButton, ModalBody,
     ModalLinks, LinkButton, ProjectGallery, GalleryImage,
     LightboxBackdrop, LightboxContent, LightboxPrev, LightboxNext, LightboxClose,
     TitleRow, NdaBadge, ArchBlock, ArchTitle, ArchList
@@ -13,7 +13,7 @@ import styled from 'styled-components';
 export interface Project {
     id: number;
     title: string;
-    category: 'app' | 'ecommerce' | 'automation';
+    category: 'app' | 'ecommerce' | 'automation' | 'flagship' | 'tools';
     image: string | null;
     mediaType: 'video' | 'image' | 'none';
     description: string;
@@ -34,7 +34,7 @@ interface ModalProps {
 }
 
 const ColoredHeader = styled.div<{ $bg?: string }>`
-    width: 100%; height: 200px; background: ${({ $bg }) => $bg || '#333'};
+    width: 100%; height: 250px; background: ${({ $bg }) => $bg || '#333'};
     display: flex; align-items: center; justify-content: center; font-size: 5rem;
     color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid var(--border-color);
 `;
@@ -72,63 +72,69 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                             initial={{ scale: 0.9, opacity: 0, y: 50 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 50 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
                         >
+                            {/* Крестик теперь прибит к ракушке и не скроллится */}
                             <CloseButton onClick={closeModal}><FaTimes /></CloseButton>
 
-                            {project.mediaType === 'none' ? (
-                                <ColoredHeader $bg={project.color}>{project.icon}</ColoredHeader>
-                            ) : (
-                                <ModalImage>
-                                    {project.mediaType === 'image' && project.image ? ( <img src={project.image} alt={project.title} /> ) : project.mediaType === 'video' && project.image ? ( <video autoPlay loop muted playsInline><source src={project.image} type="video/mp4" /></video> ) : null}
-                                </ModalImage>
-                            )}
+                            {/* Индикатор для мобилок */}
+                            <MobileDragHandle />
 
-                            <ModalBody>
-                                <TitleRow>
-                                    <ProjectTitle style={{ fontSize: '2rem', margin: 0 }}>{project.title}</ProjectTitle>
-                                    {project.nda && <NdaBadge>NDA Protected</NdaBadge>}
-                                </TitleRow>
-
-                                <TechList style={{ marginBottom: '24px' }}>
-                                    {project.tech.map((tech, j) => <TechTag key={j}>{tech}</TechTag>)}
-                                </TechList>
-
-                                <ProjectDescription style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
-                                    {project.description}
-                                </ProjectDescription>
-
-                                {/* АРХИТЕКТУРНЫЙ БЛОК */}
-                                {(project.challenges || project.solutions) && (
-                                    <ArchBlock>
-                                        {project.challenges && (
-                                            <div style={{ marginBottom: project.solutions ? '20px' : '0' }}>
-                                                <ArchTitle><FaTools /> Architectural Challenges</ArchTitle>
-                                                <ArchList>{project.challenges.map((c, i) => <li key={i}>{c}</li>)}</ArchList>
-                                            </div>
-                                        )}
-                                        {project.solutions && (
-                                            <div>
-                                                <ArchTitle><FaLightbulb style={{ color: 'var(--accent-color)' }} /> Solutions & Execution</ArchTitle>
-                                                <ArchList>{project.solutions.map((s, i) => <li key={i}>{s}</li>)}</ArchList>
-                                            </div>
-                                        )}
-                                    </ArchBlock>
+                            {/* Зона контента, которая скроллится. data-lenis-prevent останавливает фон сайта */}
+                            <ScrollableArea data-lenis-prevent="true">
+                                {project.mediaType === 'none' ? (
+                                    <ColoredHeader $bg={project.color}>{project.icon}</ColoredHeader>
+                                ) : (
+                                    <ModalImage>
+                                        {project.mediaType === 'image' && project.image ? ( <img src={project.image} alt={project.title} /> ) : project.mediaType === 'video' && project.image ? ( <video autoPlay loop muted playsInline><source src={project.image} type="video/mp4" /></video> ) : null}
+                                    </ModalImage>
                                 )}
 
-                                {project.gallery && project.gallery.length > 0 && (
-                                    <ProjectGallery>
-                                        {project.gallery.map((img, idx) => ( <GalleryImage key={idx} src={img} alt={`Screenshot ${idx + 1}`} onClick={() => setLightboxIndex(idx)} /> ))}
-                                    </ProjectGallery>
-                                )}
+                                <ModalBody>
+                                    <TitleRow>
+                                        <ProjectTitle style={{ fontSize: '2rem', margin: 0 }}>{project.title}</ProjectTitle>
+                                        {project.nda && <NdaBadge>NDA Protected</NdaBadge>}
+                                    </TitleRow>
 
-                                <ModalLinks>
-                                    {project.live && project.live !== '#' && (
-                                        <LinkButton href={project.live} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> Open Live</LinkButton>
+                                    <TechList style={{ marginBottom: '24px' }}>
+                                        {project.tech.map((tech, j) => <TechTag key={j}>{tech}</TechTag>)}
+                                    </TechList>
+
+                                    <ProjectDescription style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
+                                        {project.description}
+                                    </ProjectDescription>
+
+                                    {(project.challenges || project.solutions) && (
+                                        <ArchBlock>
+                                            {project.challenges && (
+                                                <div style={{ marginBottom: project.solutions ? '20px' : '0' }}>
+                                                    <ArchTitle><FaTools /> Architectural Challenges</ArchTitle>
+                                                    <ArchList>{project.challenges.map((c, i) => <li key={i}>{c}</li>)}</ArchList>
+                                                </div>
+                                            )}
+                                            {project.solutions && (
+                                                <div>
+                                                    <ArchTitle><FaLightbulb style={{ color: 'var(--accent-color)' }} /> Solutions & Execution</ArchTitle>
+                                                    <ArchList>{project.solutions.map((s, i) => <li key={i}>{s}</li>)}</ArchList>
+                                                </div>
+                                            )}
+                                        </ArchBlock>
                                     )}
-                                    {project.github && project.github !== '#' && (
-                                        <LinkButton href={project.github} target="_blank" rel="noopener noreferrer" className="secondary"><FaGithub /> Source Code</LinkButton>
+
+                                    {project.gallery && project.gallery.length > 0 && (
+                                        <ProjectGallery>
+                                            {project.gallery.map((img, idx) => ( <GalleryImage key={idx} src={img} alt={`Screenshot ${idx + 1}`} onClick={() => setLightboxIndex(idx)} /> ))}
+                                        </ProjectGallery>
                                     )}
-                                </ModalLinks>
-                            </ModalBody>
+
+                                    <ModalLinks>
+                                        {project.live && project.live !== '#' && (
+                                            <LinkButton href={project.live} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> Open Live</LinkButton>
+                                        )}
+                                        {project.github && project.github !== '#' && (
+                                            <LinkButton href={project.github} target="_blank" rel="noopener noreferrer" className="secondary"><FaGithub /> Source Code</LinkButton>
+                                        )}
+                                    </ModalLinks>
+                                </ModalBody>
+                            </ScrollableArea>
                         </ModalContent>
                     </Backdrop>
                 )}

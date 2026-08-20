@@ -37,10 +37,14 @@ const TitleStyled = styled.h1`
     font-size: 5.5rem;
     line-height: 1.1;
     font-weight: 700;
-    color: var(--text-primary);
+    /* Строгий металлический градиент текста вместо простого белого */
+    background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 1.5rem;
     letter-spacing: -0.04em;
-    text-shadow: 0 4px 30px var(--accent-glow); /* Оранжевое свечение текста */
+    /* Убрали оранжевый text-shadow, оставили едва заметную черную тень для четкости */
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 
     @media (max-width: 768px) { font-size: 3.5rem; }
 `;
@@ -96,13 +100,17 @@ const CtaButtonStyled = styled.a`
 const SecondaryCtaButtonStyled = styled.a`
     display: inline-flex; align-items: center; justify-content: center;
     padding: 14px 32px; font-size: 1.1rem; font-weight: 600;
-    color: var(--text-primary); background-color: transparent;
-    border: 2px solid var(--border-color); border-radius: 50px;
+    color: var(--text-secondary); /* Сделали более приглушенной */
+    background-color: rgba(255, 255, 255, 0.02); /* Чуть заметный фон */
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
     text-decoration: none; transition: all 0.3s ease; cursor: pointer;
+    backdrop-filter: blur(5px);
 
     &:hover {
-        border-color: var(--accent-color);
-        background-color: rgba(234, 88, 12, 0.05);
+        color: var(--text-primary);
+        border-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.05);
     }
 `;
 
