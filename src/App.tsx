@@ -7,7 +7,8 @@ import Skills from './components/Skills/Skills';
 import Experience from './components/Experience/Experience';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
-import AnimatedBackground from './components/Background/AnimatedBackground'; // ВЕРНУЛИ ИМПОРТ ФОНА
+import AnimatedBackground from './components/Background/AnimatedBackground';
+import BugReport from './components/BugReport/BugReport';
 import Lenis from 'lenis';
 
 const GlobalStyle = createGlobalStyle`
@@ -81,8 +82,10 @@ function App() {
     return (
         <>
             <GlobalStyle />
-            {/* РЕНДЕРИМ МАССИВНЫЙ ФОН */}
             <AnimatedBackground />
+
+            {/* Наша новая плавающая кнопка репортов */}
+            <BugReport />
 
             <Header />
 
