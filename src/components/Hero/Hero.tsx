@@ -12,12 +12,13 @@ const itemVariants: any = {
     visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: "easeOut" } }
 };
 
+// АКТУАЛИЗИРОВАННЫЕ ТЕГИ
 const skills = [
-    { name: "React & UI/UX", filter: "app" },
-    { name: "Telegram Web Apps", filter: "app" },
-    { name: "Node.js & APIs", filter: "ecommerce" },
-    { name: "Shopify & CMS", filter: "ecommerce" },
-    { name: "Python Automation", filter: "automation" }
+    { name: "System Architecture", filter: "flagship" },
+    { name: "High-Load Backend", filter: "tools" },
+    { name: "Zero-Trust Security", filter: "ecommerce" },
+    { name: "React Ecosystem", filter: "flagship" },
+    { name: "DevOps & Automation", filter: "tools" }
 ];
 
 const Hero = () => {
@@ -33,16 +34,15 @@ const Hero = () => {
                 animate="visible"
             >
                 <Subtitle variants={itemVariants}>
-                    Technical Architect & Full-Stack Engineer
+                    Alexander — Technical Architect
                 </Subtitle>
 
                 <Title variants={itemVariants}>
-                    Alexander.
+                    Engineering robust web architecture.
                 </Title>
 
                 <Description variants={itemVariants}>
-                    I specialize in engineering high-performance web applications, robust automated systems, and enterprise-grade Telegram Bots.
-                    I bridge the gap between heavy backend architecture and pixel-perfect user interfaces.
+                    I build software that doesn't break under pressure. Moving from aviation engineering to full-stack development, I apply a zero-trust approach to architecture, automating infrastructure, and writing predictable, maintainable code.
                 </Description>
 
                 <SkillsWrapper variants={itemVariants}>

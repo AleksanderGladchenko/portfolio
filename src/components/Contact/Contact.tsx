@@ -11,8 +11,7 @@ const Contact = () => {
         >
             <Title>Let’s Work Together.</Title>
             <Subtitle>
-                Have a project in mind or just want to discuss the latest tech?
-                My inbox is open for new opportunities.
+                I'm always open to discussing complex architectural challenges, high-load systems, or new engineering roles. Drop me a line.
             </Subtitle>
 
             <ButtonContainer>

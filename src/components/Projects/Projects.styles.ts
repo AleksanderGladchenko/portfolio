@@ -87,14 +87,15 @@ export const MediaContainer = styled.div`
     border-bottom: 1px solid var(--border-color);
 `;
 
-export const ProjectImage = styled.video`
-    width: 100%; height: 100%; object-fit: cover; opacity: 0.85;
+export const ProjectImage = styled.video<{ $isLoaded?: boolean }>`
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: ${({ $isLoaded }) => ($isLoaded ? 0.85 : 0)};
     transform: translateZ(0); -webkit-transform: translateZ(0); pointer-events: none;
-    transition: transform 0.7s cubic-bezier(0.25, 1, 0.25, 1), opacity 0.4s ease;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.25, 1), opacity 0.5s ease;
 
     ${ProjectCard}:hover & {
         transform: scale(1.08) translateZ(0);
-        opacity: 1;
+        opacity: ${({ $isLoaded }) => ($isLoaded ? 1 : 0)};
     }
 `;
 
@@ -147,4 +148,24 @@ export const GalleryBadge = styled.div`
     display: flex; align-items: center; gap: 6px;
     pointer-events: none;
     svg { font-size: 0.9rem; color: var(--accent-color); }
+`;
+
+import { keyframes } from 'styled-components'; // Добавь keyframes в импорт сверху, если его нет
+
+const shimmer = keyframes`
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+`;
+
+export const SkeletonLoader = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Цвета подобраны под твой темный Apple-стиль */
+    background: linear-gradient(90deg, #0a0a0a 25%, #1c1c1e 50%, #0a0a0a 75%);
+    background-size: 200% 100%;
+    animation: ${shimmer} 2s infinite linear;
+    z-index: 1;
 `;

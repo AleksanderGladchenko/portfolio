@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MJBYLC7PCE"></script>
@@ -10,33 +11,95 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-MJBYLC7PCE');
   </script>
 
-  <title>AGworking</title>
-  <meta name="description" content="Portfolio of Alexander, a Full-Stack Software Engineer specializing in scalable web architecture, React, Python, and E-commerce integrations." />
+  <title>Alexander | Technical Architect</title>
+  <meta name="description" content="I design and build software systems that don't break under load. Zero-trust architecture, automated infrastructure, and predictable client-side code." />
   <meta name="author" content="Alexander" />
   <meta name="theme-color" content="#0a0a0a" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://aleksandergladchenko.github.io/portfolio/" />
+  <meta property="og:url" content="https://agworking.com/" />
   <meta property="og:title" content="Alexander | Technical Architect" />
-  <meta property="og:description" content="I bridge the gap between complex backend architecture and pixel-perfect user interfaces. Explore my technical projects." />
-  <meta property="og:image" content="https://aleksandergladchenko.github.io/portfolio/og-image.jpg" />
+  <meta property="og:description" content="I design and build software systems that don't break under load. Zero-trust architecture, automated infrastructure, and predictable client-side code." />
+  <meta property="og:image" content="https://agworking.com/og-image.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://aleksandergladchenko.github.io/portfolio/" />
+  <meta name="twitter:url" content="https://agworking.com/" />
   <meta name="twitter:title" content="Alexander | Technical Architect" />
-  <meta name="twitter:description" content="Full-Stack Engineer specializing in high-performance web applications." />
-  <meta name="twitter:image" content="https://aleksandergladchenko.github.io/portfolio/og-image.jpg" />
+  <meta name="twitter:description" content="Full-Stack Engineer specializing in high-load systems and predictable architecture." />
+  <meta name="twitter:image" content="https://agworking.com/og-image.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #000000;
+      overflow: hidden;
+    }
+    #initial-loader {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      background-color: #000000; z-index: 99999;
+    }
+    .ag-monogram {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      font-size: 72px;
+      font-weight: 800;
+      letter-spacing: -3px;
+      fill: transparent;
+      stroke: #ffffff;
+      stroke-width: 1.5px;
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: drawOutline 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+      fillText 0.5s ease forwards 1.2s;
+    }
+    .ag-accent {
+      stroke: #ea580c;
+      animation: drawOutline 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+      fillAccent 0.5s ease forwards 1.2s;
+    }
+    .ag-progress-container {
+      margin-top: 30px;
+      width: 180px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .ag-progress-bar {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 30%;
+      background: #ea580c;
+      animation: scanline 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes drawOutline { to { stroke-dashoffset: 0; } }
+    @keyframes fillText { to { fill: #ffffff; stroke: transparent; } }
+    @keyframes fillAccent { to { fill: #ea580c; stroke: transparent; } }
+    @keyframes scanline { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+  </style>
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<body>
+<div id="root">
+  <div id="initial-loader">
+    <svg width="160" height="90" viewBox="0 0 160 90">
+      <text x="50%" y="70%" text-anchor="middle" class="ag-monogram">
+        A<tspan class="ag-accent">G</tspan>.
+      </text>
+    </svg>
+    <div class="ag-progress-container">
+      <div class="ag-progress-bar"></div>
+    </div>
+  </div>
+</div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
 </html>

@@ -23,30 +23,26 @@ export const HeroContainer = styled.section`
 `;
 
 const SubtitleStyled = styled.h2`
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--accent-color);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     margin-bottom: 1.5rem;
 
-    @media (max-width: 768px) { font-size: 0.9rem; }
+    @media (max-width: 768px) { font-size: 0.85rem; }
 `;
 
 const TitleStyled = styled.h1`
-    font-size: 5.5rem;
+    font-size: 4.8rem;
     line-height: 1.1;
     font-weight: 700;
-    /* Строгий металлический градиент текста вместо простого белого */
-    background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
-    letter-spacing: -0.04em;
-    /* Убрали оранжевый text-shadow, оставили едва заметную черную тень для четкости */
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
-    @media (max-width: 768px) { font-size: 3.5rem; }
+    @media (max-width: 768px) { font-size: 3rem; }
 `;
 
 const DescriptionStyled = styled.p`
@@ -61,6 +57,7 @@ const DescriptionStyled = styled.p`
     @media (max-width: 768px) { font-size: 1.1rem; }
 `;
 
+/* ВОЗВРАЩАЕМ ПЛАШКИ С НОВЫМ ДИЗАЙНОМ */
 const SkillsWrapperStyled = styled.div`
     display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 3.5rem; max-width: 800px;
 `;
@@ -68,15 +65,20 @@ const SkillsWrapperStyled = styled.div`
 const SkillPillStyled = styled.div`
     display: inline-flex; align-items: center; justify-content: center;
     background: var(--card-bg);
-    backdrop-filter: blur(10px); border: 1px solid var(--border-color);
-    padding: 10px 20px; border-radius: 50px; font-size: 0.95rem; font-weight: 500;
-    color: var(--text-primary); transition: all 0.2s ease; cursor: pointer;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: all 0.2s ease; cursor: pointer;
 
     &:hover {
         transform: translateY(-2px);
         background: rgba(234, 88, 12, 0.1);
         border-color: var(--accent-color);
-        box-shadow: 0 4px 20px var(--accent-glow);
+        box-shadow: 0 4px 20px rgba(234, 88, 12, 0.4); /* Мягкое оранжевое свечение */
     }
 `;
 
@@ -100,8 +102,8 @@ const CtaButtonStyled = styled.a`
 const SecondaryCtaButtonStyled = styled.a`
     display: inline-flex; align-items: center; justify-content: center;
     padding: 14px 32px; font-size: 1.1rem; font-weight: 600;
-    color: var(--text-secondary); /* Сделали более приглушенной */
-    background-color: rgba(255, 255, 255, 0.02); /* Чуть заметный фон */
+    color: var(--text-secondary);
+    background-color: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border-color);
     border-radius: 50px;
     text-decoration: none; transition: all 0.3s ease; cursor: pointer;

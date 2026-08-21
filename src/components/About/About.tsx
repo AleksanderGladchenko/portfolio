@@ -31,17 +31,16 @@ const About = () => {
             <ProfileCard>
                 <TextContent>
                     <HighlightText>
-                        Eliminating system bottlenecks.<br />
-                        Delivering <span>Scalable Architecture</span>.
+                        Less magic.<br />
+                        More <span>Engineering</span>.
                     </HighlightText>
 
                     <Paragraph>
-                        I'm Alexander, a Full-Stack Software Engineer with a background in Aviation & Rocketry. This foundational engineering experience taught me to approach software not just as lines of code, but as complex, interconnected systems where reliability, optimization, and fault tolerance are critical.
+                        I'm Alexander. My background is in Aviation & Rocketry — an industry where failure isn't an option and tolerances are absolute. I traded aerodynamics for software engineering, bringing that same strict, paranoid mindset to web architecture.
                     </Paragraph>
 
-                    {/* ОБНОВЛЕНО: Добавлены Telegram Web Apps */}
                     <Paragraph>
-                        Today, I design and build end-to-end web solutions. From architecting robust databases, complex Telegram Web Apps (Python/Aiogram), and custom API integrations to crafting pixel-perfect React interfaces, I handle the full development lifecycle. My focus is on delivering secure, scalable, and business-driven results that work flawlessly under the hood.
+                        I don't just write code; I solve business problems. Whether it's orchestrating a headless farm of Android emulators via Python, securing payment flows, or structuring a clean React frontend, I focus on system resilience. No spaghetti code, no fragile 'magic' one-liners. Just modular, scalable solutions that work predictably.
                     </Paragraph>
                 </TextContent>
 
