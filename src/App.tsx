@@ -55,6 +55,10 @@ const MainContent = styled.main`
     margin: 0 auto;
     max-width: 1200px;
     padding: 0 24px;
+
+    @media (max-width: 768px) {
+        padding: 0 12px; /* Уменьшили глобальный отступ в 2 раза */
+    }
 `;
 
 function App() {

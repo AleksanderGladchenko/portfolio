@@ -17,33 +17,37 @@ export const SectionTitle = styled.h2`
     @media (max-width: 768px) { font-size: 2.2rem; }
 `;
 
-/* ПРЕМИАЛЬНЫЕ ВКЛАДКИ (Segmented Control) */
 export const TabsContainer = styled.div`
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin: 0 auto 50px;
+    gap: 12px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 6px;
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    width: fit-content;
+
+    @media (max-width: 768px) {
+        gap: 8px;
+        margin-bottom: 24px;
+    }
 `;
 
 export const TabButton = styled.button<{ $active: boolean }>`
-    background: ${({ $active }) => ($active ? 'rgba(234, 88, 12, 0.1)' : 'transparent')};
-    border: 1px solid ${({ $active }) => ($active ? 'var(--accent-color)' : 'transparent')};
-    color: ${({ $active }) => ($active ? 'var(--text-primary)' : 'var(--text-secondary)')};
+    /* Твои текущие стили оставляем... */
     padding: 10px 24px;
-    border-radius: 12px;
+    background: ${({ $active }) => ($active ? 'var(--accent-color)' : 'transparent')};
+    color: ${({ $active }) => ($active ? '#fff' : 'var(--text-secondary)')};
+    border: 1px solid ${({ $active }) => ($active ? 'var(--accent-color)' : 'var(--border-color)')};
+    border-radius: 980px;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: ${({ $active }) => ($active ? '0 4px 15px rgba(234, 88, 12, 0.2)' : 'none')};
+    transition: all 0.2s ease;
 
-    &:hover { color: var(--text-primary); }
+    @media (max-width: 768px) {
+        padding: 8px 16px; /* Делаем кнопки тоньше */
+        font-size: 0.85rem;
+        flex: 1 1 auto; /* Позволяем им растягиваться, чтобы не висели огрызками */
+        text-align: center;
+    }
 `;
 
 export const ProjectsGrid = styled(motion.div)`
@@ -110,11 +114,14 @@ export const NoImagePlaceholder = styled.div`
 `;
 
 export const ProjectContent = styled.div`
-    padding: 24px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background: transparent;
+
+    @media (max-width: 768px) {
+        padding: 20px; /* Больше места для самого текста */
+    }
 `;
 
 export const ProjectTitle = styled.h3`

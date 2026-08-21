@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 export const AboutSection = styled(motion.section)`
     max-width: 1000px;
     margin: 0 auto;
-    padding: 120px 24px;
+    padding: 100px 24px;
+
+    @media (max-width: 768px) {
+        padding: 60px 0; /* Убрали боковые отступы у секции, они уже есть в MainContent */
+    }
 `;
 
 export const SectionTitle = styled.h2`
@@ -28,18 +32,20 @@ export const ProfileCard = styled.div`
     grid-template-columns: 3fr 2fr;
     gap: 40px;
     align-items: center;
-    border: 1px solid var(--border-color); /* Возвращаем строгую границу */
-    box-shadow: 0 20px 40px var(--shadow-color); /* Оставляем только базовую черную тень для глубины */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px var(--shadow-color);
     margin: 0 auto;
     transition: border-color 0.3s ease;
 
     &:hover {
-        border-color: rgba(234, 88, 12, 0.4); /* Легкая подсветка самой рамки, БЕЗ свечения вокруг */
+        border-color: rgba(234, 88, 12, 0.4);
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 768px) {
         grid-template-columns: 1fr;
-        padding: 30px;
+        padding: 24px 20px; /* Радикально срезали внутренний жир */
+        border-radius: 24px; /* Уменьшили скругление для мобилок */
+        gap: 24px;
     }
 `;
 

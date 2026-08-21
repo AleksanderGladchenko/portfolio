@@ -9,12 +9,14 @@ export const ContactSection = styled(motion.section)`
     border-radius: 40px;
     border: 1px solid var(--border-color);
     box-shadow: 0 20px 60px var(--shadow-color);
-    text-align: center; position: relative; overflow: hidden;
-    
-    @media (max-width: 768px) { 
-        padding: 60px 20px 30px; 
-        margin: 60px 16px 40px; 
-        border-radius: 32px; 
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        padding: 40px 20px 30px; /* Убрали жир */
+        margin: 40px 0 20px; /* Убрали боковые отступы, пусть тянется */
+        border-radius: 24px;
     }
 `;
 
@@ -30,25 +32,23 @@ export const Subtitle = styled.p`
 
 export const ButtonContainer = styled.div`
     display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 60px;
+
+    @media (max-width: 768px) {
+        flex-direction: column; /* На телефоне кнопки должны быть в столбик 100% ширины */
+        width: 100%;
+        margin-bottom: 40px;
+    }
 `;
 
 export const ContactButton = styled(motion.a)`
-    display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
+    /* Базовые стили не трогаем... */
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 28px;
     border-radius: 980px; font-size: 1rem; font-weight: 500; text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s; cursor: pointer;
 
-    &.primary {
-        background: var(--accent-color); color: #fff; border: 1px solid transparent;
-        box-shadow: 0 4px 15px var(--accent-glow);
-        &:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(234, 88, 12, 0.6); }
-    }
-
-    &.secondary {
-        background: transparent; color: var(--text-primary); border: 1px solid var(--border-color);
-        &:hover {
-            transform: scale(1.05); background: rgba(234, 88, 12, 0.05);
-            border-color: var(--accent-color); box-shadow: 0 4px 15px var(--accent-glow);
-        }
+    @media (max-width: 768px) {
+        width: 100%; /* Растягиваем кнопку на всю карточку */
+        padding: 16px;
     }
 `;
 

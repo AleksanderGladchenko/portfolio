@@ -42,7 +42,10 @@ export const TimelineContainer = styled.div`
 `;
 
 export const TimelineItem = styled(motion.div)`
-    position: relative; width: 50%; padding: 10px 40px; box-sizing: border-box;
+    position: relative;
+    width: 50%;
+    padding: 10px 40px;
+    box-sizing: border-box;
 
     &:nth-child(odd) { left: 0; text-align: right; .content-box { align-items: flex-end; } .date-badge { right: -60px; text-align: left; } }
     &:nth-child(even) { left: 50%; text-align: left; .content-box { align-items: flex-start; } .date-badge { left: -60px; text-align: right; } }
@@ -55,21 +58,19 @@ export const TimelineItem = styled(motion.div)`
     }
     &:nth-child(even)::after { left: -7px; }
 
-    /* МОБИЛЬНАЯ ВЕРСИЯ */
+    /* МОБИЛЬНАЯ ВЕРСИЯ: Жесткий фикс */
     @media (max-width: 768px) {
         width: 100%;
-        padding-left: 50px; /* Отступ от линии */
+        padding-left: 35px; /* Только место под линию */
         padding-right: 0;
         text-align: left !important;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
 
         &:nth-child(odd), &:nth-child(even) { left: 0; }
         &:nth-child(odd) .content-box, &:nth-child(even) .content-box { align-items: flex-start; }
 
-        /* Точка переезжает влево */
-        &::after { left: 14px !important; right: auto; }
-
-        .date-badge { position: static; margin-bottom: 5px; text-align: left !important; }
+        /* Точка переезжает жестко на линию слева */
+        &::after { left: 14px !important; right: auto; top: 20px; }
     }
 `;
 
@@ -82,7 +83,8 @@ export const ContentBox = styled.div`
     display: flex; flex-direction: column;
 
     @media (max-width: 768px) {
-        padding: 16px;
+        padding: 16px; /* Срезали внутренние отступы */
+        border-radius: 16px;
     }
 `;
 
