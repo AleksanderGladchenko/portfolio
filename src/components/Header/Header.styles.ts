@@ -10,22 +10,24 @@ export const HeaderContainer = styled.header`
     width: 90%;
     max-width: 1200px;
     height: 60px;
-    background-color: var(--nav-bg);
+    /* Эффект матового стекла */
+    background-color: rgba(10, 10, 10, 0.75);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-radius: 980px;
+    border-radius: 980px; /* Форма пилюли */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
     z-index: 1000;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px var(--shadow-color);
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Мягкая граница */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 
     @media (max-width: 768px) {
-        width: 95%;
+        width: 92%;
         padding: 0 20px;
-        top: 10px;
+        top: 15px; /* Отступ от верхнего края, чтобы контент обтекал хедер */
+        height: 55px;
     }
 `;
 
@@ -36,10 +38,10 @@ export const Logo = styled.div`
     letter-spacing: -0.02em;
     cursor: pointer;
     transition: text-shadow 0.3s ease, color 0.3s ease;
-    
+
     &:hover {
         color: var(--accent-color);
-        text-shadow: 0 0 15px var(--accent-glow);
+        text-shadow: 0 0 15px rgba(234, 88, 12, 0.4);
     }
 `;
 
@@ -70,6 +72,7 @@ export const NavLinkStyled = styled.a`
         color: var(--accent-color) !important;
     }
 
+    /* Возвращаем аккуратную точку индикатора */
     &.active::after {
         content: '';
         position: absolute;
@@ -90,7 +93,7 @@ export const BurgerIcon = styled.div`
     color: var(--text-primary);
     cursor: pointer;
     transition: color 0.2s ease;
-    
+
     &:hover { color: var(--accent-color); }
 
     @media (max-width: 768px) {
@@ -101,21 +104,21 @@ export const BurgerIcon = styled.div`
 
 export const MobileNav = styled(motion.div)`
     position: fixed;
-    top: 80px;
+    top: 85px; /* Аккуратно зависает под хедером, не прилипая к нему */
     left: 0;
     right: 0;
     margin: 0 auto;
-    width: 95%;
-    background-color: var(--nav-bg);
+    width: 92%;
+    background-color: rgba(10, 10, 10, 0.85);
     padding: 24px;
     border-radius: 24px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    box-shadow: 0 30px 60px var(--shadow-color);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
     z-index: 9999;
 
     a {
@@ -124,7 +127,7 @@ export const MobileNav = styled(motion.div)`
         font-size: 1.1rem;
         font-weight: 600;
         display: block;
-        padding: 10px;
+        padding: 12px;
         text-align: center;
         border-radius: 12px;
         transition: all 0.2s ease;
