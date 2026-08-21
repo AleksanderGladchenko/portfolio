@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AG Logo Concepts v2</title>
+    <style>
+        body {
+            background: #000000;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        .concept {
+            background: #0A0A0A;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: border-color 0.2s ease;
+        }
+        .concept:hover { border-color: #F04914; }
+        .label { margin-top: 20px; font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #666; }
+        svg { width: 100%; max-width: 140px; height: auto; border-radius: 16px; }
+    </style>
+</head>
+<body>
+
+<!-- Concept 11: THE MONOLITH (Сверхтяжелый, слитный) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="128" y="170" font-size="120" font-weight="900" letter-spacing="-15" fill="#FFF" text-anchor="middle">AG</text>
+    </svg>
+    <div class="label">11. THE MONOLITH</div>
+</div>
+
+<!-- Concept 12: WIREFRAME (Контурный, бэкенд-структура) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="128" y="165" font-size="100" font-weight="900" fill="none" stroke="#F04914" stroke-width="4" text-anchor="middle">AG</text>
+    </svg>
+    <div class="label">12. WIREFRAME</div>
+</div>
+
+<!-- Concept 13: SYSTEM BLOCK (AG и массивный курсор) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="95" y="160" font-size="80" font-weight="900" fill="#FFF" text-anchor="middle">AG</text>
+        <rect x="155" y="90" width="30" height="70" fill="#F04914"/>
+    </svg>
+    <div class="label">13. SYSTEM BLOCK</div>
+</div>
+
+<!-- Concept 14: DUAL ROUTE (A // G) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="65" y="165" font-size="70" font-weight="900" fill="#FFF" text-anchor="middle">A</text>
+        <text x="128" y="165" font-size="70" font-weight="300" fill="#444" text-anchor="middle">//</text>
+        <text x="190" y="165" font-size="70" font-weight="900" fill="#F04914" text-anchor="middle">G</text>
+    </svg>
+    <div class="label">14. DUAL ROUTE</div>
+</div>
+
+<!-- Concept 15: ARCHITECTURAL BRACKETS (Строгие скобки) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="60" y="165" font-size="90" font-weight="300" fill="#F04914" text-anchor="middle">[</text>
+        <text x="128" y="165" font-size="80" font-weight="800" fill="#FFF" text-anchor="middle">AG</text>
+        <text x="195" y="165" font-size="90" font-weight="300" fill="#F04914" text-anchor="middle">]</text>
+    </svg>
+    <div class="label">15. BRACKETS</div>
+</div>
+
+<!-- Concept 16: CONSOLE LOG (Моноширинная эстетика терминала) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="128" y="165" font-family="monospace" font-size="90" font-weight="bold" fill="#FFF" text-anchor="middle">A:G</text>
+    </svg>
+    <div class="label">16. CONSOLE LOG</div>
+</div>
+
+<!-- Concept 17: PIPELINE (Разделение процессов A | G) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="75" y="165" font-size="90" font-weight="900" fill="#FFF" text-anchor="middle">A</text>
+        <rect x="122" y="90" width="12" height="75" fill="#F04914"/>
+        <text x="180" y="165" font-size="90" font-weight="900" fill="#FFF" text-anchor="middle">G</text>
+    </svg>
+    <div class="label">17. PIPELINE</div>
+</div>
+
+<!-- Concept 18: LOAD BALANCER (Вертикальное смещение) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="100" y="130" font-size="90" font-weight="900" fill="#FFF" text-anchor="middle">A</text>
+        <text x="155" y="195" font-size="90" font-weight="900" fill="#F04914" text-anchor="middle">G</text>
+    </svg>
+    <div class="label">18. LOAD BALANCER</div>
+</div>
+
+<!-- Concept 19: SOLID CORE (Полная инверсия цвета) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <rect x="30" y="30" width="196" height="196" rx="20" fill="#F04914"/>
+        <text x="128" y="165" font-size="100" font-weight="900" fill="#111" text-anchor="middle">AG</text>
+    </svg>
+    <div class="label">19. SOLID CORE</div>
+</div>
+
+<!-- Concept 20: DEPENDENCY (Точечная связь) -->
+<div class="concept">
+    <svg viewBox="0 0 256 256">
+        <rect width="256" height="256" rx="40" fill="#111"/>
+        <text x="128" y="145" font-size="75" font-weight="900" fill="#FFF" text-anchor="middle">A</text>
+        <circle cx="128" cy="180" r="10" fill="#F04914"/>
+        <text x="128" y="235" font-size="50" font-weight="900" fill="#666" text-anchor="middle">G</text>
+    </svg>
+    <div class="label">20. DEPENDENCY</div>
+</div>
+
+</body>
+</html>
