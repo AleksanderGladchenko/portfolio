@@ -102,8 +102,8 @@ const projectsData: Project[] = [
         id: 7,
         title: 'Game Server Monitoring',
         category: 'ecommerce',
-        image: null,
-        mediaType: 'none',
+        image: server1, // <-- ВАЖНО: передаем переменную импортированной картинки
+        mediaType: 'image', // <-- ВАЖНО: меняем 'none' на 'image', чтобы сработал рендер тега <img>
         icon: <FaServer />,
         color: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
         description: 'Architected a custom server monitoring architecture within a classifieds CMS. Engineered an automated Cron-based system querying servers every 5 minutes.',
