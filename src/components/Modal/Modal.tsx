@@ -12,15 +12,15 @@ import { FaGithub, FaExternalLinkAlt, FaTimes, FaChevronLeft, FaChevronRight, Fa
 import styled from 'styled-components';
 
 export interface Project {
-    id: string | number;
-    title: string;
+    id: string; // ИНЖЕНЕРНЫЙ ФИКС: Строгая типизация ключа
     category: 'app' | 'ecommerce' | 'automation' | 'flagship' | 'tools' | string;
     image: string | null;
     mediaType: 'video' | 'image' | 'none';
-    description: string;
     tech: string[];
     github: string;
     live: string;
+    title?: string;       // ИНЖЕНЕРНЫЙ ФИКС: Поле теперь опционально, так как берем из i18n
+    description?: string; // ИНЖЕНЕРНЫЙ ФИКС: Поле теперь опционально
     icon?: React.ReactNode;
     color?: string;
     gallery?: string[];
@@ -48,14 +48,11 @@ const Modal = ({ project, closeModal }: ModalProps) => {
 
     useEffect(() => {
         if (project) {
-            // ИНЖЕНЕРНЫЙ ФИКС 1: Вычисляем ширину скроллбара
             const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
             document.body.style.overflow = 'hidden';
-            // Добавляем паддинг, чтобы компенсировать исчезнувший скроллбар
             document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-            // Компенсируем сдвиг для фиксированного хедера
             const header = document.querySelector('header');
             if (header) {
                 const currentPadding = window.getComputedStyle(header).paddingRight;
@@ -97,7 +94,6 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                     <Backdrop onClick={closeModal} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <ModalContent
                             onClick={(e) => e.stopPropagation()}
-                            // ИНЖЕНЕРНЫЙ ФИКС 2: Убрали spring, поставили премиальную кинематику ease-out
                             initial={{ scale: 0.95, opacity: 0, y: 30 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.95, opacity: 0, y: 30 }}
@@ -111,14 +107,14 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                                     <ColoredHeader $bg={project.color}>{project.icon}</ColoredHeader>
                                 ) : (
                                     <ModalImage>
-                                        {project.mediaType === 'image' && project.image ? ( <img src={project.image} alt={project.title} /> ) : project.mediaType === 'video' && project.image ? ( <video autoPlay loop muted playsInline><source src={project.image} type="video/mp4" /></video> ) : null}
+                                        {project.mediaType === 'image' && project.image ? ( <img src={project.image} alt={project.id} /> ) : project.mediaType === 'video' && project.image ? ( <video autoPlay loop muted playsInline><source src={project.image} type="video/mp4" /></video> ) : null}
                                     </ModalImage>
                                 )}
 
                                 <ModalBody>
                                     <TitleRow>
                                         <ProjectTitle style={{ fontSize: '2rem', margin: 0 }}>
-                                            {t(`projects.items.${project.id}.title`, project.title)}
+                                            {t(`projects.items.${project.id}.title`, project.title || '')}
                                         </ProjectTitle>
                                         {project.nda && <NdaBadge>{t('projects.modal.nda', 'NDA Protected')}</NdaBadge>}
                                     </TitleRow>
@@ -128,7 +124,7 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                                     </TechList>
 
                                     <ProjectDescription style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
-                                        {t(`projects.items.${project.id}.description`, project.description)}
+                                        {t(`projects.items.${project.id}.description`, project.description || '')}
                                     </ProjectDescription>
 
                                     {(project.challenges || project.hasChallenges || project.solutions || project.hasSolutions) && (
@@ -186,7 +182,6 @@ const Modal = ({ project, closeModal }: ModalProps) => {
                             <LightboxClose onClick={() => setLightboxIndex(null)}><FaTimes /></LightboxClose>
                             {project.gallery.length > 1 && ( <> <LightboxPrev onClick={prevImage}><FaChevronLeft /></LightboxPrev> <LightboxNext onClick={nextImage}><FaChevronRight /></LightboxNext> </> )}
 
-                            {/* ИНЖЕНЕРНЫЙ ФИКС 3: Убрали резкий выезд (x: 20). Сделали мягкий Crossfade (opacity + scale) */}
                             <motion.img
                                 key={lightboxIndex}
                                 src={project.gallery[lightboxIndex]}
