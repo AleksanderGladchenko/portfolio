@@ -24,7 +24,7 @@ const Header = () => {
         }
     };
 
-    // Контакты убраны из общего массива, они будут отдельной кнопкой
+    // Оставляем только безопасные секции
     const navLinks = [
         { to: 'about', label: t('header.about') },
         { to: 'skills', label: t('header.skills') },
@@ -36,7 +36,6 @@ const Header = () => {
         <>
             {navLinks.map(link => (
                 isHomePage ? (
-                    // Если на главной - плавно скроллим
                     <ScrollLink
                         key={link.to}
                         to={link.to}
@@ -53,7 +52,6 @@ const Header = () => {
                         {link.label}
                     </ScrollLink>
                 ) : (
-                    // Если на странице контактов - просто возвращаем на главную
                     <NavLinkStyled
                         key={link.to}
                         as={RouterLink}
@@ -66,15 +64,7 @@ const Header = () => {
                 )
             ))}
 
-            {/* Кнопка Контакты ВСЕГДА ведет на React-роут /contact */}
-            <NavLinkStyled
-                as={RouterLink}
-                to="/contact"
-                className={`${isMobile ? "mobile-link" : ""} ${!isHomePage ? 'active' : ''}`}
-                onClick={() => isMobile && setMenuOpen(false)}
-            >
-                {t('header.contact')}
-            </NavLinkStyled>
+            {/* КНОПКА "CONTACT" ПОЛНОСТЬЮ УДАЛЕНА ИЗ UI */}
         </>
     );
 
