@@ -36,7 +36,8 @@ export const ModalContent = styled(motion.div)`
 export const ScrollableArea = styled.div`
     flex-grow: 1;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none; /* ИНЖЕНЕРНЫЙ ФИКС: Блокирует передачу скролла на body */
 
     &::-webkit-scrollbar { width: 6px; }
     &::-webkit-scrollbar-track { background: transparent; }

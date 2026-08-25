@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const ContactSection = styled(motion.section)`
     max-width: 1000px;
-    margin: 60px auto 40px;
+    margin: 120px auto 40px;
     padding: 80px 40px 40px;
     background-color: var(--card-bg);
     border-radius: 40px;

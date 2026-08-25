@@ -1,16 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import { SkillsSection, SectionTitle, Grid, CategoryCard, CategoryHeader, SkillsList, SkillItem } from './Skills.styles';
-
-// Добавлены FaShopify и FaShoppingCart
-import { FaLaptopCode, FaServer, FaTools, FaCreditCard, FaDatabase, FaShopify, FaShoppingCart } from 'react-icons/fa';
-
-// Добавлен SiJavascript для нативной JS логики
+import { FaLaptopCode, FaServer, FaTools } from 'react-icons/fa';
 import {
-    SiReact, SiAngular, SiTypescript, SiHtml5, SiStyledcomponents,
-    SiPython, SiAppium, SiLinux, SiGnubash, SiDocker,
-    SiGit, SiPostman, SiPhp, SiChartdotjs, SiNodedotjs, SiJavascript
+    SiReact, SiAngular, SiTypescript, SiJavascript, SiHtml5, SiStyledcomponents,
+    SiPython, SiFlask, SiAppium, SiLinux, SiGnubash, SiDocker,
+    SiGit, SiFigma, SiPostman
 } from 'react-icons/si';
 
 const Skills = () => {
+    // Подключаем хук перевода
+    const { t } = useTranslation();
+
     const categories = [
         {
             title: "Frontend Ecosystem",
@@ -19,36 +19,32 @@ const Skills = () => {
                 { name: "React / Redux", icon: <SiReact /> },
                 { name: "Angular / RxJS", icon: <SiAngular /> },
                 { name: "TypeScript", icon: <SiTypescript /> },
-                { name: "Advanced JS (DOM/AJAX)", icon: <SiJavascript /> }, // Добавлено из ТЗ
-                { name: "Data Viz (Chart.js)", icon: <SiChartdotjs /> },
-                { name: "HTML5 / SCSS", icon: <SiHtml5 /> },
+                { name: "JavaScript (ES6+)", icon: <SiJavascript /> },
                 { name: "Styled Components", icon: <SiStyledcomponents /> },
+                { name: "HTML5 / SCSS", icon: <SiHtml5 /> },
             ]
         },
         {
-            title: "Backend & E-commerce", // Переименовано для Shopify
+            title: "Backend & Automation",
             icon: <FaServer />,
             skills: [
-                { name: "Shopify Liquid", icon: <FaShopify /> }, // Добавлено
-                { name: "Cart API Integrations", icon: <FaShoppingCart /> }, // Добавлено
-                { name: "Python / Flask", icon: <SiPython /> },
-                { name: "PHP & MySQL", icon: <SiPhp /> },
-                { name: "Node.js & APIs", icon: <SiNodedotjs /> },
-                { name: "FinTech (Monobank)", icon: <FaCreditCard /> },
-                { name: "Cron & Automation", icon: <SiGnubash /> },
+                { name: "Python 3", icon: <SiPython /> },
+                { name: "Flask API", icon: <SiFlask /> },
+                { name: "Appium / Selenium", icon: <SiAppium /> },
+                { name: "Linux Administration", icon: <SiLinux /> },
+                { name: "Bash Scripting", icon: <SiGnubash /> },
+                { name: "SQLAlchemy", icon: <SiPython /> },
             ]
         },
         {
-            title: "DevOps & Workflow",
+            title: "Tools & Workflow",
             icon: <FaTools />,
             skills: [
-                { name: "Linux Administration", icon: <SiLinux /> },
-                { name: "Docker / Systemd", icon: <SiDocker /> },
-                { name: "DB Mgt (Adminer/SQL)", icon: <FaDatabase /> },
-                { name: "Appium / Selenium", icon: <SiAppium /> }, // Перенесено для баланса
                 { name: "Git / GitHub", icon: <SiGit /> },
-                { name: "Postman / API Testing", icon: <SiPostman /> },
-                { name: "Vite / Webpack", icon: <FaTools /> },
+                { name: "Docker / Systemd", icon: <SiDocker /> },
+                { name: "Figma", icon: <SiFigma /> },
+                { name: "Postman", icon: <SiPostman /> },
+                { name: "Vite / Webpack", icon: <SiReact /> },
             ]
         }
     ];
@@ -60,7 +56,8 @@ const Skills = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
         >
-            <SectionTitle>Technical <span>Specs</span></SectionTitle>
+            {/* Динамический заголовок из i18n */}
+            <SectionTitle>{t('skills.titlePart1')} <span>{t('skills.titlePart2')}</span></SectionTitle>
 
             <Grid>
                 {categories.map((cat, index) => (

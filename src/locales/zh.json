@@ -1,0 +1,164 @@
+{
+  "header": {
+    "about": "关于我",
+    "skills": "技能",
+    "projects": "项目",
+    "experience": "经验",
+    "contact": "联系方式"
+  },
+  "hero": {
+    "subtitle": "亚历山大 — 技术架构师",
+    "title": "设计健壮的 Web 架构。",
+    "description": "我构建在压力下不会崩溃的软件。从航空工程转向全栈开发，我将零信任（zero-trust）方法应用于架构，自动化基础设施，并编写可预测的代码。",
+    "ctaExplore": "浏览我的作品",
+    "ctaResume": "简历"
+  },
+  "about": {
+    "titlePart1": "关于",
+    "titlePart2": "我",
+    "highlight1": "少一点魔法。",
+    "highlight2": "多一点",
+    "highlight3": "工程。",
+    "p1": "我是亚历山大。我的背景是航空航天工程——这是一个不允许失败且容差绝对的行业。我将空气动力学换成了软件工程，把那种严格的、偏执的思维方式带入了 Web 架构中。",
+    "p2": "我不仅写代码；我解决商业问题。无论是通过 Python 编排 Android 模拟器的无头农场，保护支付流程，还是构建干净的 React 前端，我都专注于系统的弹性。没有意大利面条式代码，没有脆弱的“魔法”单行代码。只有可预测运行的模块化、可扩展的解决方案。",
+    "ratHint": "点击任何地方关闭"
+  },
+  "skills": {
+    "titlePart1": "技术",
+    "titlePart2": "规格"
+  },
+  "experience": {
+    "titlePart1": "职业",
+    "titlePart2": "生涯",
+    "jobs": [
+      {
+        "company": "SaaS 平台 / 定制 Web 解决方案",
+        "role": "技术架构师 & 全栈工程师",
+        "period": "2025年12月 - 至今",
+        "tasks": [
+          "构建了自定义 CMS 并自动化了游戏服务器遥测。使用基于 Cron 的聚合引擎取代了手动跟踪。",
+          "集成 Monobank API。设计了具有严格服务器端事务验证的容错结账流程。",
+          "开发了实时仪表板 (Chart.js) 以可视化实时业务指标。"
+        ]
+      },
+      {
+        "company": "自由职业 / B2B 项目",
+        "role": "全栈 Web 开发人员",
+        "period": "2025年5月 - 2025年11月",
+        "tasks": [
+          "为 WordPress 编写了自定义 Geo-Traffic Shield，在恶意机器人请求到达应用层之前每月丢弃超过 10k 次请求。",
+          "重构了 Osclass 市场中的繁重 SQL 查询。自动化 XML 产品提要生成，将 CPU 峰值降低 40%。",
+          "使用 Nginx 在裸机 Linux 服务器上设置了零停机 CI/CD 部署。"
+        ]
+      },
+      {
+        "company": "高负载自动化项目",
+        "role": "后端 & 自动化工程师",
+        "period": "2024年9月 - 2025年4月",
+        "tasks": [
+          "设计并维护了一个无头农场，在单个 Ubuntu 服务器上运行 10 多个并发 Android 模拟器。",
+          "构建了线程安全的 REST API (Flask/SQLAlchemy) 以编排 Appium 任务，而不会发生数据库死锁。",
+          "通过配置 Systemd 看门狗并编写 bash 恢复脚本，防止服务器 OOM 崩溃。"
+        ]
+      },
+      {
+        "company": "电子商务 / 数字机构",
+        "role": "中级前端工程师",
+        "period": "2023年12月 - 2024年8月",
+        "tasks": [
+          "将旧版电子商务前端迁移到 React。优化 Core Web Vitals (LCP < 1.5s) 以改善 SEO 和 UX。",
+          "与后端团队合作，在严格的冲刺期限内集成第三方 API 和支付网关。"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "titlePart1": "精选",
+    "titlePart2": "项目",
+    "tabs": {
+      "all": "所有作品",
+      "flagship": "旗舰解决方案",
+      "ecommerce": "商业与电子商务",
+      "tools": "基础设施与工具"
+    },
+    "modal": {
+      "openLive": "查看实时",
+      "sourceCode": "源代码",
+      "nda": "受保密协议保护",
+      "archChallenges": "架构挑战",
+      "solutions": "解决方案与执行",
+      "images": "图像"
+    },
+    "items": {
+      "geoprint": {
+        "title": "Geoprint Next.js 平台",
+        "description": "用于打印服务的商业目录平台。重点是严格的数据验证并将繁重的 UI 动画与主渲染线程隔离。",
+        "challenges": [
+          "在充满敌意的前端环境中，客户端验证是一种安全风险。",
+          "繁重的 UI 混合效果导致 GPU 延迟。"
+        ],
+        "solutions": [
+          "在与 Telegram API 交互之前，使用 Zod 将所有验证移至 Next.js 后端。",
+          "通过转换约束将动画卸载到单独的 GPU 层。"
+        ]
+      },
+      "karma": {
+        "title": "Karma-Case Telegram Web 应用",
+        "description": "处理并发用户请求的 Telegram Web 应用程序。基于 Webhook 架构构建，具有双层 RBAC 管理系统。",
+        "challenges": [
+          "同时高频请求下的数据库锁定和竞争条件。"
+        ],
+        "solutions": [
+          "实现 aiosqlite 以进行非阻塞的线程安全异步 I/O 操作。"
+        ]
+      },
+      "shopify": {
+        "title": "Shopify 配置器 & 购物车 API",
+        "description": "将自定义 JS 产品配置器与 Shopify 购物车 API 集成。用动态定价计算取代了标准购物车逻辑。"
+      },
+      "server": {
+        "title": "游戏服务器监控",
+        "description": "分类 CMS 内的自定义服务器遥测架构。设计了一个基于 Cron 的守护程序，每 5 分钟查询一次外部服务器以汇总正常运行时间数据。"
+      },
+      "osclass": {
+        "title": "Osclass 市场优化",
+        "description": "平台本地化和后端优化。自动化 XML 产品提要生成以与外部聚合器同步。"
+      },
+      "wpgeo": {
+        "title": "WP Geo-Traffic Shield",
+        "description": "WordPress 的安全插件。实现了地理重定向和 IP 过滤逻辑以减轻机器人流量。"
+      },
+      "farm": {
+        "title": "自动化农场",
+        "description": "管理 Linux 上的并发 Android 模拟器的无头自动化架构。具有通过 Systemd 自动修复和线程安全 API 任务排队的功能。"
+      },
+      "phrase": {
+        "title": "短语分析器",
+        "description": "客户端文本分析工具。集成 Datamuse API 以进行实时同义词获取和文本替换。"
+      },
+      "form": {
+        "title": "智能表单",
+        "description": "基于 Angular 的响应式表单引擎，具有动态字段生成和严格的自定义验证器。"
+      }
+    }
+  },
+  "contact": {
+    "title": "让我们合作吧。",
+    "subtitle": "我随时愿意讨论复杂的架构挑战、高负载系统或新的工程职位。给我留言吧。",
+    "book": "预约 15 分钟的通话",
+    "email": "给我发邮件",
+    "telegram": "电报",
+    "designedBy": "由亚历山大设计与构建。",
+    "backToTop": "回到顶部"
+  },
+  "bugReport": {
+    "title": "报告问题",
+    "subtitle": "发现了错误或有建议？在下面告诉我。如果需要，您可以包含屏幕截图（Lightshot、Imgur 等）的链接。",
+    "placeholder": "在此处描述问题或粘贴屏幕截图链接...",
+    "sending": "发送中...",
+    "send": "发送报告",
+    "success": "报告提交成功。谢谢！",
+    "errorCommon": "出了些问题。",
+    "errorNetwork": "网络错误。请重试。"
+  }
+}

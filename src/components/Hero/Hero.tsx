@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { HeroContainer, Title, Subtitle, Description, SkillsWrapper, SkillPill, ButtonGroup, CtaButton, SecondaryCtaButton, ContentWrapper } from './Hero.styles';
 import { Link } from 'react-scroll';
 import { FaDownload } from 'react-icons/fa';
@@ -12,7 +13,6 @@ const itemVariants: any = {
     visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-// АКТУАЛИЗИРОВАННЫЕ ТЕГИ
 const skills = [
     { name: "System Architecture", filter: "flagship" },
     { name: "High-Load Backend", filter: "tools" },
@@ -22,6 +22,9 @@ const skills = [
 ];
 
 const Hero = () => {
+    // Подключаем хук перевода
+    const { t } = useTranslation();
+
     const handleTagClick = (filterCategory: string) => {
         window.dispatchEvent(new CustomEvent('setProjectFilter', { detail: filterCategory }));
     };
@@ -34,15 +37,15 @@ const Hero = () => {
                 animate="visible"
             >
                 <Subtitle variants={itemVariants}>
-                    Alexander — Technical Architect
+                    {t('hero.subtitle')}
                 </Subtitle>
 
                 <Title variants={itemVariants}>
-                    Engineering robust web architecture.
+                    {t('hero.title')}
                 </Title>
 
                 <Description variants={itemVariants}>
-                    I build software that doesn't break under pressure. Moving from aviation engineering to full-stack development, I apply a zero-trust approach to architecture, automating infrastructure, and writing predictable, maintainable code.
+                    {t('hero.description')}
                 </Description>
 
                 <SkillsWrapper variants={itemVariants}>
@@ -66,7 +69,7 @@ const Hero = () => {
 
                 <ButtonGroup variants={itemVariants}>
                     <CtaButton href="#projects" whileTap={{ scale: 0.95 }}>
-                        Explore My Work
+                        {t('hero.ctaExplore')}
                     </CtaButton>
 
                     <SecondaryCtaButton
@@ -75,7 +78,7 @@ const Hero = () => {
                         rel="noopener noreferrer"
                         whileTap={{ scale: 0.95 }}
                     >
-                        <FaDownload style={{ marginRight: '8px', fontSize: '0.9rem' }} /> Resume
+                        <FaDownload style={{ marginRight: '8px', fontSize: '0.9rem' }} /> {t('hero.ctaResume')}
                     </SecondaryCtaButton>
                 </ButtonGroup>
             </ContentWrapper>

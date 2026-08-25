@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const ProjectsSection = styled(motion.section)`
@@ -31,7 +31,6 @@ export const TabsContainer = styled.div`
 `;
 
 export const TabButton = styled.button<{ $active: boolean }>`
-    /* Твои текущие стили оставляем... */
     padding: 10px 24px;
     background: ${({ $active }) => ($active ? 'var(--accent-color)' : 'transparent')};
     color: ${({ $active }) => ($active ? '#fff' : 'var(--text-secondary)')};
@@ -43,9 +42,9 @@ export const TabButton = styled.button<{ $active: boolean }>`
     transition: all 0.2s ease;
 
     @media (max-width: 768px) {
-        padding: 8px 16px; /* Делаем кнопки тоньше */
+        padding: 8px 16px;
         font-size: 0.85rem;
-        flex: 1 1 auto; /* Позволяем им растягиваться, чтобы не висели огрызками */
+        flex: 1 1 auto;
         text-align: center;
     }
 `;
@@ -55,7 +54,7 @@ export const ProjectsGrid = styled(motion.div)`
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
     width: 100%;
-    min-height: 600px; /* Удерживаем высоту, чтобы футер не прыгал при фильтрации */
+    min-height: 600px;
     align-content: start;
     box-sizing: border-box;
 `;
@@ -91,7 +90,8 @@ export const MediaContainer = styled.div`
     border-bottom: 1px solid var(--border-color);
 `;
 
-export const ProjectImage = styled.video<{ $isLoaded?: boolean }>`
+/* Общий CSS для картинки и видео, чтобы не дублировать код */
+const mediaStyles = css<{ $isLoaded?: boolean }>`
     width: 100%; height: 100%; object-fit: cover;
     opacity: ${({ $isLoaded }) => ($isLoaded ? 0.85 : 0)};
     transform: translateZ(0); -webkit-transform: translateZ(0); pointer-events: none;
@@ -102,6 +102,10 @@ export const ProjectImage = styled.video<{ $isLoaded?: boolean }>`
         opacity: ${({ $isLoaded }) => ($isLoaded ? 1 : 0)};
     }
 `;
+
+/* Разделяем на два строго типизированных компонента */
+export const ProjectVideo = styled.video<{ $isLoaded?: boolean }>`${mediaStyles}`;
+export const ProjectImage = styled.img<{ $isLoaded?: boolean }>`${mediaStyles}`;
 
 export const NoImagePlaceholder = styled.div`
     width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
@@ -120,7 +124,7 @@ export const ProjectContent = styled.div`
     flex-grow: 1;
 
     @media (max-width: 768px) {
-        padding: 20px; /* Больше места для самого текста */
+        padding: 20px;
     }
 `;
 
@@ -157,8 +161,6 @@ export const GalleryBadge = styled.div`
     svg { font-size: 0.9rem; color: var(--accent-color); }
 `;
 
-import { keyframes } from 'styled-components'; // Добавь keyframes в импорт сверху, если его нет
-
 const shimmer = keyframes`
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
@@ -170,7 +172,6 @@ export const SkeletonLoader = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    /* Цвета подобраны под твой темный Apple-стиль */
     background: linear-gradient(90deg, #0a0a0a 25%, #1c1c1e 50%, #0a0a0a 75%);
     background-size: 200% 100%;
     animation: ${shimmer} 2s infinite linear;

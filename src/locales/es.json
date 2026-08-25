@@ -1,0 +1,164 @@
+{
+  "header": {
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "subtitle": "Alexander — Arquitecto Técnico",
+    "title": "Ingeniería de arquitectura web robusta.",
+    "description": "Construyo software que no se rompe bajo presión. Pasando de la ingeniería de aviación al desarrollo full-stack, aplico un enfoque zero-trust a la arquitectura, automatizando la infraestructura y escribiendo código predecible.",
+    "ctaExplore": "Ver mis proyectos",
+    "ctaResume": "Currículum"
+  },
+  "about": {
+    "titlePart1": "Sobre",
+    "titlePart2": "Mí",
+    "highlight1": "Menos magia.",
+    "highlight2": "Más",
+    "highlight3": "Ingeniería",
+    "p1": "Soy Alexander. Mi formación es en Ingeniería de Aviación y Cohetes, una industria donde el fallo no es una opción y las tolerancias son absolutas. Cambié la aerodinámica por la ingeniería de software, llevando esa misma mentalidad estricta y paranoica a la arquitectura web.",
+    "p2": "No solo escribo código; resuelvo problemas comerciales. Ya sea orquestando una granja headless de emuladores Android en Python, asegurando flujos de pago o estructurando un frontend React limpio, me concentro en la resiliencia del sistema. Sin código espagueti, sin 'magia' frágil. Solo soluciones modulares y escalables que funcionan de manera predecible.",
+    "ratHint": "Haz clic en cualquier lugar para cerrar"
+  },
+  "skills": {
+    "titlePart1": "Especificaciones",
+    "titlePart2": "Técnicas"
+  },
+  "experience": {
+    "titlePart1": "Historial",
+    "titlePart2": "Laboral",
+    "jobs": [
+      {
+        "company": "Plataforma SaaS / Soluciones Web",
+        "role": "Arquitecto Técnico y Desarrollador Full-Stack",
+        "period": "Dic 2025 - Presente",
+        "tasks": [
+          "Construí un CMS personalizado y automaticé la telemetría del servidor de juegos. Reemplacé el seguimiento manual con un motor de agregación basado en Cron.",
+          "Integré la API de Monobank. Diseñé un flujo de pago tolerante a fallos con validación estricta de transacciones en el servidor.",
+          "Desarrollé paneles en tiempo real (Chart.js) para visualizar métricas comerciales."
+        ]
+      },
+      {
+        "company": "Freelance / Proyectos B2B",
+        "role": "Desarrollador Web Full-Stack",
+        "period": "May 2025 - Nov 2025",
+        "tasks": [
+          "Escribí un Geo-Traffic Shield personalizado para WordPress, bloqueando más de 10k solicitudes de bots maliciosos por mes antes de que lleguen a la aplicación.",
+          "Refactoricé consultas SQL pesadas en un marketplace Osclass. Automaticé la generación de feeds XML, reduciendo los picos de CPU en un 40%.",
+          "Configuré despliegues CI/CD zero-downtime en servidores Linux bare-metal usando Nginx."
+        ]
+      },
+      {
+        "company": "Proyecto de Automatización High-Load",
+        "role": "Ingeniero de Backend y Automatización",
+        "period": "Sep 2024 - Abr 2025",
+        "tasks": [
+          "Diseñé y mantuve una granja headless que ejecuta más de 10 emuladores Android simultáneos en un servidor Ubuntu.",
+          "Construí una API REST thread-safe (Flask/SQLAlchemy) para orquestar tareas de Appium sin bloqueos de base de datos.",
+          "Previne bloqueos del servidor (OOM) configurando Systemd watchdogs y escribiendo scripts de recuperación en bash."
+        ]
+      },
+      {
+        "company": "E-commerce / Agencia Digital",
+        "role": "Desarrollador Front-End Middle",
+        "period": "Dic 2023 - Ago 2024",
+        "tasks": [
+          "Migré frontends heredados a React. Optimicé Core Web Vitals (LCP < 1.5s) para mejorar el SEO y UX.",
+          "Colaboré con equipos de backend para integrar APIs de terceros y pasarelas de pago dentro de plazos estrictos de sprint."
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "titlePart1": "Proyectos",
+    "titlePart2": "Destacados",
+    "tabs": {
+      "all": "Todos",
+      "flagship": "Soluciones Insignia",
+      "ecommerce": "Comercio y E-commerce",
+      "tools": "Infraestructura y Herramientas"
+    },
+    "modal": {
+      "openLive": "Ver en vivo",
+      "sourceCode": "Código Fuente",
+      "nda": "Protegido por NDA",
+      "archChallenges": "Desafíos Arquitectónicos",
+      "solutions": "Soluciones y Ejecución",
+      "images": "Imágenes"
+    },
+    "items": {
+      "geoprint": {
+        "title": "Plataforma Geoprint Next.js",
+        "description": "Plataforma de catálogo comercial para un servicio de impresión. El enfoque fue la validación estricta de datos y el aislamiento de animaciones pesadas de UI del hilo principal de renderizado.",
+        "challenges": [
+          "La validación del lado del cliente es un riesgo de seguridad en un entorno frontend hostil.",
+          "Efectos de mezcla de UI pesados que causan retrasos en la GPU."
+        ],
+        "solutions": [
+          "Se movió toda la validación al backend de Next.js usando Zod antes de interactuar con la API de Telegram.",
+          "Se descargaron las animaciones a capas de GPU separadas mediante transform constraints."
+        ]
+      },
+      "karma": {
+        "title": "Karma-Case Telegram Web App",
+        "description": "Aplicación web de Telegram que maneja solicitudes simultáneas de usuarios. Construida sobre arquitectura Webhook con un sistema de administración RBAC de dos niveles.",
+        "challenges": [
+          "Bloqueos de base de datos y condiciones de carrera bajo solicitudes simultáneas de alta frecuencia."
+        ],
+        "solutions": [
+          "Se implementó aiosqlite para operaciones de E/S asíncronas seguras para subprocesos y sin bloqueo."
+        ]
+      },
+      "shopify": {
+        "title": "Shopify Configurator & Cart API",
+        "description": "Integración de un configurador de productos JS personalizado con la API del carrito de Shopify. Se reemplazó la lógica estándar del carrito por cálculos de precios dinámicos."
+      },
+      "server": {
+        "title": "Monitoreo de Servidores de Juegos",
+        "description": "Arquitectura de telemetría de servidor personalizada dentro de un CMS de clasificados. Se diseñó un demonio basado en Cron que consulta servidores externos cada 5 minutos para agregar datos de tiempo de actividad."
+      },
+      "osclass": {
+        "title": "Optimización del Marketplace Osclass",
+        "description": "Localización de la plataforma y optimización del backend. Generación automatizada de feeds de productos XML para sincronizar con agregadores externos."
+      },
+      "wpgeo": {
+        "title": "WP Geo-Traffic Shield",
+        "description": "Plugin de seguridad para WordPress. Se implementó la redirección geográfica y la lógica de filtrado de IP para mitigar el tráfico de bots."
+      },
+      "farm": {
+        "title": "Granja de Automatización",
+        "description": "Arquitectura de automatización headless que gestiona emuladores Android simultáneos en Linux. Cuenta con recuperación automática mediante Systemd y encolamiento de tareas API seguro para subprocesos."
+      },
+      "phrase": {
+        "title": "Analizador de Frases",
+        "description": "Herramienta de análisis de texto del lado del cliente. Integra la API de Datamuse para la obtención de sinónimos en tiempo real y el reemplazo de texto."
+      },
+      "form": {
+        "title": "Formularios Inteligentes",
+        "description": "Motor de formularios reactivos basado en Angular con generación dinámica de campos y validadores personalizados estrictos."
+      }
+    }
+  },
+  "contact": {
+    "title": "Trabajemos Juntos.",
+    "subtitle": "Siempre estoy abierto a discutir desafíos arquitectónicos complejos, sistemas de alta carga o nuevos roles de ingeniería. Escríbeme.",
+    "book": "Reservar llamada de 15 min",
+    "email": "Enviar Email",
+    "telegram": "Telegram",
+    "designedBy": "Diseñado y Construido por Alexander.",
+    "backToTop": "Volver Arriba"
+  },
+  "bugReport": {
+    "title": "Reportar un Problema",
+    "subtitle": "¿Viste un error o tienes una sugerencia? Házmelo saber a continuación. Puedes incluir un enlace a una captura de pantalla si es necesario.",
+    "placeholder": "Describe el problema o pega un enlace de captura de pantalla aquí...",
+    "sending": "Enviando...",
+    "send": "Enviar Reporte",
+    "success": "Reporte enviado con éxito. ¡Gracias!",
+    "errorCommon": "Algo salió mal.",
+    "errorNetwork": "Error de red. Inténtalo de nuevo."
+  }
+}

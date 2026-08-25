@@ -1,0 +1,116 @@
+{
+  "header": {
+    "about": "About", "skills": "Skills", "projects": "Projects", "experience": "Experience", "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Alexander — Technical Architect",
+    "title": "Engineering robust web architecture.",
+    "description": "I build software that doesn't break under pressure. Moving from aviation engineering to full-stack development, I apply a zero-trust approach to architecture, automating infrastructure, and writing predictable, maintainable code.",
+    "ctaExplore": "Explore My Work",
+    "ctaResume": "Resume"
+  },
+  "about": {
+    "titlePart1": "About", "titlePart2": "Me",
+    "highlight1": "Less magic.", "highlight2": "More", "highlight3": "Engineering",
+    "p1": "I'm Alexander. My background is in Aviation & Rocketry — an industry where failure isn't an option and tolerances are absolute. I traded aerodynamics for software engineering, bringing that same strict, paranoid mindset to web architecture.",
+    "p2": "I don't just write code; I solve business problems. Whether it's orchestrating a headless farm of Android emulators via Python, securing payment flows, or structuring a clean React frontend, I focus on system resilience. No spaghetti code, no fragile 'magic' one-liners. Just modular, scalable solutions that work predictably.",
+    "ratHint": "Click anywhere to close"
+  },
+  "skills": {
+    "titlePart1": "Career", "titlePart2": "History"
+  },
+  "experience": {
+    "titlePart1": "Career", "titlePart2": "History",
+    "jobs": [
+      {
+        "company": "SaaS Platform / Custom Web Solutions", "role": "Technical Architect & Full-Stack Engineer", "period": "Dec 2025 - Present",
+        "tasks": ["Built a custom CMS and automated game server telemetry. Replaced manual tracking with a Cron-driven aggregation engine.", "Integrated Monobank API. Engineered a fault-tolerant checkout flow with strict server-side transaction validation.", "Developed real-time dashboards (Chart.js) to visualize live business metrics."]
+      },
+      {
+        "company": "Freelance / B2B Projects", "role": "Full-Stack Web Developer", "period": "May 2025 - Nov 2025",
+        "tasks": ["Wrote a custom Geo-Traffic Shield for WordPress, dropping 10k+ malicious bot requests per month before they hit the app layer.", "Refactored heavy SQL queries in an Osclass marketplace. Automated XML feed generation, cutting CPU spikes by 40%.", "Set up zero-downtime CI/CD deployments across bare-metal Linux servers using Nginx."]
+      },
+      {
+        "company": "High-Load Automation Project", "role": "Backend & Automation Engineer", "period": "Sep 2024 - Apr 2025",
+        "tasks": ["Designed and maintained a headless farm running 10+ concurrent Android emulators on a single Ubuntu server.", "Built a thread-safe REST API (Flask/SQLAlchemy) to orchestrate Appium tasks without database deadlocks.", "Prevented server OOM crashes by configuring Systemd watchdogs and writing bash recovery scripts."]
+      },
+      {
+        "company": "E-commerce / Digital Agency", "role": "Middle Front-End Engineer", "period": "Dec 2023 - Aug 2024",
+        "tasks": ["Migrated legacy e-commerce frontends to React. Squeezed Core Web Vitals (LCP < 1.5s) to improve SEO and UX.", "Collaborated with backend teams to integrate third-party APIs and payment gateways within strict sprint deadlines."]
+      }
+    ]
+  },
+  "projects": {
+    "titlePart1": "Selected",
+    "titlePart2": "Projects",
+    "tabs": {
+      "all": "All Work",
+      "flagship": "Flagship Solutions",
+      "ecommerce": "Commercial & E-commerce",
+      "tools": "Infrastructure & Tools"
+    },
+    "modal": {
+      "openLive": "Open Live",
+      "sourceCode": "Source Code",
+      "nda": "NDA Protected",
+      "archChallenges": "Architectural Challenges",
+      "solutions": "Solutions & Execution",
+      "images": "Images"
+    },
+    "items": {
+      "geoprint": {
+        "title": "Geoprint Next.js Platform",
+        "description": "Commercial catalog platform for a printing service. Focus was on strict data validation and isolating heavy UI animations from the main rendering thread.",
+        "challenges": ["Client-side validation is a security risk in a hostile frontend environment.", "Heavy UI blending effects causing GPU lag."],
+        "solutions": ["Moved all validation to the Next.js backend using Zod before interacting with the Telegram API.", "Offloaded animations to separate GPU layers via transform constraints."]
+      },
+      "karma": {
+        "title": "Karma-Case Telegram Web App",
+        "description": "Telegram Web App handling concurrent user requests. Built on Webhook architecture with a dual-tier RBAC admin system.",
+        "challenges": ["Database locks and race conditions under simultaneous high-frequency requests."],
+        "solutions": ["Implemented aiosqlite for non-blocking, thread-safe asynchronous I/O operations."]
+      },
+      "shopify": {
+        "title": "Shopify Configurator & Cart API",
+        "description": "Integrated a custom JS product configurator with the Shopify Cart API. Replaced standard cart logic with dynamic pricing calculations."
+      },
+      "server": {
+        "title": "Game Server Monitoring",
+        "description": "Custom server telemetry architecture within a classifieds CMS. Engineered a Cron-based daemon querying external servers every 5 minutes to aggregate uptime data."
+      },
+      "osclass": {
+        "title": "Osclass Marketplace Optimization",
+        "description": "Platform localization and backend optimization. Automated XML product feed generation to sync with external aggregators."
+      },
+      "wpgeo": {
+        "title": "WP Geo-Traffic Shield",
+        "description": "Security plugin for WordPress. Implemented geo-redirection and IP filtering logic to mitigate bot traffic."
+      },
+      "farm": {
+        "title": "Automation Farm",
+        "description": "Headless automation architecture managing concurrent Android emulators on Linux. Features auto-healing via Systemd and thread-safe API task queuing."
+      },
+      "phrase": {
+        "title": "Phrase Analyzer",
+        "description": "Client-side text analysis tool. Integrates the Datamuse API for real-time synonym fetching and text replacement."
+      },
+      "form": {
+        "title": "Smart Forms",
+        "description": "Angular-based reactive forms engine with dynamic field generation and strict custom validators."
+      }
+    }
+  },
+  "contact": {
+    "title": "Let’s Work Together.",
+    "subtitle": "I'm always open to discussing complex architectural challenges, high-load systems, or new engineering roles. Drop me a line.",
+    "book": "Book a 15-min Sync", "email": "Email Me", "telegram": "Telegram",
+    "designedBy": "Designed & Built by Alexander.", "backToTop": "Back to Top"
+  },
+  "bugReport": {
+    "title": "Report an Issue",
+    "subtitle": "Spotted a bug or have a suggestion? Let me know below. You can include a link to a screenshot (Lightshot, Imgur, etc.) if needed.",
+    "placeholder": "Describe the issue or paste a screenshot link here...",
+    "sending": "Sending...", "send": "Send Report", "success": "Report submitted successfully. Thank you!",
+    "errorCommon": "Something went wrong.", "errorNetwork": "Network error. Please try again."
+  }
+}
